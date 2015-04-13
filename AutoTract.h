@@ -14,3 +14,4 @@ class AutoTract :public QMainWindow, public Ui::MainWindow
 };
 
 #endif
+

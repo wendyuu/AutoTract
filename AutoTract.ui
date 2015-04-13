@@ -6,27 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>727</width>
-    <height>600</height>
+    <width>743</width>
+    <height>760</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QScrollBar" name="slider">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>80</y>
-      <width>160</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QLCDNumber" name="lcd">
     <property name="geometry">
      <rect>
@@ -50,18 +37,1388 @@
      <string>Exit</string>
     </property>
    </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>725</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>4</number>
+    </property>
+    <widget class="QWidget" name="input_tab">
+     <attribute name="title">
+      <string>Inputs</string>
+     </attribute>
+     <widget class="QWidget" name="input_path_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>681</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="input_path_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>681</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Input Paths</string>
+       </property>
+       <widget class="QPushButton" name="ref_atlas_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>131</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reference Atlas</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="input_atlas_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>140</y>
+          <width>131</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Input Atlas</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="output_dir_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>131</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Output Directory</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="output_dir_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>40</y>
+          <width>351</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="ref_atlas_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>90</y>
+          <width>351</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="input_atlas_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>140</y>
+          <width>351</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="input_parameters_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>260</y>
+        <width>681</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="input_parameters_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>681</width>
+         <height>191</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Input Parameters</string>
+       </property>
+       <widget class="QLabel" name="dilatation_radius_label">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>40</y>
+          <width>111</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Dilatation Radius</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="resampling_factor_label">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>80</y>
+          <width>121</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Resampling Factor</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="threshold_csf_label">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>120</y>
+          <width>151</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Threshold (CSF mask)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="threshold_ref_image_label">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>160</y>
+          <width>191</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Threshold (ref image mask)</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="dilatation_radius_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>35</y>
+          <width>62</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="resampling_factor_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>75</y>
+          <width>62</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="threshold_csf_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>115</y>
+          <width>62</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="threshold_ref_image_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>155</y>
+          <width>62</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="software_path_tab">
+     <attribute name="title">
+      <string>Software</string>
+     </attribute>
+     <widget class="QWidget" name="executable_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>681</width>
+        <height>481</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="executable_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>691</width>
+         <height>481</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Executables</string>
+       </property>
+       <widget class="QLineEdit" name="ResampleDTIVolume_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>110</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_TractographyLabelMapSeeding_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>190</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_polydatatransform_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>270</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="polydatattransform_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>270</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>polydatatransform</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unu_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>310</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="ImageMath_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>150</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_MDT_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>350</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="ImageMath_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>150</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>ImageMath</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="FiberPostProcess_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>230</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>FiberPostProcess</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="unu_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>310</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>unu</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="DTIReg_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>30</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>DTIReg</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_ImageMath_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>150</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="ResampleDTIVolume_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>110</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>ResampleDTIVolume</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_ResampleDTI_Volume_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>110</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_unu_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>310</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="TractographyLabelMapSeeding_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>190</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TractographyLabelMapSeeding</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="polydatatransform_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>270</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="MDT_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>350</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="dtiprocess_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>430</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="fiberprocess_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>70</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>fiberprocess</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_python_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>390</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="dtiprocess_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>430</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>dtiprocess</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="python_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>390</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>python</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_FiberPostProcess_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>230</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_dtiprocess_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>430</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="TractographyLabelMapSeeding_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>190</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_DTIReg_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>30</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="fiberprocess_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>70</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="reset_fiberprocess_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>579</x>
+          <y>70</y>
+          <width>85</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="MDT_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>350</y>
+          <width>239</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>MDT</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="FiberPostProcess_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>230</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="DTIReg_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>30</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="python_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>390</y>
+          <width>323</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tractography_param_tab">
+     <attribute name="title">
+      <string>Tractography Parameters</string>
+     </attribute>
+     <widget class="QWidget" name="seed_placement_options_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>681</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="seed_placement_options_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>685</width>
+         <height>131</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Seed Placement Options</string>
+       </property>
+       <widget class="QLabel" name="seedspacing_label">
+        <property name="geometry">
+         <rect>
+          <x>17</x>
+          <y>40</y>
+          <width>91</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Seed Spacing</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="linearmeasure_label">
+        <property name="geometry">
+         <rect>
+          <x>17</x>
+          <y>80</y>
+          <width>241</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Linear Measure Start Threshold</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="seedspacing_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>35</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.500000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="linearmeasure_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>75</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.050000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.150000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="seedspacing_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>40</y>
+          <width>251</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Spacing between seed points (mm)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="linearmeasure_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>80</y>
+          <width>331</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Minimum Linear Measure for the seeding to start</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tractography_seeding_parameters_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>681</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="tractograph_seeding_parameters_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>681</width>
+         <height>251</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Tractography Seeding Parameters</string>
+       </property>
+       <widget class="QLabel" name="minpathlength_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>151</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Minimum Path Length</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="maxpathlength_descr_label_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>151</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Maximum Path Length</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="stoppingvalue_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>101</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Stopping Value</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="stoppingcurvature_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>160</y>
+          <width>131</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Stopping Curvature</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="integrationsteplength_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>200</y>
+          <width>161</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Integration Step Length</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="minpathlength_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>35</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>200.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>10.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="maxpathlength_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>75</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>2000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>800.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="stoppingvalue_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>115</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.120000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="stoppingcurvature_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>155</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.300000000000000</double>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="integrationsteplength_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>195</y>
+          <width>71</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+        <property name="value">
+         <double>10.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="minpathlength_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>40</y>
+          <width>231</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <italic>true</italic>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="text">
+         <string>Minimum length of the fibers (mm)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="maxpathlength_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>80</y>
+          <width>241</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Maximum length of the fibers (mm)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="stoppingvalue_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>110</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Tractography will stop when the 
+stopping measurement drops below this value</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="stoppingcurvature_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>150</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Tractography will stop if radius of curvature
+becomes smaller than this number (degre/mm)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="integrationsteplength_descr_label">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>195</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Distance between two points 
+on the same fiber (mm)</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="reference_tracts_tab">
+     <attribute name="title">
+      <string>Reference tracts</string>
+     </attribute>
+     <widget class="QWidget" name="tracts_dir_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>681</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="tracts_dir_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>685</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Reference Tracts Directory</string>
+       </property>
+       <widget class="QPushButton" name="tracts_dir_button">
+        <property name="geometry">
+         <rect>
+          <x>17</x>
+          <y>40</y>
+          <width>127</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Tracts Directory</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="tracts_dir_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>151</x>
+          <y>40</y>
+          <width>525</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="ref_tracts_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>691</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <widget class="QGroupBox" name="ref_tracts_groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>691</width>
+         <height>391</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Reference Tracts</string>
+       </property>
+       <widget class="QListWidget" name="fibers_list">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>256</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="selected_fibers_list">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>60</y>
+          <width>256</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="add_fiber_button">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>90</y>
+          <width>93</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&gt;&gt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="remove_fiber_button">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>130</y>
+          <width>93</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;&lt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="add_all_fibers_button">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>280</y>
+          <width>93</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Add All</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="remove_all_fibers_button">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>320</y>
+          <width>93</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Remove All</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="tract_available_label">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>30</y>
+          <width>115</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Tracts Available</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="selected_tract_label">
+        <property name="geometry">
+         <rect>
+          <x>490</x>
+          <y>30</y>
+          <width>110</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Selected Tracts</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Execution_tab">
+     <attribute name="title">
+      <string>Execution</string>
+     </attribute>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>681</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <widget class="QLabel" name="view_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>15</y>
+         <width>63</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>View:</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="singletract_radioButton">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>13</y>
+         <width>109</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Single Tract</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="singletract_comboBox">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>10</y>
+         <width>85</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="all_radioButton">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>13</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>All</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="log_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>681</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <widget class="QPlainTextEdit" name="log_textEdit">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>681</width>
+         <height>431</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>727</width>
+     <width>743</width>
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Data_Configuration"/>
+    <addaction name="actionSave_DataConfiguration"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoad_Parameters_Configuration"/>
+    <addaction name="actionSave_Parameters_Configuration"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoad_Software_Configuration"/>
+    <addaction name="actionSave_Software_Configuration"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLoad_Data_Configuration">
+   <property name="text">
+    <string>Load Data Configuration</string>
+   </property>
+  </action>
+  <action name="actionSave_DataConfiguration">
+   <property name="text">
+    <string>Save DataConfiguration</string>
+   </property>
+  </action>
+  <action name="actionLoad_Parameters_Configuration">
+   <property name="text">
+    <string>Load Parameters Configuration</string>
+   </property>
+  </action>
+  <action name="actionSave_Parameters_Configuration">
+   <property name="text">
+    <string>Save Parameters Configuration</string>
+   </property>
+  </action>
+  <action name="actionLoad_Software_Configuration">
+   <property name="text">
+    <string>Load Software Configuration</string>
+   </property>
+  </action>
+  <action name="actionSave_Software_Configuration">
+   <property name="text">
+    <string>Save Software Configuration</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
