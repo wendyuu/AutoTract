@@ -90,7 +90,7 @@
          <string>Output Directory</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="output_dir_lineEdit">
+       <widget class="QLineEdit" name="para_output_dir_lineEdit">
         <property name="geometry">
          <rect>
           <x>170</x>
@@ -100,7 +100,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="ref_atlas_lineEdit">
+       <widget class="QLineEdit" name="para_ref_atlas_lineEdit">
         <property name="geometry">
          <rect>
           <x>170</x>
@@ -110,7 +110,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="input_atlas_lineEdit">
+       <widget class="QLineEdit" name="para_input_atlas_lineEdit">
         <property name="geometry">
          <rect>
           <x>170</x>
@@ -195,7 +195,7 @@
          <string>Threshold (ref image mask)</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="dilatation_radius_spinBox">
+       <widget class="QDoubleSpinBox" name="para_dilatation_radius_spinBox">
         <property name="geometry">
          <rect>
           <x>280</x>
@@ -205,7 +205,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="resampling_factor_spinBox">
+       <widget class="QDoubleSpinBox" name="para_resampling_factor_spinBox">
         <property name="geometry">
          <rect>
           <x>280</x>
@@ -215,7 +215,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="threshold_csf_spinBox">
+       <widget class="QDoubleSpinBox" name="para_threshold_csf_spinBox">
         <property name="geometry">
          <rect>
           <x>280</x>
@@ -225,7 +225,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="threshold_ref_image_spinBox">
+       <widget class="QDoubleSpinBox" name="para_threshold_ref_image_spinBox">
         <property name="geometry">
          <rect>
           <x>280</x>
@@ -263,7 +263,7 @@
        <property name="title">
         <string>Executables</string>
        </property>
-       <widget class="QLineEdit" name="ResampleDTIVolume_lineEdit">
+       <widget class="QLineEdit" name="soft_ResampleDTIVolume_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -312,7 +312,7 @@
          <string>polydatatransform</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="unu_lineEdit">
+       <widget class="QLineEdit" name="soft_unu_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -322,7 +322,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="ImageMath_lineEdit">
+       <widget class="QLineEdit" name="soft_ImageMath_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -462,7 +462,7 @@
          <string>TractographyLabelMapSeeding</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="polydatatransform_lineEdit">
+       <widget class="QLineEdit" name="soft_polydatatransform_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -472,7 +472,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="MDT_lineEdit">
+       <widget class="QLineEdit" name="soft_MDT_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -482,7 +482,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="dtiprocess_lineEdit">
+       <widget class="QLineEdit" name="soft_dtiprocess_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -570,7 +570,7 @@
          <string>Reset</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="TractographyLabelMapSeeding_lineEdit">
+       <widget class="QLineEdit" name="soft_TractographyLabelMapSeeding_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -593,7 +593,7 @@
          <string>Reset</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="fiberprocess_lineEdit">
+       <widget class="QLineEdit" name="soft_fiberprocess_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -629,7 +629,7 @@
          <string>MDT</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="FiberPostProcess_lineEdit">
+       <widget class="QLineEdit" name="soft_FiberPostProcess_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -639,7 +639,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="DTIReg_lineEdit">
+       <widget class="QLineEdit" name="soft_DTIReg_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -649,7 +649,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="python_lineEdit">
+       <widget class="QLineEdit" name="soft_python_lineEdit">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -713,7 +713,7 @@
          <string>Linear Measure Start Threshold</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="seedspacing_spinBox">
+       <widget class="QDoubleSpinBox" name="para_seedspacing_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -721,6 +721,9 @@
           <width>71</width>
           <height>27</height>
          </rect>
+        </property>
+        <property name="minimum">
+         <double>-1.000000000000000</double>
         </property>
         <property name="maximum">
          <double>10.000000000000000</double>
@@ -732,7 +735,7 @@
          <double>0.500000000000000</double>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="linearmeasure_spinBox">
+       <widget class="QDoubleSpinBox" name="para_linearmeasure_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -875,7 +878,7 @@
          <string>Integration Step Length</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="minpathlength_spinBox">
+       <widget class="QDoubleSpinBox" name="para_minpathlength_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -891,7 +894,7 @@
          <double>10.000000000000000</double>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="maxpathlength_spinBox">
+       <widget class="QDoubleSpinBox" name="para_maxpathlength_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -907,7 +910,7 @@
          <double>800.000000000000000</double>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="stoppingvalue_spinBox">
+       <widget class="QDoubleSpinBox" name="para_stoppingvalue_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -926,7 +929,7 @@
          <double>0.120000000000000</double>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="stoppingcurvature_spinBox">
+       <widget class="QDoubleSpinBox" name="para_stoppingcurvature_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -945,7 +948,7 @@
          <double>0.300000000000000</double>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="integrationsteplength_spinBox">
+       <widget class="QDoubleSpinBox" name="para_integrationsteplength_spinBox">
         <property name="geometry">
          <rect>
           <x>260</x>
@@ -1102,7 +1105,7 @@ on the same fiber (mm)</string>
          <string>Tracts Directory</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="tracts_dir_lineEdit">
+       <widget class="QLineEdit" name="para_tracts_dir_lineEdit">
         <property name="geometry">
          <rect>
           <x>151</x>
@@ -1135,7 +1138,7 @@ on the same fiber (mm)</string>
        <property name="title">
         <string>Reference Tracts</string>
        </property>
-       <widget class="QListWidget" name="listWidget">
+       <widget class="QListWidget" name="para_ref_tracts_listWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -1174,7 +1177,7 @@ on the same fiber (mm)</string>
         <string>View:</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="singletract_radioButton">
+      <widget class="QRadioButton" name="para_singletract_radioButton">
        <property name="geometry">
         <rect>
          <x>160</x>
@@ -1187,7 +1190,7 @@ on the same fiber (mm)</string>
         <string>Single Tract</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="singletract_comboBox">
+      <widget class="QComboBox" name="para_singletract_comboBox">
        <property name="geometry">
         <rect>
          <x>270</x>
@@ -1197,7 +1200,7 @@ on the same fiber (mm)</string>
         </rect>
        </property>
       </widget>
-      <widget class="QRadioButton" name="all_radioButton">
+      <widget class="QRadioButton" name="para_all_radioButton">
        <property name="geometry">
         <rect>
          <x>80</x>
@@ -1247,33 +1250,38 @@ on the same fiber (mm)</string>
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionLoad_Configuration"/>
-    <addaction name="actionSave_Configuration"/>
+    <addaction name="actionLoad_Parameter_Configuration"/>
+    <addaction name="actionSave_Parameter_Configuration"/>
     <addaction name="separator"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionAbout"/>
+    <addaction name="actionLoad_Software_Configuration"/>
+    <addaction name="actionSave_Software_Configuration"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionLoad_Configuration">
+  <action name="actionLoad_Parameter_Configuration">
    <property name="text">
-    <string>Load Configuration</string>
+    <string>Load Parameter Configuration</string>
    </property>
   </action>
-  <action name="actionSave_Configuration">
+  <action name="actionSave_Parameter_Configuration">
    <property name="text">
-    <string>Save Configuration</string>
+    <string>Save Parameter Configuration</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionLoad_Software_Configuration">
+   <property name="text">
+    <string>Load Software Configuration</string>
+   </property>
+  </action>
+  <action name="actionSave_Software_Configuration">
+   <property name="text">
+    <string>Save Software Configuration</string>
    </property>
   </action>
  </widget>

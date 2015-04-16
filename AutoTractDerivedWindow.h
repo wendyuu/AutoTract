@@ -7,6 +7,8 @@ class AutoTractDerivedWindow :public AutoTractWindow
 public:
     AutoTractDerivedWindow();
 private slots:
-    void SaveConfigFile();
-    void LoadConfigFile();
+    void SaveParaConfigFile();
+    void LoadParaConfigFile();
+    void SaveSoftConfigFile();
+    void LoadSoftConfigFile();
 };
