@@ -40,6 +40,13 @@ void AutoTractWindow::SyncUiToModelStructure()
 
     /*4th tab*/
     para_m.setpara_tracts_dir_lineEdit( para_tracts_dir_lineEdit->text() );
+    std::map<QString,bool> itemList ;
+    for( int i = 0 ; i < para_ref_tracts_listWidget->count() ; i++ )
+    {
+        QListWidgetItem *currentItem = para_ref_tracts_listWidget->item(i) ;
+        itemList[ currentItem->text() ] = static_cast<bool>(currentItem->checkState() ) ;
+    }
+    para_m.setpara_ref_tracts_listWidget(itemList) ;
 
     /*5th tab*/
     para_m.setpara_all_radioButton( para_all_radioButton->isChecked() );
@@ -85,6 +92,14 @@ void AutoTractWindow::SyncModelStructureToUi()
 
     /*4th tab*/
     para_tracts_dir_lineEdit->setText( para_m.getpara_tracts_dir_lineEdit() );
+    std::map<QString,bool> itemList ;
+    itemList = para_m.getpara_ref_tracts_listWidget() ;
+    para_ref_tracts_listWidget->clear() ;
+    for( std::map<QString,bool>::iterator it = itemList.begin() ; it != itemList.end() ; it++ )
+    {
+        QListWidgetItem *item = new QListWidgetItem( it->first , para_ref_tracts_listWidget ) ;
+        item->setCheckState( it->second != 0 ? Qt::Checked : Qt::Unchecked ) ;
+    }
 
     /*5th tab*/
     para_all_radioButton->setChecked( para_m.getpara_all_radioButton() );

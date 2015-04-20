@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="input_tab">
      <attribute name="title">
@@ -1092,7 +1092,7 @@ on the same fiber (mm)</string>
        <property name="title">
         <string>Reference Tracts Directory</string>
        </property>
-       <widget class="QPushButton" name="tracts_dir_button">
+       <widget class="QPushButton" name="tracts_dir_pushButton">
         <property name="geometry">
          <rect>
           <x>17</x>
