@@ -23,8 +23,8 @@ private slots:
     void selectExecutable(QString executable_name);
     void enterExecutable(QString executable_name);
     void resetExecutable(QString executable_name);
-    void selectData(QString data_name);
-    void enterData(QString data_name);
+    void selectParameters(QString parameters_name);
+    void enterParameters(QString parameters_name);
 
 private:
     struct Executable
@@ -33,7 +33,7 @@ private:
         QLineEdit* enter_lineEdit;
         QPushButton* reset_button;
     };
-    struct Data
+    struct Parameters
     {
         QPushButton* select_button;
         QLineEdit* enter_lineEdit;
@@ -41,10 +41,10 @@ private:
 
     QMap<QString, Executable> m_executables_map;
     QMap<QString, QString> executables_map;
-    QMap<QString, Data> m_data_map;
-    QMap<QString, QString> data_map;
+    QMap<QString, Parameters> m_parameters_map;
+    QMap<QString, QString> parameters_map;
     void initializeExecutablesMap();
-    void initializeDataMap();
+    void initializeParametersMap();
 
     QStringList m_selectedAtlases;
     QString m_atlasPopulationDirectory;

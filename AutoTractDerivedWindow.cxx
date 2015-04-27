@@ -11,26 +11,26 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect( this->actionLoad_Software_Configuration, SIGNAL( triggered() ), SLOT( LoadSoftConfigFile() ) );
 
     /*1st tab*/
-    // Select Executable Signal Mapper
-    QSignalMapper* selectData_signalMapper = new QSignalMapper(this);
-    connect(selectData_signalMapper, SIGNAL(mapped(QString)), this, SLOT(selectData(QString)));
+    // Select Parameters Signal Mapper
+    QSignalMapper* selectParameters_signalMapper = new QSignalMapper(this);
+    connect(selectParameters_signalMapper, SIGNAL(mapped(QString)), this, SLOT(selectParameters(QString)));
 
-    // Enter Executable Signal Mapper
-    QSignalMapper* enterData_signalMapper = new QSignalMapper(this);
-    connect(enterData_signalMapper, SIGNAL(mapped(QString)), this, SLOT(enterData(QString)));
+    // Enter Parameters Signal Mapper
+    QSignalMapper* enterParameters_signalMapper = new QSignalMapper(this);
+    connect(enterParameters_signalMapper, SIGNAL(mapped(QString)), this, SLOT(enterParameters(QString)));
 
-    initializeDataMap();
-    QMap<QString, Data>::iterator it_data;
-    for(it_data = m_data_map.begin(); it_data != m_data_map.end(); ++it_data)
+    initializeParametersMap();
+    QMap<QString, Parameters>::iterator it_parameters;
+    for(it_parameters = m_parameters_map.begin(); it_parameters != m_parameters_map.end(); ++it_parameters)
     {
-        QString name = it_data.key();
-        Data data = it_data.value();
+        QString name = it_parameters.key();
+        Parameters parameters = it_parameters.value();
 
-        selectData_signalMapper->setMapping(data.select_button, name);
-        connect(data.select_button, SIGNAL(clicked()), selectData_signalMapper, SLOT(map()));
+        selectParameters_signalMapper->setMapping(parameters.select_button, name);
+        connect(parameters.select_button, SIGNAL(clicked()), selectParameters_signalMapper, SLOT(map()));
 
-        enterData_signalMapper->setMapping(data.enter_lineEdit, name);
-        connect(data.enter_lineEdit, SIGNAL(editingFinished()), enterData_signalMapper, SLOT(map()));
+        enterParameters_signalMapper->setMapping(parameters.enter_lineEdit, name);
+        connect(parameters.enter_lineEdit, SIGNAL(editingFinished()), enterParameters_signalMapper, SLOT(map()));
     }
 
     /*2nd tab*/
@@ -188,47 +188,53 @@ void AutoTractDerivedWindow::resetExecutable(QString executable_name)
     (executable.enter_lineEdit)->setText(executables_map[executable_name]);
 }
 
-void AutoTractDerivedWindow::initializeDataMap()
+void AutoTractDerivedWindow::initializeParametersMap()
 {
-    Data output_dir = {output_dir_pushButton, para_output_dir_lineEdit};
-    m_data_map.insert("output_dir", output_dir);
+    Parameters inputDTIatlas_dir = { inputDTIatlas_pushButton, para_inputDTIatlas_lineEdit};
+    m_parameters_map.insert("inputDTIatlas_dir", inputDTIatlas_dir);
 
-    Data ref_atlas = {ref_atlas_pushButton, para_ref_atlas_lineEdit};
-    m_data_map.insert("ref_atlas", ref_atlas);
+    Parameters inputWMmask_dir = {inputWMmask_pushButton, para_inputWMmask_lineEdit};
+    m_parameters_map.insert("inputWMmask_dir", inputWMmask_dir);
 
-    Data input_atlas = {input_atlas_pushButton, para_input_atlas_lineEdit};
-    m_data_map.insert("input_atlas", input_atlas);
+    Parameters inputCSFmask_dir = {inputCSFmask_pushButton, para_inputCSFmask_lineEdit};
+    m_parameters_map.insert("inputCSFmask_dir", inputCSFmask_dir);
 
-    //Data tracts_dir = {tracts_dir_pushButton, para_tracts_dir_lineEdit};
-    //m_data_map.insert("tracts_dir", tracts_dir);
+    Parameters output_dir = {output_dir_pushButton, para_output_dir_lineEdit};
+    m_parameters_map.insert("output_dir", output_dir);
+
+    Parameters refDTIatlas_dir = {refDTIatlas_pushButton, para_refDTIatlas_lineEdit};
+    m_parameters_map.insert("refDTIatlas_dir", refDTIatlas_dir);
+
+    Parameters tracts_dir = {tracts_dir_pushButton, para_tracts_dir_lineEdit};
+    m_parameters_map.insert("tracts_dir", tracts_dir);
 
 }
 
-void AutoTractDerivedWindow::selectData(QString data_name)
+void AutoTractDerivedWindow::selectParameters(QString parameters_name)
 {
-    Data data = m_data_map[data_name];
-    QString data_path = (data.enter_lineEdit)->text();
+    Parameters parameters = m_parameters_map[parameters_name];
+    QString parameters_path = (parameters.enter_lineEdit)->text();
     QString dir_path = "";
 
-    if(!(data_path.isEmpty()))
+    if(!(parameters_path.isEmpty()))
     {
-        dir_path = (QFileInfo(data_path).dir()).absolutePath();
+        dir_path = (QFileInfo(parameters_path).dir()).absolutePath();
     }
 
-    data_path = QFileDialog::getOpenFileName(this, tr("Select path"), dir_path);
-    if(!data_path.isEmpty())
+    parameters_path = QFileDialog::getOpenFileName(this, tr("Select path"), dir_path);
+    if(!parameters_path.isEmpty())
     {
-        (data.enter_lineEdit)->setText(data_path) ;
-        data_map[data_name] = data_path;
+        (parameters.enter_lineEdit)->setText(parameters_path) ;
+        parameters_map[parameters_name] = parameters_path;
     }
 }
 
-void AutoTractDerivedWindow::enterData(QString data_name)
+void AutoTractDerivedWindow::enterParameters(QString parameters_name)
 {
-    Data data = m_data_map[data_name];
-    QString data_path = (data.enter_lineEdit)->text();
-    (data.enter_lineEdit)->setText(data_path) ;
-    data_map[data_name] = data_path;
+    Parameters parameters = m_parameters_map[parameters_name];
+    QString parameters_path = (parameters.enter_lineEdit)->text();
+    (parameters.enter_lineEdit)->setText(parameters_path) ;
+    parameters_map[parameters_name] = parameters_path;
 }
 
 void AutoTractDerivedWindow::selectTractsPopulationDirectory()
