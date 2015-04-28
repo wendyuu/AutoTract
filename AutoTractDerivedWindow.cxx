@@ -63,11 +63,55 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
         connect(executable.reset_button, SIGNAL(clicked()), resetExecutable_signalMapper, SLOT(map()));
     }
 
+    /*4th tab: Registration*/
+    QStringList list=(QStringList()<<"Rigid"<<"Affine"<<"GreedyDiffeo"<<"SpatioTempDiffeo");
+    para_registration_type_comboBox->addItems( list );
+    connect(para_registration_type_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeRegistrationType(int)));
 
     /*4th tab*/
     connect(tracts_dir_pushButton, SIGNAL(clicked()), this, SLOT(selectTractsPopulationDirectory()));
     connect(para_tracts_dir_lineEdit, SIGNAL(editingFinished()), this, SLOT(enterAtlasPopulationDirectory()));
     connect(para_ref_tracts_listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(selectAtlas(QListWidgetItem*)));
+
+    /*7th tab: Execution*/
+    connect(runPipeline_pushButton, SIGNAL(clicked()), this, SLOT(runPipeline()));
+}
+
+void AutoTractDerivedWindow::runPipeline()
+{
+    m_script = "";
+    m_script += "#!/usr/bin/env python\n\n";
+    m_script += "import os\n";
+    m_script += "import sys\n";
+    m_script += "import logging\n";
+    m_script += "import signal\n";
+    m_script += "import subprocess\n\n";
+    QMap<QString, QString>::iterator i;
+    for (i = executables_map.begin(); i != executables_map.end(); ++i)
+    {
+        m_script += i.key() + " = '" + i.value() + "'\n";
+    }
+    QMap<QString, QString>::iterator j;
+    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
+    {
+        m_script += i.key() + " = '" + i.value() + "'\n";
+    }
+    m_script += "fibersMappedDir = outputdir + \"fibers_mapped/\"\n";
+    m_script += "displacementField = outputdir + \"displacementField.nrrd\"\n";
+    m_script += "upsampledImage = outputdir + \"/upsampledImage.nrrd\"\n";
+
+    /*1st step: Registration*/
+    m_script += "print \"Step: Co-registering atlases & creation of displacement field ...\"\n";
+   // m_script +=
+
+    std::ofstream* script_stream = new std::ofstream("script.py", std::ios::out | std::ios::trunc);
+    *script_stream << m_script.toStdString() << std::endl;
+    script_stream->close();
+}
+
+void AutoTractDerivedWindow::changeRegistrationType(int index)
+{
+
 }
 
 void AutoTractDerivedWindow::SaveParaConfigFile()
@@ -207,7 +251,6 @@ void AutoTractDerivedWindow::initializeParametersMap()
 
     Parameters tracts_dir = {tracts_dir_pushButton, para_tracts_dir_lineEdit};
     m_parameters_map.insert("tracts_dir", tracts_dir);
-
 }
 
 void AutoTractDerivedWindow::selectParameters(QString parameters_name)

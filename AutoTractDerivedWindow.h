@@ -1,6 +1,9 @@
 #include "AutoTractWindow.h"
 #include <QFileDialog>
 #include <QSignalMapper>
+#include <iterator>
+#include <iostream>
+#include <fstream>
 
 class AutoTractDerivedWindow :public AutoTractWindow
 {
@@ -25,6 +28,8 @@ private slots:
     void resetExecutable(QString executable_name);
     void selectParameters(QString parameters_name);
     void enterParameters(QString parameters_name);
+    void changeRegistrationType(int index);
+    void runPipeline();
 
 private:
     struct Executable
@@ -48,4 +53,6 @@ private:
 
     QStringList m_selectedAtlases;
     QString m_atlasPopulationDirectory;
+    QString m_script;
+
 };

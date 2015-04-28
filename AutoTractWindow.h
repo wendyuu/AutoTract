@@ -23,7 +23,7 @@ public slots:
     void Load_Software_Configuration( std::string filename );
 
 
-private:
+protected:
     para_Model_AutoTract para_m;
     para_Save_AutoTract para_s;
     para_Load_AutoTract para_l;
