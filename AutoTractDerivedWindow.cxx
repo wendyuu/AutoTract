@@ -77,36 +77,50 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect(runPipeline_pushButton, SIGNAL(clicked()), this, SLOT(runPipeline()));
 }
 
+/*void AutoTractDerivedWindow::setSoftwareXMLPath(std::string executables)
+{
+    m_executable_path = executables;
+}
+
+void AutoTractDerivedWindow::setParameterXMLPath(std::string parameters)
+{
+    m_parameter_path = parameters;
+}*/
+
 void AutoTractDerivedWindow::runPipeline()
 {
-    m_script = "";
-    m_script += "#!/usr/bin/env python\n\n";
-    m_script += "import os\n";
-    m_script += "import sys\n";
-    m_script += "import logging\n";
-    m_script += "import signal\n";
-    m_script += "import subprocess\n\n";
-    QMap<QString, QString>::iterator i;
-    for (i = executables_map.begin(); i != executables_map.end(); ++i)
-    {
-        m_script += i.key() + " = '" + i.value() + "'\n";
-    }
-    QMap<QString, QString>::iterator j;
-    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
-    {
-        m_script += i.key() + " = '" + i.value() + "'\n";
-    }
-    m_script += "fibersMappedDir = outputdir + \"fibers_mapped/\"\n";
-    m_script += "displacementField = outputdir + \"displacementField.nrrd\"\n";
-    m_script += "upsampledImage = outputdir + \"/upsampledImage.nrrd\"\n";
+    /*Load_Parameter_Configuration(m_parameter_path);
+    Load_Software_Configuration(m_executable_path);*/
+    SyncUiToModelStructure();
+    m_pipeline->writePipeline();
+                //    m_script = "";
+                //    m_script += "#!/usr/bin/env python\n\n";
+                //    m_script += "import os\n";
+                //    m_script += "import sys\n";
+                //    m_script += "import logging\n";
+                //    m_script += "import signal\n";
+                //    m_script += "import subprocess\n\n";
+                //    QMap<QString, QString>::iterator i;
+                //    for (i = executables_map.begin(); i != executables_map.end(); ++i)
+                //    {
+                //        m_script += i.key() + " = '" + i.value() + "'\n";
+                //    }
+                //    QMap<QString, QString>::iterator j;
+                //    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
+                //    {
+                //        m_script += i.key() + " = '" + i.value() + "'\n";
+                //    }
+                //    m_script += "fibersMappedDir = outputdir + \"fibers_mapped/\"\n";
+                //    m_script += "displacementField = outputdir + \"displacementField.nrrd\"\n";
+                //    m_script += "upsampledImage = outputdir + \"/upsampledImage.nrrd\"\n";
 
-    /*1st step: Registration*/
-    m_script += "print \"Step: Co-registering atlases & creation of displacement field ...\"\n";
-   // m_script +=
+                //    /*1st step: Registration*/
+                //    m_script += "print \"Step: Co-registering atlases & creation of displacement field ...\"\n";
+                //   // m_script +=
 
-    std::ofstream* script_stream = new std::ofstream("script.py", std::ios::out | std::ios::trunc);
-    *script_stream << m_script.toStdString() << std::endl;
-    script_stream->close();
+                //    std::ofstream* script_stream = new std::ofstream("script.py", std::ios::out | std::ios::trunc);
+                //    *script_stream << m_script.toStdString() << std::endl;
+                //    script_stream->close();
 }
 
 void AutoTractDerivedWindow::changeRegistrationType(int index)

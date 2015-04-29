@@ -1,4 +1,5 @@
 #include "AutoTractWindow.h"
+#include "Pipeline.h"
 #include <QFileDialog>
 #include <QSignalMapper>
 #include <iterator>
@@ -13,6 +14,8 @@ public:
     void displayAtlases();
     void checkSelectedAtlases();
     void checkAtlases();
+    /*void setSoftwareXMLPath(std::string executables);
+    void setParameterXMLPath(std::string parameters);*/
 public slots:
     void UpdateAtlasPopulationDirectoryDisplay();
     void selectAtlas(QListWidgetItem* item);
@@ -48,9 +51,11 @@ private:
     QMap<QString, QString> executables_map;
     QMap<QString, Parameters> m_parameters_map;
     QMap<QString, QString> parameters_map;
+    /*std::string m_executable_path;
+    std::string m_parameter_path;*/
     void initializeExecutablesMap();
     void initializeParametersMap();
-
+    Pipeline* m_pipeline;
     QStringList m_selectedAtlases;
     QString m_atlasPopulationDirectory;
     QString m_script;

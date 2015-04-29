@@ -17,6 +17,7 @@ set(srcfiles
 AutoTract.cxx 
 AutoTractWindow.cxx
 AutoTractDerivedWindow.cxx
+Pipeline.cxx
 )
 
 QT4_ADD_RESOURCES(RESOURCES resources.qrc)
