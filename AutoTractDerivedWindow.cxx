@@ -32,6 +32,8 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
         enterParameters_signalMapper->setMapping(parameters.enter_lineEdit, name);
         connect(parameters.enter_lineEdit, SIGNAL(editingFinished()), enterParameters_signalMapper, SLOT(map()));
     }
+    connect(output_dir_pushButton, SIGNAL(clicked()), this, SLOT(selectOutputDirectory()));
+    connect(para_output_dir_lineEdit, SIGNAL(editingFinished()), this, SLOT(enterOutputDirectory()));
 
     /*2nd tab*/
     // Select Executable Signal Mapper
@@ -92,6 +94,9 @@ void AutoTractDerivedWindow::runPipeline()
     /*Load_Parameter_Configuration(m_parameter_path);
     Load_Software_Configuration(m_executable_path);*/
     SyncUiToModelStructure();
+    m_pipeline = new Pipeline();
+    m_pipeline->setPipelineParameters(m_para_m);
+    m_pipeline->setPipelineSoftwares(m_soft_m);
     m_pipeline->writePipeline();
                 //    m_script = "";
                 //    m_script += "#!/usr/bin/env python\n\n";
@@ -257,9 +262,6 @@ void AutoTractDerivedWindow::initializeParametersMap()
     Parameters inputCSFmask_dir = {inputCSFmask_pushButton, para_inputCSFmask_lineEdit};
     m_parameters_map.insert("inputCSFmask_dir", inputCSFmask_dir);
 
-    Parameters output_dir = {output_dir_pushButton, para_output_dir_lineEdit};
-    m_parameters_map.insert("output_dir", output_dir);
-
     Parameters refDTIatlas_dir = {refDTIatlas_pushButton, para_refDTIatlas_lineEdit};
     m_parameters_map.insert("refDTIatlas_dir", refDTIatlas_dir);
 
@@ -373,5 +375,21 @@ void AutoTractDerivedWindow::checkAtlases()
         {
             m_selectedAtlases << *it;
         }
+    }
+}
+
+void AutoTractDerivedWindow::selectOutputDirectory()
+{
+    QString outputDirectory = QFileDialog::getExistingDirectory (this, tr("Open Directory"), para_output_dir_lineEdit->text(), QFileDialog::ShowDirsOnly);
+    para_output_dir_lineEdit->setText(outputDirectory);
+    m_para_m->setpara_output_dir_lineEdit( outputDirectory );
+}
+
+void AutoTractDerivedWindow::enterOutputDirectory()
+{
+    QString outputDirectory = para_output_dir_lineEdit->text();
+    if(!outputDirectory.isEmpty())
+    {
+        m_para_m->setpara_output_dir_lineEdit( para_output_dir_lineEdit->text() ) ;
     }
 }

@@ -21,6 +21,8 @@ public slots:
     void selectAtlas(QListWidgetItem* item);
     void selectTractsPopulationDirectory();
     void enterAtlasPopulationDirectory();
+    void selectOutputDirectory();
+    void enterOutputDirectory();
 private slots:
     void SaveParaConfigFile();
     void LoadParaConfigFile();
@@ -59,5 +61,4 @@ private:
     QStringList m_selectedAtlases;
     QString m_atlasPopulationDirectory;
     QString m_script;
-
 };
