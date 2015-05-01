@@ -8,6 +8,7 @@
 #include "soft_Save_AutoTract.h"
 #include "soft_Load_AutoTract.h"
 #include "soft_Model_AutoTract.h"
+#include "MainScriptThread.h"
 
 class AutoTractWindow :public QMainWindow, public Ui::MainWindow
 {

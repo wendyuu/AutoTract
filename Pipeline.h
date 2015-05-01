@@ -1,3 +1,6 @@
+#ifndef DEF_Pipeline
+#define DEF_Pipeline
+
 // General Librairies
 #include <iostream>
 #include <fstream>
@@ -21,7 +24,6 @@
 
 class Pipeline
 {
-
    public:
 
    // Constructor
@@ -31,6 +33,8 @@ class Pipeline
    ~Pipeline();
 
    // Parameters
+   void SetExecutablesMap( QMap<QString, QString> executables_map);
+   void SetParametersMap( QMap<QString, QString> parameters_map);
    void setPipelineParameters(para_Model_AutoTract *para_m);
    void setPipelineSoftwares(soft_Model_AutoTract *soft_m);
    void setPlainTextEdit(QPlainTextEdit* plainTextEdit);
@@ -43,12 +47,15 @@ class Pipeline
    void runPipeline();
    void stopPipeline();
 
+
+
    private:
    // Write Main Script
    void initializeMainScript();
    void initializeLogging();
    void defineSignalHandler();
    void writeMainScript();
+   void writeRegistration();
    void executeMainScript();
    void copySegmentations();
 
@@ -57,6 +64,9 @@ class Pipeline
 
    para_Model_AutoTract* m_para_m;
    soft_Model_AutoTract* m_soft_m;
+
+   QMap<QString, QString> m_executables_map;
+   QMap<QString, QString> m_parameters_map;
 
    QString m_processing_path;
 
@@ -77,3 +87,5 @@ class Pipeline
    // Timer
    QTime m_timer;
 };
+
+#endif

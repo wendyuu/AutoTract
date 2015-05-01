@@ -1,3 +1,6 @@
+#ifndef DEF_DerivedWindow
+#define DEF_DerivedWindow
+
 #include "AutoTractWindow.h"
 #include "Pipeline.h"
 #include <QFileDialog>
@@ -50,11 +53,10 @@ private:
     };
 
     QMap<QString, Executable> m_executables_map;
-    QMap<QString, QString> executables_map;
+    QMap<QString, QString> m_lookup_executables_map;
     QMap<QString, Parameters> m_parameters_map;
-    QMap<QString, QString> parameters_map;
-    /*std::string m_executable_path;
-    std::string m_parameter_path;*/
+    QMap<QString, QString> m_lookup_parameters_map;
+    MainScriptThread* m_thread;
     void initializeExecutablesMap();
     void initializeParametersMap();
     Pipeline* m_pipeline;
@@ -62,3 +64,5 @@ private:
     QString m_atlasPopulationDirectory;
     QString m_script;
 };
+
+#endif

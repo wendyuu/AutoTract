@@ -97,35 +97,14 @@ void AutoTractDerivedWindow::runPipeline()
     m_pipeline = new Pipeline();
     m_pipeline->setPipelineParameters(m_para_m);
     m_pipeline->setPipelineSoftwares(m_soft_m);
+    std::cout<<m_lookup_executables_map["python"].toStdString()<<std::endl;
+    m_pipeline->SetExecutablesMap( m_lookup_executables_map );
+    m_pipeline->SetParametersMap( m_lookup_parameters_map );
     m_pipeline->writePipeline();
-                //    m_script = "";
-                //    m_script += "#!/usr/bin/env python\n\n";
-                //    m_script += "import os\n";
-                //    m_script += "import sys\n";
-                //    m_script += "import logging\n";
-                //    m_script += "import signal\n";
-                //    m_script += "import subprocess\n\n";
-                //    QMap<QString, QString>::iterator i;
-                //    for (i = executables_map.begin(); i != executables_map.end(); ++i)
-                //    {
-                //        m_script += i.key() + " = '" + i.value() + "'\n";
-                //    }
-                //    QMap<QString, QString>::iterator j;
-                //    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
-                //    {
-                //        m_script += i.key() + " = '" + i.value() + "'\n";
-                //    }
-                //    m_script += "fibersMappedDir = outputdir + \"fibers_mapped/\"\n";
-                //    m_script += "displacementField = outputdir + \"displacementField.nrrd\"\n";
-                //    m_script += "upsampledImage = outputdir + \"/upsampledImage.nrrd\"\n";
 
-                //    /*1st step: Registration*/
-                //    m_script += "print \"Step: Co-registering atlases & creation of displacement field ...\"\n";
-                //   // m_script +=
-
-                //    std::ofstream* script_stream = new std::ofstream("script.py", std::ios::out | std::ios::trunc);
-                //    *script_stream << m_script.toStdString() << std::endl;
-                //    script_stream->close();
+    m_thread = new MainScriptThread();
+    m_thread->setPipeline(m_pipeline);
+    m_thread->start();
 }
 
 void AutoTractDerivedWindow::changeRegistrationType(int index)
@@ -155,6 +134,11 @@ void AutoTractDerivedWindow::LoadParaConfigFile()
         m_DialogDir = fi.dir().absolutePath() ;
     }
     Load_Parameter_Configuration( filename.toStdString() );
+    m_lookup_executables_map["inputDTIatlas_dir"] = para_inputDTIatlas_lineEdit->text();
+    m_lookup_executables_map["inputWMmask_dir"] = para_inputWMmask_lineEdit->text();
+    m_lookup_executables_map["inputCSFmask_dir"] = para_inputCSFmask_lineEdit->text();
+    m_lookup_executables_map["refDTIatlas_dir"] = para_refDTIatlas_lineEdit->text();
+    m_lookup_executables_map["tracts_dir"] = para_tracts_dir_lineEdit->text();
 }
 
 void AutoTractDerivedWindow::SaveSoftConfigFile()
@@ -178,7 +162,18 @@ void AutoTractDerivedWindow::LoadSoftConfigFile()
         QFileInfo fi( filename ) ;
         m_DialogDir = fi.dir().absolutePath() ;
     }
-    Load_Parameter_Configuration( filename.toStdString() );
+    Load_Software_Configuration( filename.toStdString() );
+    m_lookup_executables_map["DTIReg"] = soft_DTIReg_lineEdit->text();
+    m_lookup_executables_map["fiberprocess"] = soft_fiberprocess_lineEdit->text();
+    m_lookup_executables_map["ResampleDTIVolume"] = soft_ResampleDTIVolume_lineEdit->text();
+    m_lookup_executables_map["ImageMath"] = soft_ImageMath_lineEdit->text();
+    m_lookup_executables_map["TractographyLabelMapSeeding"] = soft_TractographyLabelMapSeeding_lineEdit->text();
+    m_lookup_executables_map["FiberPostProcess"] = soft_FiberPostProcess_lineEdit->text();
+    m_lookup_executables_map["polydatatransform"] = soft_polydatatransform_lineEdit->text();
+    m_lookup_executables_map["unu"] = soft_unu_lineEdit->text();
+    m_lookup_executables_map["MDT"] = soft_MDT_lineEdit->text();
+    m_lookup_executables_map["python"] = soft_python_lineEdit->text();
+    m_lookup_executables_map["dtiprocess"] = soft_dtiprocess_lineEdit->text();
 
 }
 
@@ -233,7 +228,7 @@ void AutoTractDerivedWindow::selectExecutable(QString executable_name)
     if(!executable_path.isEmpty())
     {
         (executable.enter_lineEdit)->setText(executable_path) ;
-        executables_map[executable_name] = executable_path;
+        m_lookup_executables_map[executable_name] = executable_path;
     }
 }
 
@@ -242,13 +237,13 @@ void AutoTractDerivedWindow::enterExecutable(QString executable_name)
     Executable executable = m_executables_map[executable_name];
     QString executable_path = (executable.enter_lineEdit)->text();
     (executable.enter_lineEdit)->setText(executable_path) ;
-    executables_map[executable_name] = executable_path;
+    m_lookup_executables_map[executable_name] = executable_path;
 }
 
 void AutoTractDerivedWindow::resetExecutable(QString executable_name)
 {
     Executable executable = m_executables_map[executable_name];
-    (executable.enter_lineEdit)->setText(executables_map[executable_name]);
+    (executable.enter_lineEdit)->setText(m_lookup_executables_map[executable_name]);
 }
 
 void AutoTractDerivedWindow::initializeParametersMap()
@@ -284,7 +279,7 @@ void AutoTractDerivedWindow::selectParameters(QString parameters_name)
     if(!parameters_path.isEmpty())
     {
         (parameters.enter_lineEdit)->setText(parameters_path) ;
-        parameters_map[parameters_name] = parameters_path;
+        m_lookup_parameters_map[parameters_name] = parameters_path;
     }
 }
 
@@ -293,7 +288,7 @@ void AutoTractDerivedWindow::enterParameters(QString parameters_name)
     Parameters parameters = m_parameters_map[parameters_name];
     QString parameters_path = (parameters.enter_lineEdit)->text();
     (parameters.enter_lineEdit)->setText(parameters_path) ;
-    parameters_map[parameters_name] = parameters_path;
+    m_lookup_parameters_map[parameters_name] = parameters_path;
 }
 
 void AutoTractDerivedWindow::selectTractsPopulationDirectory()

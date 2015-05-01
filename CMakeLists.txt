@@ -18,10 +18,11 @@ AutoTract.cxx
 AutoTractWindow.cxx
 AutoTractDerivedWindow.cxx
 Pipeline.cxx
+MainScriptThread.cxx
 )
 
 QT4_ADD_RESOURCES(RESOURCES resources.qrc)
-QT4_WRAP_CPP(QtProject_HEADERS_MOC AutoTractWindow.h AutoTractDerivedWindow.h)
+QT4_WRAP_CPP(QtProject_HEADERS_MOC AutoTractWindow.h AutoTractDerivedWindow.h MainScriptThread.h)
 QT4_WRAP_UI(UI_FILES AutoTract.ui)
 
 # Use the include path and library for Qt that is used by VTK.
