@@ -40,7 +40,7 @@ void AutoTractWindow::SyncUiToModelStructure()
     /*4th tab: registration*/
     m_para_m->setpara_registration_type_comboBox( para_registration_type_comboBox->currentText() );
     m_para_m->setpara_transformation_step_spinBox( para_transformation_step_spinBox->value() );
-    m_para_m->setpara_iterations_spinBox( para_iterations_spinBox->value() );
+    m_para_m->setpara_iterations_lineEdit( para_iterations_lineEdit->text() );
     m_para_m->setpara_similarity_metric_comboBox( para_similarity_metric_comboBox->currentText() );
     m_para_m->setpara_gaussian_sigma_spinBox( para_gaussian_sigma_spinBox->value() );
 
@@ -98,10 +98,10 @@ void AutoTractWindow::SyncModelStructureToUi()
     soft_unu_lineEdit->setText( m_soft_m->getsoft_unu_lineEdit() );
 
     /*4th tab: registration*/
-    para_registration_type_comboBox->setEditText( m_para_m->getpara_registration_type_comboBox() );
+    para_registration_type_comboBox->setCurrentIndex(para_registration_type_comboBox->findText(m_para_m->getpara_registration_type_comboBox()));
     para_transformation_step_spinBox->setValue( m_para_m->getpara_transformation_step_spinBox() );
-    para_iterations_spinBox->setValue( m_para_m->getpara_iterations_spinBox() );
-    para_similarity_metric_comboBox->setEditText( m_para_m->getpara_similarity_metric_comboBox() );
+    para_iterations_lineEdit->setText( m_para_m->getpara_iterations_lineEdit() );
+    para_similarity_metric_comboBox->setCurrentIndex(para_similarity_metric_comboBox->findText(m_para_m->getpara_similarity_metric_comboBox() ) );
     para_gaussian_sigma_spinBox->setValue( m_para_m->getpara_gaussian_sigma_spinBox() );
 
     /*5th tab*/

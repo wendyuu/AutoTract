@@ -8,6 +8,7 @@
 #include <iterator>
 #include <iostream>
 #include <fstream>
+#include <QtGui>
 
 class AutoTractDerivedWindow :public AutoTractWindow
 {
@@ -26,6 +27,10 @@ public slots:
     void enterAtlasPopulationDirectory();
     void selectOutputDirectory();
     void enterOutputDirectory();
+    void initializePipelineLogging();
+    void printPipelineLog();
+    void SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map);
+    void SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map);
 private slots:
     void SaveParaConfigFile();
     void LoadParaConfigFile();
@@ -36,8 +41,9 @@ private slots:
     void resetExecutable(QString executable_name);
     void selectParameters(QString parameters_name);
     void enterParameters(QString parameters_name);
-    void changeRegistrationType(int index);
     void runPipeline();
+    void stopPipeline();
+    void changeRegistrationType(int index);
 
 private:
     struct Executable
@@ -56,6 +62,7 @@ private:
     QMap<QString, QString> m_lookup_executables_map;
     QMap<QString, Parameters> m_parameters_map;
     QMap<QString, QString> m_lookup_parameters_map;
+    QTextStream* m_log_textStream;
     MainScriptThread* m_thread;
     void initializeExecutablesMap();
     void initializeParametersMap();

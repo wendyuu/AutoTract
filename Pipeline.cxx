@@ -3,6 +3,7 @@
 
 Pipeline::Pipeline()
 {
+    m_processing_name = "Script";
 }
 
 Pipeline::~Pipeline()
@@ -12,12 +13,20 @@ Pipeline::~Pipeline()
 
 void Pipeline::SetExecutablesMap( QMap<QString, QString> executables_map)
 {
-    m_executables_map = executables_map;
+    QMap<QString, QString>::iterator i;
+    for (i = executables_map.begin(); i != executables_map.end(); ++i)
+    {
+        m_executables_map[i.key()] =  i.value() ;
+    }
 }
 
 void Pipeline::SetParametersMap( QMap<QString, QString> parameters_map)
 {
-    m_parameters_map = parameters_map;
+    QMap<QString, QString>::iterator i;
+    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
+    {
+        m_parameters_map[i.key()] =  i.value() ;
+    }
 }
 
 void Pipeline::setPipelineParameters(para_Model_AutoTract* para_m)
@@ -39,6 +48,26 @@ QProcess* Pipeline::getMainScriptProcess()
     return m_mainScriptProcess;
 }
 
+void Pipeline::createProcessingDirectory()
+{
+    QDir output_dir(m_para_m->getpara_output_dir_lineEdit());
+    if(!output_dir.exists(m_processing_name))
+    {
+        output_dir.mkdir(m_processing_name);
+    }
+    m_processing_path = output_dir.filePath(m_processing_name);
+}
+
+QString Pipeline::createModuleDirectory(QString directory_name)
+{
+    QDir output_dir(m_para_m->getpara_output_dir_lineEdit());
+    if(!output_dir.exists(directory_name))
+    {
+        output_dir.mkdir(directory_name);
+    }
+    return output_dir.filePath(directory_name);
+}
+
 void Pipeline::initializeMainScript()
 {
     m_script = "#!/usr/bin/env python\n\n";
@@ -50,19 +79,6 @@ void Pipeline::initializeMainScript()
     m_script += "import subprocess\n";
     m_script += "import datetime\n";
     m_script += "import shutil\n\n";
-    QMap<QString, QString>::iterator i;
-    for (i = m_executables_map.begin(); i != m_executables_map.end(); ++i)
-    {
-        m_script += i.key() + " = '" + i.value() + "'\n";
-    }
-    QMap<QString, QString>::iterator j;
-    for (i = m_parameters_map.begin(); i != m_parameters_map.end(); ++i)
-    {
-        m_script += i.key() + " = '" + i.value() + "'\n";
-    }
-    m_script += "fibersMappedDir = outputdir + \"fibers_mapped/\"\n";
-    m_script += "displacementField = outputdir + \"displacementField.nrrd\"\n";
-    m_script += "upsampledImage = outputdir + \"/upsampledImage.nrrd\"\n";
 }
 
 void Pipeline::defineSignalHandler()
@@ -102,6 +118,7 @@ void Pipeline::initializeLogging()
 void Pipeline::writeMainScript()
 {
     initializeMainScript();
+    m_script += m_importingModules;
     defineSignalHandler();
     initializeLogging();
 
@@ -110,6 +127,8 @@ void Pipeline::writeMainScript()
     m_script += "logger.info(sys.executable)\n";
 
     m_script += "start = datetime.datetime.now()\n\n";
+
+    m_script += m_runningModules + "\n";
 
     m_script += "end = datetime.datetime.now()\n\n";
 
@@ -125,7 +144,6 @@ void Pipeline::writeMainScript()
 
     m_script += "logger.info('Pipeline took %s hour(s), %s minute(s) and %s second(s)', hours, minutes, seconds)\n";
 
-    writeRegistration();
     QDir* processing_dir = new QDir(m_processing_path);
     m_main_path = processing_dir->filePath("main.py");
 
@@ -139,12 +157,38 @@ void Pipeline::writeMainScript()
 
 void Pipeline::writeRegistration()
 {
+    QString directory_name = "1.Registration";
+    QString directory_path = createModuleDirectory(directory_name);
+
+    QString module_name = "Registration";
+    m_registration = new::Registration(module_name);
+
+    m_registration->setModuleDirectory(directory_path);
+    m_registration->setProcessingDirectory(m_processing_path);
+    m_registration->setRefDTIAtlas(m_para_m->getpara_refDTIatlas_lineEdit());
+    m_registration->setInputDTIAtlas(m_para_m->getpara_inputDTIatlas_lineEdit());
+    m_registration->setRegistrationType(m_para_m->getpara_registration_type_comboBox());
+    m_registration->setSimilarityMetric(m_para_m->getpara_similarity_metric_comboBox());
+    m_registration->setGaussianSigma(QString::number(m_para_m->getpara_gaussian_sigma_spinBox()));
+    m_registration->setDisplacementFieldPath(directory_name+"/displacementField.nrrd");
+
+    m_registration->SetExecutablesMap(m_executables_map);
+    m_registration->SetParametersMap(m_parameters_map);
+    m_registration->setScriptParameters(m_para_m);
+    m_registration->setScriptSoftwares(m_soft_m);
+
+    /*m_registration->setOverwriting(m_parameters->getOverwriting());
+      m_registration->setSuffix(m_parameters->getSuffix());
+      m_registration->setStoppingIfError(m_parameters->getStoppingIfError());*/
+    m_registration->update();
+    m_importingModules += "import " + module_name + "\n";
+    m_runningModules += module_name + ".run()\n";
 
     /*1st step: Registration*/
-    m_script += "print \"Step: Co-registering atlases & creation of displacement field ...\"\n";
-    m_script += "\n\nsubprocess.call([DTIReg, \"--movingVolume\", DTItarget, \"--fixedVolume\", DTIsource, \"--method useScalar-ANTS\",\"--ANTSRegistrationType\", \"GreedyDiffeo\", \"--ANTSSimilarityMetric\",\"CC\",\"--ANTSSimilarityParameter\", \"4\", \"--outputDisplacementField\", displacementField])";
+    /*m_script += "\nlogger.info(' \"Step: Co-registering atlases & creation of displacement field ...\"'\n)";
+    m_script += "\ns = subprocess.Popen([DTIReg, \"--movingVolume\", refDTIatlas_dir, \"--fixedVolume\", inputDTIatlas_dir, \"--method useScalar-ANTS\",\"--ANTSRegistrationType\", \"GreedyDiffeo\", \"--ANTSSimilarityMetric\",\"CC\",\"--ANTSSimilarityParameter\", \"4\", \"--outputDisplacementField\", displacementField], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)";
 
-    m_script += "print \"Step: Co-registration DONE\"";
+    m_script += "\nlogger.info(' \"Step: Co-registration DONE\"'\n)";*/
 }
 
 void Pipeline::cleanUp()
@@ -153,17 +197,22 @@ void Pipeline::cleanUp()
 
 void Pipeline::writePipeline()
 {
+    m_importingModules = "";
+    m_runningModules = "";
+
+    createProcessingDirectory();
     QDir* output_dir = new QDir(m_para_m->getpara_output_dir_lineEdit());
     QFileInfo fi(m_para_m->getpara_output_dir_lineEdit());
     QString base = fi.baseName();
     m_log_path = output_dir->filePath(base + ".log");
-    writeMainScript();
+
     writeRegistration();
+    writeMainScript();
 }
 
 void Pipeline::runPipeline()
 {
-    QString command;
+    QString command/*("/work/jeanyves/tmp")*/;
     //if(!(m_parameters->getComputingSystem()).compare("local", Qt::CaseInsensitive) || !(m_parameters->getComputingSystem()).compare("killdevil interactive", Qt::CaseInsensitive))
     //{
     command = m_main_path;
@@ -174,22 +223,29 @@ void Pipeline::runPipeline()
     //      command = "bsub -q day -M 4 -n 1 -R \"span[hosts=1]\" python " +  m_main_path;
     //   }
     QString python_path = m_executables_map["python"];
-    QString pythonDirectory_path = ((QFileInfo(python_path)).absoluteDir()).path();
-    //   QString FSL_path = (m_parameters->getExecutablePaths())->getExecutablePath("FSL");
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    env.insert("PATH", pythonDirectory_path + ":" + env.value("PATH"));
-    env.insert("PYTHONPATH", "");
-    m_mainScriptProcess = new QProcess;
-    //m_mainScriptProcess->setProcessEnvironment(env);
-    m_mainScriptProcess->start(command);
+    if(python_path!="")
+    {
+        QString pythonDirectory_path = ((QFileInfo(python_path)).absoluteDir()).path();
 
+        env.insert("PATH", pythonDirectory_path + ":" + env.value("PATH"));
+        env.insert("PYTHONPATH", "");
+    }
+    m_mainScriptProcess = new QProcess;
+    m_mainScriptProcess->setProcessEnvironment(env);
+    m_mainScriptProcess->start(command);
     m_mainScriptProcess->waitForStarted();
-    m_timer.start();
+    m_mainScriptProcess->waitForFinished();
+    /*QString p_stdout = m_mainScriptProcess->readAllStandardOutput();
+    QString p_stderr = m_mainScriptProcess->readAllStandardError();
+    std::cout<<p_stdout.toStdString()<<std::endl;
+    std::cout<<p_stderr.toStdString()<<std::endl;*/
+    /*m_timer.start();
 
     while (!m_mainScriptProcess->waitForFinished())
     {
         sleep(1);
-    }
+    }*/
 
     //   if(!(m_parameters->getComputingSystem()).compare("killdevil", Qt::CaseInsensitive))
     //   {
@@ -237,8 +293,8 @@ void Pipeline::stopPipeline()
       {
          sleep(1);
       }
-   }
+   }*/
 
-   m_mainScriptProcess->terminate();*/
+    m_mainScriptProcess->terminate();
 }
 

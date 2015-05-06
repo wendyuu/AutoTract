@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="inputs_tab">
      <attribute name="title">
@@ -844,9 +844,12 @@
          <rect>
           <x>440</x>
           <y>35</y>
-          <width>85</width>
+          <width>161</width>
           <height>27</height>
          </rect>
+        </property>
+        <property name="maxVisibleItems">
+         <number>4</number>
         </property>
         <item>
          <property name="text">
@@ -899,16 +902,6 @@
          <rect>
           <x>440</x>
           <y>115</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_iterations_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>195</y>
           <width>62</width>
           <height>27</height>
          </rect>
@@ -1013,6 +1006,16 @@ MI=Mutual Information, MSQ=Mean Square Difference</string>
         </property>
         <property name="text">
          <string>ANTS Gaussian Sigma</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="para_iterations_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>195</y>
+          <width>161</width>
+          <height>27</height>
+         </rect>
         </property>
        </widget>
       </widget>
@@ -1796,7 +1799,7 @@ a reference fiber bundle allowed</string>
         <string>Run Pipeline</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="resources.qrc">
          <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
        </property>
        <property name="iconSize">
@@ -1819,7 +1822,7 @@ a reference fiber bundle allowed</string>
         <string>Stop Pipeline</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="resources.qrc">
          <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
        </property>
        <property name="iconSize">
@@ -1855,7 +1858,7 @@ a reference fiber bundle allowed</string>
         <string>Display Results</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="resources.qrc">
          <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
        </property>
        <property name="iconSize">
@@ -1919,7 +1922,7 @@ a reference fiber bundle allowed</string>
   </widget>
   <action name="actionLoad_Parameter_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/load.png</normaloff>:/icons/icons/load.png</iconset>
    </property>
    <property name="text">
@@ -1928,7 +1931,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionSave_Parameter_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/save-3.png</normaloff>:/icons/icons/save-3.png</iconset>
    </property>
    <property name="text">
@@ -1937,7 +1940,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionLoad_Software_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/load-softwares.png</normaloff>:/icons/icons/load-softwares.png</iconset>
    </property>
    <property name="text">
@@ -1946,7 +1949,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionSave_Software_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/save-softwares.png</normaloff>:/icons/icons/save-softwares.png</iconset>
    </property>
    <property name="text">
@@ -1958,18 +1961,18 @@ a reference fiber bundle allowed</string>
     <string>About</string>
    </property>
   </action>
-  <action name="actionRun_Pipeline">
+  <action name="runPipeline_action">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
    </property>
    <property name="text">
     <string>Run Pipeline</string>
    </property>
   </action>
-  <action name="actionStop_Pipeline">
+  <action name="stopPipeline_action">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
    </property>
    <property name="text">
@@ -1978,7 +1981,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionDisplay_Results">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
    </property>
    <property name="text">
@@ -1986,6 +1989,8 @@ a reference fiber bundle allowed</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

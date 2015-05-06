@@ -19,6 +19,8 @@ AutoTractWindow.cxx
 AutoTractDerivedWindow.cxx
 Pipeline.cxx
 MainScriptThread.cxx
+Script.cxx
+Registration.cxx
 )
 
 QT4_ADD_RESOURCES(RESOURCES resources.qrc)

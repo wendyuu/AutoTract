@@ -21,71 +21,81 @@
 
 #include "para_Model_AutoTract.h"
 #include "soft_Model_AutoTract.h"
+#include "Registration.h"
 
 class Pipeline
 {
-   public:
+public:
 
-   // Constructor
-   Pipeline();
+    // Constructor
+    Pipeline();
 
-   // Destructor
-   ~Pipeline();
+    // Destructor
+    ~Pipeline();
 
-   // Parameters
-   void SetExecutablesMap( QMap<QString, QString> executables_map);
-   void SetParametersMap( QMap<QString, QString> parameters_map);
-   void setPipelineParameters(para_Model_AutoTract *para_m);
-   void setPipelineSoftwares(soft_Model_AutoTract *soft_m);
-   void setPlainTextEdit(QPlainTextEdit* plainTextEdit);
+    // Parameters
+    void SetExecutablesMap( QMap<QString, QString> executables_map);
+    void SetParametersMap( QMap<QString, QString> parameters_map);
+    void setPipelineParameters(para_Model_AutoTract *para_m);
+    void setPipelineSoftwares(soft_Model_AutoTract *soft_m);
+    void setPlainTextEdit(QPlainTextEdit* plainTextEdit);
 
-   // Process
-   QProcess* getMainScriptProcess();
+    // Process
+    QProcess* getMainScriptProcess();
 
-   // Write Pipeline
-   void writePipeline();
-   void runPipeline();
-   void stopPipeline();
+    // Write Pipeline
+    void writePipeline();
+    void runPipeline();
+    void stopPipeline();
 
 
 
-   private:
-   // Write Main Script
-   void initializeMainScript();
-   void initializeLogging();
-   void defineSignalHandler();
-   void writeMainScript();
-   void writeRegistration();
-   void executeMainScript();
-   void copySegmentations();
+private:
+    void createProcessingDirectory();
+    QString createModuleDirectory(QString directory_name);
 
-   // Clean-Up
-   void cleanUp();
+    // Write Main Script
+    void initializeMainScript();
+    void initializeLogging();
+    void defineSignalHandler();
+    void writeMainScript();
+    void writeRegistration();
+    void executeMainScript();
+    void copySegmentations();
 
-   para_Model_AutoTract* m_para_m;
-   soft_Model_AutoTract* m_soft_m;
+    // Clean-Up
+    void cleanUp();
 
-   QMap<QString, QString> m_executables_map;
-   QMap<QString, QString> m_parameters_map;
+    Registration* m_registration;
 
-   QString m_processing_path;
+    QString m_importingModules;
+    QString m_runningModules;
 
-   QString m_script;
+    para_Model_AutoTract* m_para_m;
+    soft_Model_AutoTract* m_soft_m;
 
-   QString m_main_path;
+    QMap<QString, QString> m_executables_map;
+    QMap<QString, QString> m_parameters_map;
 
-   QString m_log_path;
+    QString m_processing_name;
+    QString m_processing_path;
 
-   QString m_jobID;
+    QString m_script;
 
-   // QProcess
-   QProcess* m_mainScriptProcess;
+    QString m_main_path;
 
-   // PlainTextEdit
-   QPlainTextEdit* m_plainTextEdit;
+    QString m_log_path;
 
-   // Timer
-   QTime m_timer;
+    QString m_jobID;
+
+    // QProcess
+    QProcess* m_mainScriptProcess;
+
+    // PlainTextEdit
+    QPlainTextEdit* m_plainTextEdit;
+
+    // Timer
+    QTime m_timer;
 };
 
 #endif

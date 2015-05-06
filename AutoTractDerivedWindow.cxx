@@ -66,8 +66,6 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     }
 
     /*4th tab: Registration*/
-    QStringList list=(QStringList()<<"Rigid"<<"Affine"<<"GreedyDiffeo"<<"SpatioTempDiffeo");
-    para_registration_type_comboBox->addItems( list );
     connect(para_registration_type_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeRegistrationType(int)));
 
     /*4th tab*/
@@ -77,39 +75,82 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
 
     /*7th tab: Execution*/
     connect(runPipeline_pushButton, SIGNAL(clicked()), this, SLOT(runPipeline()));
+    connect(stopPipeline_pushButton, SIGNAL(clicked()), this, SLOT(stopPipeline()));
 }
 
-/*void AutoTractDerivedWindow::setSoftwareXMLPath(std::string executables)
+void AutoTractDerivedWindow::changeRegistrationType(int index)
 {
-    m_executable_path = executables;
-}
 
-void AutoTractDerivedWindow::setParameterXMLPath(std::string parameters)
-{
-    m_parameter_path = parameters;
-}*/
+}
 
 void AutoTractDerivedWindow::runPipeline()
 {
-    /*Load_Parameter_Configuration(m_parameter_path);
-    Load_Software_Configuration(m_executable_path);*/
     SyncUiToModelStructure();
     m_pipeline = new Pipeline();
     m_pipeline->setPipelineParameters(m_para_m);
     m_pipeline->setPipelineSoftwares(m_soft_m);
-    std::cout<<m_lookup_executables_map["python"].toStdString()<<std::endl;
     m_pipeline->SetExecutablesMap( m_lookup_executables_map );
     m_pipeline->SetParametersMap( m_lookup_parameters_map );
+    initializePipelineLogging();
     m_pipeline->writePipeline();
+
 
     m_thread = new MainScriptThread();
     m_thread->setPipeline(m_pipeline);
     m_thread->start();
 }
 
-void AutoTractDerivedWindow::changeRegistrationType(int index)
+void AutoTractDerivedWindow::stopPipeline()
 {
+    m_thread->terminate();
 
+    runPipeline_pushButton->setEnabled(true);
+    runPipeline_action->setEnabled(true);
+
+    stopPipeline_pushButton->setEnabled(false);
+    stopPipeline_action->setEnabled(false);
+
+    //runPipeline_progressBar->hide();
+}
+
+void AutoTractDerivedWindow::initializePipelineLogging()
+{
+    log_textEdit->show();
+    log_textEdit->clear();
+    log_textEdit->setMaximumBlockCount(500);
+
+    // Log path
+    QDir* output_dir = new QDir(m_para_m->getpara_output_dir_lineEdit());
+    QFileInfo fi(m_para_m->getpara_output_dir_lineEdit());
+    QString base = fi.baseName();
+    QString log_path = output_dir->filePath(base + ".log");
+
+    // Log File
+    QFile* log_file = new::QFile(log_path);
+    log_file->open(QIODevice::ReadWrite);
+    m_log_textStream = new::QTextStream(log_file);
+
+    // QFileSystemWatcher
+    QFileSystemWatcher* log_watcher = new::QFileSystemWatcher(this);
+    log_watcher->addPath(log_path);
+    connect(log_watcher, SIGNAL(fileChanged(QString)), this, SLOT(printPipelineLog()));
+}
+
+void AutoTractDerivedWindow::printPipelineLog()
+{
+    QScrollBar *scrollBar = log_textEdit->verticalScrollBar();
+
+    QString line = m_log_textStream->readAll();
+
+    if(scrollBar->value() == scrollBar->maximum())
+    {
+        log_textEdit->insertPlainText(line);
+        scrollBar->setValue(scrollBar->maximum());
+    }
+    else
+    {
+        log_textEdit->insertPlainText(line);
+    }
 }
 
 void AutoTractDerivedWindow::SaveParaConfigFile()
@@ -120,8 +161,9 @@ void AutoTractDerivedWindow::SaveParaConfigFile()
     {
         QFileInfo fi( filename ) ;
         m_DialogDir = fi.dir().absolutePath() ;
+        Save_Parameter_Configuration( filename.toStdString() );
     }
-    Save_Parameter_Configuration( filename.toStdString() );
+
 }
 
 void AutoTractDerivedWindow::LoadParaConfigFile()
@@ -132,13 +174,8 @@ void AutoTractDerivedWindow::LoadParaConfigFile()
     {
         QFileInfo fi( filename ) ;
         m_DialogDir = fi.dir().absolutePath() ;
+        Load_Parameter_Configuration( filename.toStdString() );
     }
-    Load_Parameter_Configuration( filename.toStdString() );
-    m_lookup_executables_map["inputDTIatlas_dir"] = para_inputDTIatlas_lineEdit->text();
-    m_lookup_executables_map["inputWMmask_dir"] = para_inputWMmask_lineEdit->text();
-    m_lookup_executables_map["inputCSFmask_dir"] = para_inputCSFmask_lineEdit->text();
-    m_lookup_executables_map["refDTIatlas_dir"] = para_refDTIatlas_lineEdit->text();
-    m_lookup_executables_map["tracts_dir"] = para_tracts_dir_lineEdit->text();
 }
 
 void AutoTractDerivedWindow::SaveSoftConfigFile()
@@ -149,8 +186,9 @@ void AutoTractDerivedWindow::SaveSoftConfigFile()
     {
         QFileInfo fi( filename ) ;
         m_DialogDir = fi.dir().absolutePath() ;
+        Save_Software_Configuration( filename.toStdString() );
     }
-    Save_Software_Configuration( filename.toStdString() );
+
 }
 
 void AutoTractDerivedWindow::LoadSoftConfigFile()
@@ -161,19 +199,8 @@ void AutoTractDerivedWindow::LoadSoftConfigFile()
     {
         QFileInfo fi( filename ) ;
         m_DialogDir = fi.dir().absolutePath() ;
+        Load_Software_Configuration( filename.toStdString() );
     }
-    Load_Software_Configuration( filename.toStdString() );
-    m_lookup_executables_map["DTIReg"] = soft_DTIReg_lineEdit->text();
-    m_lookup_executables_map["fiberprocess"] = soft_fiberprocess_lineEdit->text();
-    m_lookup_executables_map["ResampleDTIVolume"] = soft_ResampleDTIVolume_lineEdit->text();
-    m_lookup_executables_map["ImageMath"] = soft_ImageMath_lineEdit->text();
-    m_lookup_executables_map["TractographyLabelMapSeeding"] = soft_TractographyLabelMapSeeding_lineEdit->text();
-    m_lookup_executables_map["FiberPostProcess"] = soft_FiberPostProcess_lineEdit->text();
-    m_lookup_executables_map["polydatatransform"] = soft_polydatatransform_lineEdit->text();
-    m_lookup_executables_map["unu"] = soft_unu_lineEdit->text();
-    m_lookup_executables_map["MDT"] = soft_MDT_lineEdit->text();
-    m_lookup_executables_map["python"] = soft_python_lineEdit->text();
-    m_lookup_executables_map["dtiprocess"] = soft_dtiprocess_lineEdit->text();
 
 }
 
@@ -213,6 +240,23 @@ void AutoTractDerivedWindow::initializeExecutablesMap()
     m_executables_map.insert("dtiprocess", dtiprocess);
 }
 
+void AutoTractDerivedWindow::SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map)
+{
+    QMap<QString, QString>::iterator i;
+    for (i = lookup_executables_map.begin(); i != lookup_executables_map.end(); ++i)
+    {
+        m_lookup_executables_map[i.key()] =  i.value() ;
+    }
+}
+void AutoTractDerivedWindow::SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map)
+{
+    QMap<QString, QString>::iterator i;
+    for (i = lookup_parameters_map.begin(); i != lookup_parameters_map.end(); ++i)
+    {
+        m_lookup_parameters_map[i.key()] =  i.value() ;
+    }
+}
+
 void AutoTractDerivedWindow::selectExecutable(QString executable_name)
 {
     Executable executable = m_executables_map[executable_name];
@@ -228,7 +272,6 @@ void AutoTractDerivedWindow::selectExecutable(QString executable_name)
     if(!executable_path.isEmpty())
     {
         (executable.enter_lineEdit)->setText(executable_path) ;
-        m_lookup_executables_map[executable_name] = executable_path;
     }
 }
 
@@ -237,7 +280,6 @@ void AutoTractDerivedWindow::enterExecutable(QString executable_name)
     Executable executable = m_executables_map[executable_name];
     QString executable_path = (executable.enter_lineEdit)->text();
     (executable.enter_lineEdit)->setText(executable_path) ;
-    m_lookup_executables_map[executable_name] = executable_path;
 }
 
 void AutoTractDerivedWindow::resetExecutable(QString executable_name)
@@ -279,7 +321,6 @@ void AutoTractDerivedWindow::selectParameters(QString parameters_name)
     if(!parameters_path.isEmpty())
     {
         (parameters.enter_lineEdit)->setText(parameters_path) ;
-        m_lookup_parameters_map[parameters_name] = parameters_path;
     }
 }
 
@@ -288,7 +329,6 @@ void AutoTractDerivedWindow::enterParameters(QString parameters_name)
     Parameters parameters = m_parameters_map[parameters_name];
     QString parameters_path = (parameters.enter_lineEdit)->text();
     (parameters.enter_lineEdit)->setText(parameters_path) ;
-    m_lookup_parameters_map[parameters_name] = parameters_path;
 }
 
 void AutoTractDerivedWindow::selectTractsPopulationDirectory()
