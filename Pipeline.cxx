@@ -170,7 +170,10 @@ void Pipeline::writeRegistration()
     m_registration->setRegistrationType(m_para_m->getpara_registration_type_comboBox());
     m_registration->setSimilarityMetric(m_para_m->getpara_similarity_metric_comboBox());
     m_registration->setGaussianSigma(QString::number(m_para_m->getpara_gaussian_sigma_spinBox()));
-    m_registration->setDisplacementFieldPath(directory_name+"/displacementField.nrrd");
+    QDir* output_dir = new QDir(m_para_m->getpara_output_dir_lineEdit());
+    QFileInfo fi(m_para_m->getpara_output_dir_lineEdit());
+    QString base = fi.baseName();
+    m_registration->setDisplacementFieldPath(base + "/" + directory_name+ "/displacementField.nrrd");
 
     m_registration->SetExecutablesMap(m_executables_map);
     m_registration->SetParametersMap(m_parameters_map);
