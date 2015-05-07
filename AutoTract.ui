@@ -14,1863 +14,1348 @@
    <string>AutoTract</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>0</y>
-      <width>711</width>
-      <height>541</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>3</number>
-    </property>
-    <widget class="QWidget" name="inputs_tab">
-     <attribute name="title">
-      <string>Inputs</string>
-     </attribute>
-     <widget class="QWidget" name="input_paths_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>681</width>
-        <height>181</height>
-       </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>6</number>
       </property>
-      <widget class="QGroupBox" name="input_paths_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>681</width>
-         <height>181</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Input Paths</string>
-       </property>
-       <widget class="QPushButton" name="inputWMmask_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>90</y>
-          <width>211</width>
-          <height>27</height>
-         </rect>
+      <widget class="QWidget" name="inputs_tab">
+       <attribute name="title">
+        <string>Inputs</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="bottomMargin">
+         <number>50</number>
         </property>
-        <property name="text">
-         <string>Input WM Mask (optional)</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="inputCSFmask_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>140</y>
-          <width>211</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Input CSF Mask (optional)</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="inputDTIatlas_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>40</y>
-          <width>211</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Input DTI Atlas</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_inputDTIatlas_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>40</y>
-          <width>421</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_inputWMmask_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>90</y>
-          <width>421</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_inputCSFmask_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>140</y>
-          <width>421</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
+        <item>
+         <widget class="QWidget" name="input_paths_widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="input_paths_groupBox">
+             <property name="title">
+              <string>Input Paths</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="inputDTIatlas_pushButton">
+                <property name="text">
+                 <string>Input DTI Atlas</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="para_inputDTIatlas_lineEdit"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="inputWMmask_pushButton">
+                <property name="text">
+                 <string>Input WM Mask (optional)</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="para_inputWMmask_lineEdit"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="inputCSFmask_pushButton">
+                <property name="text">
+                 <string>Input CSF Mask (optional)</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="para_inputCSFmask_lineEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="output_dir_widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QGroupBox" name="output_dir_groupBox">
+             <property name="title">
+              <string>Output Directory</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QPushButton" name="output_dir_pushButton">
+                <property name="text">
+                 <string>Output Directory</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="para_output_dir_lineEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="ref_DTI_atlas_widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QGroupBox" name="refDTIatlas_groupBox">
+             <property name="title">
+              <string>Reference DTI Atlas</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QPushButton" name="refDTIatlas_pushButton">
+                <property name="text">
+                 <string>Reference DTI Atlas</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="para_refDTIatlas_lineEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </widget>
-     <widget class="QWidget" name="ref_DTI_atlas_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>320</y>
-        <width>681</width>
-        <height>111</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="refDTIatlas_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>20</y>
-         <width>681</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Reference DTI Atlas</string>
-       </property>
-       <widget class="QPushButton" name="refDTIatlas_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>30</y>
-          <width>211</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reference DTI Atlas</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_refDTIatlas_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>30</y>
-          <width>421</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
+      <widget class="QWidget" name="reference_tracts_tab">
+       <attribute name="title">
+        <string>Reference tracts</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="tracts_dir_widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QGroupBox" name="tracts_dir_groupBox">
+             <property name="title">
+              <string>Reference Tracts Directory</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="tracts_dir_pushButton">
+                <property name="text">
+                 <string>Tracts Directory</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="para_tracts_dir_lineEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="ref_tracts_widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QGroupBox" name="ref_tracts_groupBox">
+             <property name="title">
+              <string>Reference Tracts</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QListWidget" name="para_ref_tracts_listWidget"/>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_3" native="true">
+                <layout class="QGridLayout" name="gridLayout_4">
+                 <property name="verticalSpacing">
+                  <number>24</number>
+                 </property>
+                 <item row="1" column="0">
+                  <widget class="QPushButton" name="uncheck_all_tracts_pushButton">
+                   <property name="text">
+                    <string>Uncheck All Tracts</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QPushButton" name="check_all_tracts_pushButton">
+                   <property name="text">
+                    <string>Checks All Tracts</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="3" column="0">
+                  <spacer name="verticalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </widget>
-     <widget class="QWidget" name="output_dir_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>681</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="output_dir_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>681</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Output Directory</string>
-       </property>
-       <widget class="QPushButton" name="output_dir_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>30</y>
-          <width>211</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Output Directory</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_output_dir_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>30</y>
-          <width>421</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
+      <widget class="QWidget" name="software_path_tab">
+       <attribute name="title">
+        <string>Software</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QWidget" name="executable_widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QGroupBox" name="executable_groupBox">
+             <property name="title">
+              <string>Executables</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="DTIReg_pushButton">
+                <property name="text">
+                 <string>DTIReg</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="soft_DTIReg_lineEdit"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="reset_DTIReg_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="fiberprocess_pushButton">
+                <property name="text">
+                 <string>fiberprocess</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="soft_fiberprocess_lineEdit"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="reset_fiberprocess_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="ResampleDTIVolume_pushButton">
+                <property name="text">
+                 <string>ResampleDTIVolume</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="soft_ResampleDTIVolume_lineEdit"/>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="reset_ResampleDTI_Volume_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QPushButton" name="ImageMath_pushButton">
+                <property name="text">
+                 <string>ImageMath</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="soft_ImageMath_lineEdit"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="QPushButton" name="reset_ImageMath_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QPushButton" name="TractographyLabelMapSeeding_pushButton">
+                <property name="text">
+                 <string>TractographyLabelMapSeeding</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="soft_TractographyLabelMapSeeding_lineEdit"/>
+              </item>
+              <item row="4" column="2">
+               <widget class="QPushButton" name="reset_TractographyLabelMapSeeding_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QPushButton" name="FiberPostProcess_pushButton">
+                <property name="text">
+                 <string>FiberPostProcess</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="soft_FiberPostProcess_lineEdit"/>
+              </item>
+              <item row="5" column="2">
+               <widget class="QPushButton" name="reset_FiberPostProcess_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QPushButton" name="polydatattransform_pushButton">
+                <property name="text">
+                 <string>polydatatransform</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="soft_polydatatransform_lineEdit"/>
+              </item>
+              <item row="6" column="2">
+               <widget class="QPushButton" name="reset_polydatatransform_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QPushButton" name="unu_pushButton">
+                <property name="text">
+                 <string>unu</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="soft_unu_lineEdit"/>
+              </item>
+              <item row="7" column="2">
+               <widget class="QPushButton" name="reset_unu_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QPushButton" name="MDT_pushButton">
+                <property name="text">
+                 <string>MDT</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QLineEdit" name="soft_MDT_lineEdit"/>
+              </item>
+              <item row="8" column="2">
+               <widget class="QPushButton" name="reset_MDT_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QPushButton" name="python_pushButton">
+                <property name="text">
+                 <string>python</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QLineEdit" name="soft_python_lineEdit"/>
+              </item>
+              <item row="9" column="2">
+               <widget class="QPushButton" name="reset_python_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QPushButton" name="dtiprocess_pushButton">
+                <property name="text">
+                 <string>dtiprocess</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="1">
+               <widget class="QLineEdit" name="soft_dtiprocess_lineEdit"/>
+              </item>
+              <item row="10" column="2">
+               <widget class="QPushButton" name="reset_dtiprocess_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="reference_tracts_tab">
-     <attribute name="title">
-      <string>Reference tracts</string>
-     </attribute>
-     <widget class="QWidget" name="tracts_dir_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>681</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="tracts_dir_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>685</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Reference Tracts Directory</string>
-       </property>
-       <widget class="QPushButton" name="tracts_dir_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>17</x>
-          <y>40</y>
-          <width>127</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tracts Directory</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_tracts_dir_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>151</x>
-          <y>40</y>
-          <width>525</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="ref_tracts_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>120</y>
-        <width>681</width>
-        <height>371</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="ref_tracts_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>681</width>
-         <height>371</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Reference Tracts</string>
-       </property>
-       <widget class="QListWidget" name="para_ref_tracts_listWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>371</width>
-          <height>331</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="check_all_tracts_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>150</y>
-          <width>141</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Checks All Tracts</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="uncheck_all_tracts_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>220</y>
-          <width>141</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Uncheck All Tracts</string>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="software_path_tab">
-     <attribute name="title">
-      <string>Software</string>
-     </attribute>
-     <widget class="QWidget" name="executable_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>681</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="executable_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>691</width>
-         <height>481</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Executables</string>
-       </property>
-       <widget class="QLineEdit" name="soft_ResampleDTIVolume_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>110</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_TractographyLabelMapSeeding_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>190</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_polydatatransform_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>270</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="polydatattransform_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>270</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>polydatatransform</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_unu_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>310</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_ImageMath_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>150</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_MDT_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>350</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="ImageMath_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>150</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>ImageMath</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="FiberPostProcess_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>230</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>FiberPostProcess</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="unu_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>310</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>unu</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="DTIReg_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>5</x>
-          <y>30</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>DTIReg</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_ImageMath_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>150</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="ResampleDTIVolume_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>110</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>ResampleDTIVolume</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_ResampleDTI_Volume_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>110</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_unu_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>310</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="TractographyLabelMapSeeding_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>190</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>TractographyLabelMapSeeding</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_polydatatransform_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>270</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_MDT_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>350</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_dtiprocess_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>430</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="fiberprocess_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>70</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>fiberprocess</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_python_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>390</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="dtiprocess_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>430</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>dtiprocess</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="python_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>390</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>python</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_FiberPostProcess_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>230</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_dtiprocess_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>430</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_TractographyLabelMapSeeding_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>190</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_DTIReg_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>30</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_fiberprocess_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>70</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="reset_fiberprocess_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>579</x>
-          <y>70</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="MDT_pushButton">
-        <property name="geometry">
-         <rect>
-          <x>6</x>
-          <y>350</y>
-          <width>239</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>MDT</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_FiberPostProcess_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>230</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_DTIReg_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>30</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="soft_python_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>390</y>
-          <width>323</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="registration_tab">
-     <attribute name="title">
-      <string>Registration</string>
-     </attribute>
-     <widget class="QWidget" name="registration_parameters_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>671</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="registration_parameters_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>671</width>
-         <height>481</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Registration Parameters</string>
-       </property>
-       <widget class="QLabel" name="registration_type_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>40</y>
-          <width>121</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Registration Type</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="transformation_step_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>120</y>
-          <width>141</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Transformation Step</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="iterations_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>200</y>
-          <width>71</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Iterations</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="similarity_metric_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>280</y>
-          <width>111</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Similarity Metric</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="gaussian_sigma_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>360</y>
-          <width>111</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Gaussian Sigma</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="para_registration_type_comboBox">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>35</y>
-          <width>161</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maxVisibleItems">
-         <number>4</number>
-        </property>
+      <widget class="QWidget" name="registration_tab">
+       <attribute name="title">
+        <string>Registration</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <property name="text">
-          <string>Rigid</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Affine</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>GreedyDiffeo</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>SpatioTempDiffeo</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QComboBox" name="para_similarity_metric_comboBox">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>275</y>
-          <width>85</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <item>
-         <property name="text">
-          <string>CC</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>MI</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>MSQ</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_transformation_step_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>115</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_gaussian_sigma_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>355</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="registration_type_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>60</y>
-          <width>161</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>ANTS Registration Type</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="transformation_step_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>140</y>
-          <width>291</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Diffeomorphic gradient descent step length</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="iterations_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>220</y>
-          <width>231</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>ANTS Iterations for diffeomorphism</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="similarity_metric_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>300</y>
-          <width>411</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>ANTS Similarity Metric type: CC=Cross-Correlation,
+         <widget class="QWidget" name="registration_parameters_widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="registration_parameters_groupBox">
+             <property name="title">
+              <string>Registration Parameters</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <property name="bottomMargin">
+               <number>100</number>
+              </property>
+              <item>
+               <widget class="QWidget" name="widget_4" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <property name="spacing">
+                  <number>320</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_5" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <item>
+                     <widget class="QLabel" name="registration_type_label">
+                      <property name="text">
+                       <string>Registration Type</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="registration_type_descr_label">
+                      <property name="font">
+                       <font>
+                        <italic>true</italic>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ANTS Registration Type</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="para_registration_type_comboBox">
+                   <property name="maxVisibleItems">
+                    <number>4</number>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Rigid</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Affine</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>GreedyDiffeo</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>SpatioTempDiffeo</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_6" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <property name="spacing">
+                  <number>258</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_8" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_10">
+                    <item>
+                     <widget class="QLabel" name="transformation_step_label">
+                      <property name="text">
+                       <string>Transformation Step</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="transformation_step_descr_label">
+                      <property name="font">
+                       <font>
+                        <italic>true</italic>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Diffeomorphic gradient descent step length</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_transformation_step_spinBox"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_9" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <property name="spacing">
+                  <number>200</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_10" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_11">
+                    <item>
+                     <widget class="QLabel" name="iterations_label">
+                      <property name="text">
+                       <string>Iterations</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="iterations_descr_label">
+                      <property name="font">
+                       <font>
+                        <italic>true</italic>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ANTS Iterations for diffeomorphism</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="para_iterations_lineEdit"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_11" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                 <property name="spacing">
+                  <number>116</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_12" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_12">
+                    <item>
+                     <widget class="QLabel" name="similarity_metric_label">
+                      <property name="text">
+                       <string>Similarity Metric</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="similarity_metric_descr_label">
+                      <property name="font">
+                       <font>
+                        <italic>true</italic>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ANTS Similarity Metric type: CC=Cross-Correlation,
 MI=Mutual Information, MSQ=Mean Square Difference</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="gaussian_sigma_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>380</y>
-          <width>171</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>ANTS Gaussian Sigma</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="para_iterations_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>195</y>
-          <width>161</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="para_similarity_metric_comboBox">
+                   <item>
+                    <property name="text">
+                     <string>CC</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>MI</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>MSQ</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_13" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <property name="spacing">
+                  <number>400</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_14" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_13">
+                    <item>
+                     <widget class="QLabel" name="gaussian_sigma_label">
+                      <property name="text">
+                       <string>Gaussian Sigma</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="gaussian_sigma_descr_label">
+                      <property name="font">
+                       <font>
+                        <italic>true</italic>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ANTS Gaussian Sigma</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_gaussian_sigma_spinBox"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tractography_param_tab">
-     <attribute name="title">
-      <string>Tractography</string>
-     </attribute>
-     <widget class="QWidget" name="seed_placement_options_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>681</width>
-        <height>131</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="seed_placement_options_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>685</width>
-         <height>131</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Seed Placement Options</string>
-       </property>
-       <widget class="QLabel" name="seedspacing_label">
-        <property name="geometry">
-         <rect>
-          <x>17</x>
-          <y>40</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Seed Spacing</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="linearmeasure_label">
-        <property name="geometry">
-         <rect>
-          <x>17</x>
-          <y>80</y>
-          <width>241</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Linear Measure Start Threshold</string>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_seedspacing_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>35</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="minimum">
-         <double>-1.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>10.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-        <property name="value">
-         <double>0.500000000000000</double>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_linearmeasure_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>75</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <double>10.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.050000000000000</double>
-        </property>
-        <property name="value">
-         <double>0.150000000000000</double>
-        </property>
-       </widget>
-       <widget class="QLabel" name="seedspacing_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>40</y>
-          <width>251</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Spacing between seed points (mm)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="linearmeasure_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>80</y>
-          <width>331</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Minimum Linear Measure for the seeding to start</string>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tractography_seeding_parameters_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>681</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="tractograph_seeding_parameters_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>681</width>
-         <height>251</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Tractography Seeding Parameters</string>
-       </property>
-       <widget class="QLabel" name="minpathlength_label">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>40</y>
-          <width>151</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Minimum Path Length</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="maxpathlength_descr_label_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>80</y>
-          <width>151</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Maximum Path Length</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="stoppingvalue_label">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>120</y>
-          <width>101</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Stopping Value</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="stoppingcurvature_label">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>160</y>
-          <width>131</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Stopping Curvature</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="integrationsteplength_label">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>200</y>
-          <width>161</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Integration Step Length</string>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_minpathlength_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>35</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <double>200.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>10.000000000000000</double>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_maxpathlength_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>75</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <double>2000.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>800.000000000000000</double>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_stoppingvalue_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>115</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <double>1.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.010000000000000</double>
-        </property>
-        <property name="value">
-         <double>0.120000000000000</double>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_stoppingcurvature_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>155</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <double>10.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-        <property name="value">
-         <double>0.300000000000000</double>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_integrationsteplength_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>195</y>
-          <width>71</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <double>10.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-        <property name="value">
-         <double>10.000000000000000</double>
-        </property>
-       </widget>
-       <widget class="QLabel" name="minpathlength_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>40</y>
-          <width>231</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <italic>true</italic>
-          <bold>false</bold>
-          <strikeout>false</strikeout>
-          <kerning>true</kerning>
-         </font>
-        </property>
-        <property name="text">
-         <string>Minimum length of the fibers (mm)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="maxpathlength_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>80</y>
-          <width>241</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Maximum length of the fibers (mm)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="stoppingvalue_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>110</y>
-          <width>321</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Tractography will stop when the 
-stopping measurement drops below this value</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="stoppingcurvature_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>150</y>
-          <width>321</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Tractography will stop if radius of curvature
-becomes smaller than this number (degre/mm)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="integrationsteplength_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>195</y>
-          <width>211</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Distance between two points 
-on the same fiber (mm)</string>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="preprocessing_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>681</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="preprocessing_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>681</width>
-         <height>71</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Pre-processing Step</string>
-       </property>
-       <widget class="QLabel" name="dilation_radius_label">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>40</y>
-          <width>111</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Dilation Radius</string>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_dilation_radius_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>35</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="dilation_radius_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>35</y>
-          <width>331</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Dilation of all the reference tracts before using
+      <widget class="QWidget" name="tractography_param_tab">
+       <attribute name="title">
+        <string>Tractography</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_15">
+        <property name="bottomMargin">
+         <number>40</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="preprocessing_widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_16">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="topMargin">
+            <number>9</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="preprocessing_groupBox">
+             <property name="title">
+              <string>Pre-processing Step</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <property name="horizontalSpacing">
+               <number>25</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QWidget" name="widget_18" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_22">
+                 <item>
+                  <widget class="QLabel" name="dilation_radius_label">
+                   <property name="text">
+                    <string>Dilation Radius</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QWidget" name="widget_19" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_21">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_dilation_radius_spinBox"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QWidget" name="widget_20" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_23">
+                 <item>
+                  <widget class="QLabel" name="dilation_radius_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Dilation of all the reference tracts before using
  them as label maps in the tractography</string>
-        </property>
-       </widget>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="seed_placement_options_widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_17">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="seed_placement_options_groupBox">
+             <property name="title">
+              <string>Seed Placement Options</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_8">
+              <property name="horizontalSpacing">
+               <number>25</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <item row="0" column="1" rowspan="3">
+               <widget class="QWidget" name="widget_16" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_18">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_seedspacing_spinBox">
+                   <property name="minimum">
+                    <double>-1.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>0.500000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_linearmeasure_spinBox">
+                   <property name="maximum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.050000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>0.150000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="3" rowspan="3">
+               <widget class="QWidget" name="widget_17" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_20">
+                 <item>
+                  <widget class="QLabel" name="seedspacing_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Spacing between seed points (mm)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="linearmeasure_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Minimum Linear Measure
+ for the seeding to start</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="0" rowspan="3">
+               <widget class="QWidget" name="widget_15" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_19">
+                 <item>
+                  <widget class="QLabel" name="seedspacing_label">
+                   <property name="text">
+                    <string>Seed Spacing</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="linearmeasure_label">
+                   <property name="text">
+                    <string>Linear Measure Start Threshold</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="tractography_seeding_parameters_widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <widget class="QGroupBox" name="tractograph_seeding_parameters_groupBox">
+             <property name="title">
+              <string>Tractography Seeding Parameters</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_9">
+              <property name="horizontalSpacing">
+               <number>29</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>150</number>
+              </property>
+              <item row="0" column="0" rowspan="3">
+               <widget class="QWidget" name="widget_21" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_24">
+                 <item>
+                  <widget class="QLabel" name="minpathlength_label">
+                   <property name="text">
+                    <string>Minimum Path Length</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="maxpathlength_label">
+                   <property name="text">
+                    <string>Maximum Path Length</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="stoppingvalue_label">
+                   <property name="text">
+                    <string>Stopping Value</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="integrationsteplength_label">
+                   <property name="text">
+                    <string>Integration Step Length</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="stoppingcurvature_label">
+                   <property name="text">
+                    <string>Stopping Curvature</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+                <zorder>maxpathlength_label</zorder>
+                <zorder>maxpathlength_label</zorder>
+                <zorder>stoppingvalue_label</zorder>
+                <zorder>minpathlength_label</zorder>
+                <zorder>stoppingcurvature_label</zorder>
+                <zorder>integrationsteplength_label</zorder>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="3">
+               <widget class="QWidget" name="widget_22" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_25">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_minpathlength_spinBox">
+                   <property name="maximum">
+                    <double>200.000000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>10.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_maxpathlength_spinBox">
+                   <property name="maximum">
+                    <double>2000.000000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>800.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_stoppingvalue_spinBox">
+                   <property name="maximum">
+                    <double>1.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.010000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>0.120000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_stoppingcurvature_spinBox">
+                   <property name="maximum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>0.300000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="para_integrationsteplength_spinBox">
+                   <property name="maximum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>10.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="3" rowspan="3">
+               <widget class="QWidget" name="widget_23" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_26">
+                 <item>
+                  <widget class="QLabel" name="minpathlength_descr_label">
+                   <property name="font">
+                    <font>
+                     <weight>50</weight>
+                     <italic>true</italic>
+                     <bold>false</bold>
+                     <strikeout>false</strikeout>
+                     <kerning>true</kerning>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Minimum length of the fibers (mm)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="maxpathlength_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Maximum length of the fibers (mm)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="stoppingvalue_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Tractography will stop when the 
+stopping measurement drops below this value</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="stoppingcurvature_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Tractography will stop if radius of curvature
+becomes smaller than this number (degre/mm)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="integrationsteplength_descr_label">
+                   <property name="font">
+                    <font>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Distance between two points 
+on the same fiber (mm)</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="processing_parameters_tab">
-     <attribute name="title">
-      <string>Processing</string>
-     </attribute>
-     <widget class="QWidget" name="processing_parameters_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>681</width>
-        <height>471</height>
-       </rect>
-      </property>
-      <widget class="QGroupBox" name="processing_parameters_groupBox">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>681</width>
-         <height>471</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Tract Processing Parameters</string>
-       </property>
-       <widget class="QLabel" name="tractOverlapRatio_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>130</y>
-          <width>131</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tract Overlap Ratio</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="thresholdWMmask_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>40</y>
-          <width>251</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Threshold WM mask</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="tractMaxDistThreshold_label">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>220</y>
-          <width>201</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tract Max Distance Threshold</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="thresholdWMmask_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>360</x>
-          <y>35</y>
-          <width>261</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>% of the fibers that are
+      <widget class="QWidget" name="processing_parameters_tab">
+       <attribute name="title">
+        <string>Processing</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_27">
+        <item>
+         <widget class="QWidget" name="processing_parameters_widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_28">
+           <property name="bottomMargin">
+            <number>200</number>
+           </property>
+           <item>
+            <widget class="QGroupBox" name="processing_parameters_groupBox">
+             <property name="title">
+              <string>Tract Processing Parameters</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_11">
+              <property name="horizontalSpacing">
+               <number>50</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="thresholdWMmask_label">
+                <property name="text">
+                 <string>Threshold WM mask</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QDoubleSpinBox" name="para_thresholdWMmask_spinBox"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="thresholdWMmask_descr_label">
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>% of the fibers that are
  outside of the WM boundaries allowed</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="tractOverlapRatio_label_2">
-        <property name="geometry">
-         <rect>
-          <x>370</x>
-          <y>125</y>
-          <width>271</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>% of the fibers that should overlap
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="tractOverlapRatio_label">
+                <property name="text">
+                 <string>Tract Overlap Ratio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="para_tractOverlapRatio_spinBox"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="tractOverlapRatio_label_2">
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>% of the fibers that should overlap
  with the reference fibers</string>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_thresholdWMmask_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>35</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_tractOverlapRatio_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>125</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="para_tractMaxDistThreshold_spinBox">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>215</y>
-          <width>62</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="traxtMaxDistThreshold_descr_label">
-        <property name="geometry">
-         <rect>
-          <x>370</x>
-          <y>215</y>
-          <width>271</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Maximum distance between a fiber and 
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="tractMaxDistThreshold_label">
+                <property name="text">
+                 <string>Tract Max Distance Threshold</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QDoubleSpinBox" name="para_tractMaxDistThreshold_spinBox"/>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="traxtMaxDistThreshold_descr_label">
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Maximum distance between a fiber and 
 a reference fiber bundle allowed</string>
-        </property>
-       </widget>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Execution_tab">
+       <attribute name="title">
+        <string>Execution</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_29">
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="view_label">
+             <property name="text">
+              <string>View:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="para_all_radioButton">
+             <property name="text">
+              <string>All</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="para_singletract_radioButton">
+             <property name="text">
+              <string>Single Tract</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="para_singletract_comboBox"/>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="log_widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_12">
+           <property name="verticalSpacing">
+            <number>275</number>
+           </property>
+           <item row="0" column="0" rowspan="2">
+            <widget class="QPlainTextEdit" name="log_textEdit"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QWidget" name="widget_24" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <item>
+               <widget class="QLabel" name="nbCores_label">
+                <property name="text">
+                 <string>Nb of Cores:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="nbCores_spinBox"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QWidget" name="widget_25" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_30">
+              <item>
+               <widget class="QCheckBox" name="overwrite_checkBox">
+                <property name="text">
+                 <string>Overwrite existing results</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cleanup_checkBox">
+                <property name="text">
+                 <string>Clean up after process</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+          <zorder>log_textEdit</zorder>
+          <zorder>widget_24</zorder>
+          <zorder>widget_25</zorder>
+          <zorder>displayResults_pushButton</zorder>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_2" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="runPipeline_pushButton">
+             <property name="text">
+              <string>Run Pipeline</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>24</width>
+               <height>15</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="stopPipeline_pushButton">
+             <property name="text">
+              <string>Stop Pipeline</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QProgressBar" name="progressBar">
+             <property name="value">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="displayResults_pushButton">
+             <property name="text">
+              <string>Display Results</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>15</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="Execution_tab">
-     <attribute name="title">
-      <string>Execution</string>
-     </attribute>
-     <widget class="QWidget" name="widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>681</width>
-        <height>45</height>
-       </rect>
-      </property>
-      <widget class="QLabel" name="view_label">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>15</y>
-         <width>63</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>View:</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="para_singletract_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>13</y>
-         <width>109</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Single Tract</string>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="para_singletract_comboBox">
-       <property name="geometry">
-        <rect>
-         <x>270</x>
-         <y>10</y>
-         <width>85</width>
-         <height>27</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="para_all_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>13</y>
-         <width>51</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>All</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="log_widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>70</y>
-        <width>681</width>
-        <height>351</height>
-       </rect>
-      </property>
-      <widget class="QPlainTextEdit" name="log_textEdit">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>0</y>
-         <width>401</width>
-         <height>341</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="nbCores_label">
-       <property name="geometry">
-        <rect>
-         <x>460</x>
-         <y>20</y>
-         <width>81</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Nb of Cores:</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="overwrite_checkBox">
-       <property name="geometry">
-        <rect>
-         <x>440</x>
-         <y>270</y>
-         <width>201</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Overwrite existing results</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="cleanup_checkBox">
-       <property name="geometry">
-        <rect>
-         <x>440</x>
-         <y>300</y>
-         <width>201</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Clean up temporary files</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="nbCores_spinBox">
-       <property name="geometry">
-        <rect>
-         <x>560</x>
-         <y>15</y>
-         <width>56</width>
-         <height>27</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="widget_2" native="true">
-      <property name="geometry">
-       <rect>
-        <x>14</x>
-        <y>450</y>
-        <width>691</width>
-        <height>45</height>
-       </rect>
-      </property>
-      <widget class="QPushButton" name="runPipeline_pushButton">
-       <property name="geometry">
-        <rect>
-         <x>9</x>
-         <y>10</y>
-         <width>131</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Run Pipeline</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>15</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="stopPipeline_pushButton">
-       <property name="geometry">
-        <rect>
-         <x>146</x>
-         <y>10</y>
-         <width>131</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Stop Pipeline</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>15</width>
-         <height>15</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QProgressBar" name="progressBar">
-       <property name="geometry">
-        <rect>
-         <x>279</x>
-         <y>11</y>
-         <width>131</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="displayResults_pushButton">
-       <property name="geometry">
-        <rect>
-         <x>520</x>
-         <y>10</y>
-         <width>153</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Display Results</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>15</height>
-        </size>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1922,7 +1407,7 @@ a reference fiber bundle allowed</string>
   </widget>
   <action name="actionLoad_Parameter_Configuration">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/load.png</normaloff>:/icons/icons/load.png</iconset>
    </property>
    <property name="text">
@@ -1931,7 +1416,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionSave_Parameter_Configuration">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/save-3.png</normaloff>:/icons/icons/save-3.png</iconset>
    </property>
    <property name="text">
@@ -1940,7 +1425,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionLoad_Software_Configuration">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/load-softwares.png</normaloff>:/icons/icons/load-softwares.png</iconset>
    </property>
    <property name="text">
@@ -1949,7 +1434,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionSave_Software_Configuration">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/save-softwares.png</normaloff>:/icons/icons/save-softwares.png</iconset>
    </property>
    <property name="text">
@@ -1963,7 +1448,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="runPipeline_action">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
    </property>
    <property name="text">
@@ -1972,7 +1457,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="stopPipeline_action">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
    </property>
    <property name="text">
@@ -1981,7 +1466,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionDisplay_Results">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
    </property>
    <property name="text">
@@ -1989,8 +1474,6 @@ a reference fiber bundle allowed</string>
    </property>
   </action>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
