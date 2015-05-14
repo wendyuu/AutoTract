@@ -56,9 +56,16 @@ void AutoTractWindow::SyncUiToModelStructure()
 
 
 
-    /*5th tab*/
+    /*7th tab: Execution*/
     m_para_m->setpara_all_radioButton( para_all_radioButton->isChecked() );
     m_para_m->setpara_singletract_radioButton( para_singletract_radioButton->isChecked() );
+    m_para_m->setpara_computingSystem_comboBox( para_computingSystem_comboBox->currentText() );
+    m_para_m->setpara_nbCores_spinBox( para_nbCores_spinBox->value() );
+    m_para_m->setpara_nbTractsProcessed_spinBox( para_nbTractsProcessed_spinBox->value() );
+    m_para_m->setpara_cleanup_checkBox( para_cleanup_checkBox->isChecked() );
+    m_para_m->setpara_overwrite_checkBox( para_overwrite_checkBox->isChecked() );
+    m_para_m->setpara_singletract_comboBox( para_singletract_comboBox->currentText() );
+
 
     //m.setdtiprocess_lineEdit();
     //m.setDTIReg_lineEdit();
@@ -116,9 +123,15 @@ void AutoTractWindow::SyncModelStructureToUi()
 
 
 
-    /*5th tab*/
+    /*7th tab: Execution*/
     para_all_radioButton->setChecked( m_para_m->getpara_all_radioButton() );
     para_singletract_radioButton->setChecked( m_para_m->getpara_singletract_radioButton() );
+    para_computingSystem_comboBox->setCurrentIndex(para_computingSystem_comboBox->findText(m_para_m->getpara_computingSystem_comboBox() ) );
+    para_nbCores_spinBox->setValue( m_para_m->getpara_nbCores_spinBox() );
+    para_nbTractsProcessed_spinBox->setValue( m_para_m->getpara_nbTractsProcessed_spinBox() );
+    para_cleanup_checkBox->setChecked( m_para_m->getpara_cleanup_checkBox() );
+    para_overwrite_checkBox->setChecked( m_para_m->getpara_overwrite_checkBox() );
+    para_singletract_comboBox->setCurrentIndex( para_singletract_comboBox->findText(m_para_m->getpara_singletract_comboBox() ) ) ;
 
 }
 

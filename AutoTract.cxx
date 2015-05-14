@@ -52,6 +52,9 @@ int main( int argc , char** argv )
     lookup_parameters_map["registrationType"] = para_m.getpara_registration_type_comboBox();
     lookup_parameters_map["similarityMetric"] = para_m.getpara_similarity_metric_comboBox();
     lookup_parameters_map["gaussianSigma"] = QString::number(para_m.getpara_gaussian_sigma_spinBox());
+    lookup_parameters_map["computingSystem"] = para_m.getpara_computingSystem_comboBox();
+    lookup_parameters_map["nbCores"] = QString::number(para_m.getpara_nbCores_spinBox());
+    lookup_parameters_map["nbTractsProcessed"] = QString::number(para_m.getpara_nbTractsProcessed_spinBox());
 
     if(noGUI == false)
     {
@@ -71,7 +74,6 @@ int main( int argc , char** argv )
     }
     else
     {
-        MainScriptThread* thread;
         Pipeline* pipeline;
         pipeline = new Pipeline();
         pipeline->setPipelineParameters(&para_m);

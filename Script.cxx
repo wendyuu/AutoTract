@@ -304,7 +304,6 @@ void Script::execute()
             m_script += m_indentation + "\t\texecute(args)\n";
          }
       }
-
       else
       {
          m_script += m_indentation + "\targs = " + listToString(m_argumentsList) + "\n";

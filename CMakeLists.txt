@@ -21,6 +21,8 @@ Pipeline.cxx
 MainScriptThread.cxx
 Script.cxx
 Registration.cxx
+TractPopulationProcess.cxx
+SingleTractProcess.cxx
 )
 
 QT4_ADD_RESOURCES(RESOURCES resources.qrc)

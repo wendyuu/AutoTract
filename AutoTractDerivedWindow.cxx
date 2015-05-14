@@ -344,11 +344,11 @@ void AutoTractDerivedWindow::selectAtlas(QListWidgetItem* item)
 {
     if(item->checkState())
     {
-        m_selectedAtlases << item->text();
+        m_selectedTracts << item->text();
     }
     else
     {
-        m_selectedAtlases.removeAt(m_selectedAtlases.indexOf(item->text()));
+        m_selectedTracts.removeAt(m_selectedTracts.indexOf(item->text()));
     }
 }
 
@@ -364,7 +364,7 @@ void AutoTractDerivedWindow::displayAtlases()
     para_ref_tracts_listWidget->clear();
     QStringList::const_iterator it;
     int count = 0;
-    for (it = m_selectedAtlases.constBegin(); it != m_selectedAtlases.constEnd(); ++it)
+    for (it = m_selectedTracts.constBegin(); it != m_selectedTracts.constEnd(); ++it)
     {
         QListWidgetItem* item = new QListWidgetItem(*it, para_ref_tracts_listWidget);
         item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable);
@@ -385,7 +385,7 @@ void AutoTractDerivedWindow::enterAtlasPopulationDirectory()
 void AutoTractDerivedWindow::checkSelectedAtlases()
 {
     QStringList::const_iterator it;
-    for (it = m_selectedAtlases.constBegin(); it != m_selectedAtlases.constEnd(); ++it)
+    for (it = m_selectedTracts.constBegin(); it != m_selectedTracts.constEnd(); ++it)
     {
         QList<QListWidgetItem *> items = para_ref_tracts_listWidget->findItems(*it, Qt::MatchExactly);
 
@@ -408,7 +408,7 @@ void AutoTractDerivedWindow::checkAtlases()
     {
         if((*it).endsWith(".vtk") || (*it).endsWith(".vtp"))
         {
-            m_selectedAtlases << *it;
+            m_selectedTracts << *it;
         }
     }
 }

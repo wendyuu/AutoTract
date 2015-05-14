@@ -67,7 +67,7 @@ private:
     void initializeExecutablesMap();
     void initializeParametersMap();
     Pipeline* m_pipeline;
-    QStringList m_selectedAtlases;
+    QStringList m_selectedTracts;
     QString m_atlasPopulationDirectory;
     QString m_script;
 };

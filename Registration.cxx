@@ -84,7 +84,6 @@ void Registration::implementRun()
 
     //execute(); seg fault for now (missing args?)
     executeRegistration();
-    m_script += "\texecute(args)\n";
     // Cleaning for keven data
     QFileInfo fi(m_refDTIAtlas);
     QString base = fi.baseName();

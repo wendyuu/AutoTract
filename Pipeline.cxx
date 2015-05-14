@@ -162,7 +162,7 @@ void Pipeline::writeRegistration()
 
     QString module_name = "Registration";
     m_registration = new::Registration(module_name);
-
+    m_registration->setOverwriting(m_para_m->getpara_overwrite_checkBox());
     m_registration->setModuleDirectory(directory_path);
     m_registration->setProcessingDirectory(m_processing_path);
     m_registration->setRefDTIAtlas(m_para_m->getpara_refDTIatlas_lineEdit());
@@ -170,18 +170,13 @@ void Pipeline::writeRegistration()
     m_registration->setRegistrationType(m_para_m->getpara_registration_type_comboBox());
     m_registration->setSimilarityMetric(m_para_m->getpara_similarity_metric_comboBox());
     m_registration->setGaussianSigma(QString::number(m_para_m->getpara_gaussian_sigma_spinBox()));
-    QDir* output_dir = new QDir(m_para_m->getpara_output_dir_lineEdit());
-    QFileInfo fi(m_para_m->getpara_output_dir_lineEdit());
-    QString base = fi.baseName();
-    m_registration->setDisplacementFieldPath(base + "/" + directory_name+ "/displacementField.nrrd");
-
     m_registration->SetExecutablesMap(m_executables_map);
     m_registration->SetParametersMap(m_parameters_map);
+    m_registration->setDisplacementFieldPath(m_displacementFieldPath);
     m_registration->setScriptParameters(m_para_m);
     m_registration->setScriptSoftwares(m_soft_m);
 
     /*m_registration->setOverwriting(m_parameters->getOverwriting());
-      m_registration->setSuffix(m_parameters->getSuffix());
       m_registration->setStoppingIfError(m_parameters->getStoppingIfError());*/
     m_registration->update();
     m_importingModules += "import " + module_name + "\n";
@@ -193,6 +188,43 @@ void Pipeline::writeRegistration()
 
     m_script += "\nlogger.info(' \"Step: Co-registration DONE\"'\n)";*/
 }
+
+void Pipeline::writeProcess()
+{
+    QString directory_name = "2.PostProcess";
+    QString directory_path = createModuleDirectory(directory_name);
+
+    QString module_name = "PostProcess";
+    m_process = new::TractPopulationProcess(module_name);
+    //m_process->setOverwriting(m_para_m->getpara_overwrite_checkBox());
+    m_process->setModuleDirectory(directory_path);
+    m_process->setProcessingDirectory(m_processing_path);
+    m_process->setScriptParameters(m_para_m);
+    m_process->setScriptSoftwares(m_soft_m);
+    m_process->SetExecutablesMap(m_executables_map);
+    m_process->SetParametersMap(m_parameters_map);
+    m_process->SetDisplacementFieldPath(m_displacementFieldPath);
+    m_process->update();
+    m_importingModules += "import " + module_name + "\n";
+    m_runningModules += module_name + ".run()\n";
+}
+
+void Pipeline::writeSingleTractProcess()
+{
+    QString module_name = "SingleTractProcess";
+    m_singleTractProcess = new::SingleTractProcess(module_name);
+
+    m_singleTractProcess->setProcessingDirectory(m_processing_path);
+    m_singleTractProcess->setLog(m_log_path);
+    m_singleTractProcess->setScriptParameters(m_para_m);
+    m_singleTractProcess->setScriptSoftwares(m_soft_m);
+    m_singleTractProcess->SetExecutablesMap(m_executables_map);
+    m_singleTractProcess->SetParametersMap(m_parameters_map);
+    /*m_singleTractProcess->setOverwriting(m_parameters->getOverwriting());
+    m_singleTractProcess->setStoppingIfError(m_parameters->getStoppingIfError());*/
+    m_singleTractProcess->update();
+}
+
 
 void Pipeline::cleanUp()
 {
@@ -208,95 +240,93 @@ void Pipeline::writePipeline()
     QFileInfo fi(m_para_m->getpara_output_dir_lineEdit());
     QString base = fi.baseName();
     m_log_path = output_dir->filePath(base + ".log");
-
+    m_displacementFieldPath = m_para_m->getpara_output_dir_lineEdit() + "/" + "1.Registration" + "/displacementField.nrrd";
     writeRegistration();
+    writeProcess();
+    writeSingleTractProcess();
     writeMainScript();
 }
 
 void Pipeline::runPipeline()
 {
-    QString command/*("/work/jeanyves/tmp")*/;
-    //if(!(m_parameters->getComputingSystem()).compare("local", Qt::CaseInsensitive) || !(m_parameters->getComputingSystem()).compare("killdevil interactive", Qt::CaseInsensitive))
-    //{
-    command = m_main_path;
-    //}
+    QString command;
+    if(!(m_para_m->getpara_computingSystem_comboBox()).compare("local", Qt::CaseInsensitive) || !(m_para_m->getpara_computingSystem_comboBox()).compare("killdevil interactive", Qt::CaseInsensitive))
+    {
+        command = m_main_path;
+    }
 
-    //   if(!(m_parameters->getComputingSystem()).compare("killdevil", Qt::CaseInsensitive))
-    //   {
-    //      command = "bsub -q day -M 4 -n 1 -R \"span[hosts=1]\" python " +  m_main_path;
-    //   }
+    if(!(m_para_m->getpara_computingSystem_comboBox()).compare("killdevil", Qt::CaseInsensitive))
+    {
+        command = "bsub -q day -M 4 -n 1 -R \"span[hosts=1]\" python " +  m_main_path;
+    }
     QString python_path = m_executables_map["python"];
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     if(python_path!="")
     {
         QString pythonDirectory_path = ((QFileInfo(python_path)).absoluteDir()).path();
-
         env.insert("PATH", pythonDirectory_path + ":" + env.value("PATH"));
         env.insert("PYTHONPATH", "");
     }
+
     m_mainScriptProcess = new QProcess;
     m_mainScriptProcess->setProcessEnvironment(env);
     m_mainScriptProcess->start(command);
     m_mainScriptProcess->waitForStarted();
     m_mainScriptProcess->waitForFinished();
-    /*QString p_stdout = m_mainScriptProcess->readAllStandardOutput();
-    QString p_stderr = m_mainScriptProcess->readAllStandardError();
-    std::cout<<p_stdout.toStdString()<<std::endl;
-    std::cout<<p_stderr.toStdString()<<std::endl;*/
-    /*m_timer.start();
+    m_timer.start();
 
     while (!m_mainScriptProcess->waitForFinished())
     {
         sleep(1);
-    }*/
+    }
 
-    //   if(!(m_parameters->getComputingSystem()).compare("killdevil", Qt::CaseInsensitive))
-    //   {
-    //      bool jobRunning = true;
+    if(!(m_para_m->getpara_computingSystem_comboBox()).compare("killdevil", Qt::CaseInsensitive))
+    {
+        bool jobRunning = true;
 
-    //      QString output(m_mainScriptProcess->readAllStandardOutput());
-    //      QRegExp regExp("(<{1})([0-9]{1,})(>{1})");
-    //      regExp.indexIn(output);
-    //      m_jobID = regExp.cap(2);
+        QString output(m_mainScriptProcess->readAllStandardOutput());
+        QRegExp regExp("(<{1})([0-9]{1,})(>{1})");
+        regExp.indexIn(output);
+        m_jobID = regExp.cap(2);
 
-    //      std::cout<<"jobID = "<<m_jobID.toStdString()<<std::endl;
+        std::cout<<"jobID = "<<m_jobID.toStdString()<<std::endl;
 
-    //      QProcess* bjobs_process = new::QProcess();
-    //      while(jobRunning)
-    //      {
-    //         bjobs_process->start("bjobs " + m_jobID);
-    //         while (!bjobs_process->waitForFinished())
-    //         {
-    //            sleep(1);
-    //         }
+        QProcess* bjobs_process = new::QProcess();
+        while(jobRunning)
+        {
+            bjobs_process->start("bjobs " + m_jobID);
+            while (!bjobs_process->waitForFinished())
+            {
+                sleep(1);
+            }
 
-    //         QString bjobs_output(bjobs_process->readAllStandardOutput());
-    //         if(bjobs_output.contains("DONE") || bjobs_output.contains("EXIT"))
-    //         {
-    //            jobRunning = false;
-    //         }
+            QString bjobs_output(bjobs_process->readAllStandardOutput());
+            if(bjobs_output.contains("DONE") || bjobs_output.contains("EXIT"))
+            {
+                jobRunning = false;
+            }
 
-    //         sleep(1);
-    //      }
-    //   }
+            sleep(1);
+        }
+    }
 
-    //   if(m_mainScriptProcess->exitCode()==0)
-    //   {
-    //      cleanUp();
-    //   }
+    if(m_mainScriptProcess->exitCode()==0)
+    {
+        cleanUp();
+    }
 }
 
 void Pipeline::stopPipeline()
 {
-    /*if(!(m_parameters->getComputingSystem()).compare("killdevil", Qt::CaseInsensitive))
-   {
-      QProcess* bkill_process = new::QProcess();
-      bkill_process->start("bkill " + m_jobID);
-      while (!bkill_process->waitForFinished())
-      {
-         sleep(1);
-      }
-   }*/
+    if(m_para_m->getpara_computingSystem_comboBox() == "killdevil")
+    {
+        QProcess* bkill_process = new::QProcess();
+        bkill_process->start("bkill " + m_jobID);
+        while (!bkill_process->waitForFinished())
+        {
+            sleep(1);
+        }
+    }
 
     m_mainScriptProcess->terminate();
 }

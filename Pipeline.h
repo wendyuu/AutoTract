@@ -21,7 +21,10 @@
 
 #include "para_Model_AutoTract.h"
 #include "soft_Model_AutoTract.h"
+
 #include "Registration.h"
+#include "TractPopulationProcess.h"
+#include "SingleTractProcess.h"
 
 class Pipeline
 {
@@ -60,6 +63,8 @@ private:
     void defineSignalHandler();
     void writeMainScript();
     void writeRegistration();
+    void writeSingleTractProcess();
+    void writeProcess();
     void executeMainScript();
     void copySegmentations();
 
@@ -67,6 +72,8 @@ private:
     void cleanUp();
 
     Registration* m_registration;
+    TractPopulationProcess* m_process;
+    SingleTractProcess* m_singleTractProcess;
 
     QString m_importingModules;
     QString m_runningModules;
@@ -87,6 +94,8 @@ private:
     QString m_log_path;
 
     QString m_jobID;
+
+    QString m_displacementFieldPath;
 
     // QProcess
     QProcess* m_mainScriptProcess;
