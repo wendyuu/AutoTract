@@ -31,6 +31,8 @@ public slots:
     void printPipelineLog();
     void SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map);
     void SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map);
+    void checkAllTracts();
+    void uncheckAllTracts();
 private slots:
     void SaveParaConfigFile();
     void LoadParaConfigFile();

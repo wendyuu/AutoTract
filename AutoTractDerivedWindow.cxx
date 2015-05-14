@@ -39,6 +39,8 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     // Select Executable Signal Mapper
     QSignalMapper* selectExecutable_signalMapper = new QSignalMapper(this);
     connect(selectExecutable_signalMapper, SIGNAL(mapped(QString)), this, SLOT(selectExecutable(QString)));
+    connect(check_all_tracts_pushButton, SIGNAL(clicked()), this, SLOT(checkAllTracts()));
+    connect(uncheck_all_tracts_pushButton, SIGNAL(clicked()), this, SLOT(uncheckAllTracts()));
 
     // Enter Executable Signal Mapper
     QSignalMapper* enterExecutable_signalMapper = new QSignalMapper(this);
@@ -80,6 +82,31 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
 
 void AutoTractDerivedWindow::changeRegistrationType(int index)
 {
+
+}
+
+void AutoTractDerivedWindow::checkAllTracts()
+{
+    std::map<QString,bool> map = m_para_m->getpara_ref_tracts_listWidget();
+    std::map<QString,bool>::iterator it = map.begin();
+    for( int count = 0 ; it != map.end() ; count++ , it++ )
+    {
+        map[it->first] = true;
+    }
+    m_para_m->setpara_ref_tracts_listWidget( map );
+    SyncModelStructureToUi();
+}
+
+void AutoTractDerivedWindow::uncheckAllTracts()
+{
+    std::map<QString,bool> map = m_para_m->getpara_ref_tracts_listWidget();
+    std::map<QString,bool>::iterator it = map.begin();
+    for( int count = 0 ; it != map.end() ; count++ , it++ )
+    {
+        map[it->first] = false;
+    }
+    m_para_m->setpara_ref_tracts_listWidget( map );
+    SyncModelStructureToUi();
 
 }
 
