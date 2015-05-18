@@ -14,12 +14,12 @@ void TractPopulationProcess::initializeScript()
     m_script += "from collections import namedtuple\n\n";
 
     //define
-    defineExecutable("polydatatransform");
-    defineParameter("tracts_dir");
+    //    defineParameter("tracts_dir");
+    m_script += "tracts_dir = '" + m_para_m->getpara_tracts_dir_lineEdit() + "'\n";
     m_script += "displacementFieldPath = '" + m_displacementFieldPath + "'\n";
     m_script += "logger = logging.getLogger('AutoTract')\n\n";
 
-    m_script += "runningProcess = None\n\n";
+    m_script += "runningTract = None\n\n";
 }
 void TractPopulationProcess::SetDisplacementFieldPath(QString displacementFieldPath)
 {
@@ -123,6 +123,9 @@ void TractPopulationProcess::implementProcessTractPopulation()
     m_script += "\tpostProcess_script = '" + postProcess_script + "'\n";
 
     std::vector<QString>::iterator it;
+
+
+
     for (it = m_tractPopulation.begin(); it != m_tractPopulation.end(); ++it)
     {
         i = std::distance(m_tractPopulation.begin(), it);
@@ -134,9 +137,8 @@ void TractPopulationProcess::implementProcessTractPopulation()
         m_script +="\ttract = '" + m_para_m->getpara_tracts_dir_lineEdit() + "/" + tract + "'\n";
         QString tract_path = m_module_dir->filePath(base);
         QDir* tract_dir = new QDir(tract_path);
-
         QString output_path = tract_dir->absolutePath();
-        m_script += "\tref_tract_mapped = '" + output_path + "/' + name + '_t.vtk'" +  "\n";
+        m_script += "\toutput_dir = '" + output_path +  "'\n";
 
         QString log_name = base + ".log";
         QString log = tract_dir->filePath(log_name);
@@ -190,7 +192,7 @@ void TractPopulationProcess::SubmitTractPostProcessJob(QString tract, int i)
     QString tract_name = "tract_" + QString_i;
 
     QString args = "'bsub', '-q', 'day', '-M', '" + QString::number(4) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
-    args += "'python', postProcess_script, name, tract, ref_tract_mapped, displacementFieldPath, log";
+    args += "'python', postProcess_script, name, tract, output_dir, displacementFieldPath, log";
     m_script += "\targs = [" + args + "]\n";
     m_script += "\tbsub_process = subprocess.Popen(args, stdout=subprocess.PIPE)\n";
     m_script += "\tbsub_output = bsub_process.stdout.read()\n";
@@ -219,7 +221,7 @@ void TractPopulationProcess::ExecuteTractPostProcess(QString tract, int i)
     QString tract_name = "tract_" + QString_i;
 
     QString command;
-    command = "['python', postProcess_script, name, tract, ref_tract_mapped, displacementFieldPath, log]";
+    command = "['python', postProcess_script, name, tract, output_dir, displacementFieldPath, log]";
 
     m_script += "\t" + tract_name + " = subprocess.Popen(" + command + ")\n";
 

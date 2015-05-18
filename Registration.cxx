@@ -3,28 +3,28 @@
 Registration::Registration(QString module) : Script(module)
 {
 }
-void Registration::setRefDTIAtlas(QString refDTIAtlas)
-{
-    m_refDTIAtlas = refDTIAtlas;
-}
-void Registration::setInputDTIAtlas(QString inputDTIAtlas)
-{
-    m_inputDTIAtlas = inputDTIAtlas;
-}
-void Registration::setRegistrationType(QString registrationType)
-{
-    m_registrationType = registrationType;
-}
+//void Registration::setRefDTIAtlas(QString refDTIAtlas)
+//{
+//    m_refDTIAtlas = refDTIAtlas;
+//}
+//void Registration::setInputDTIAtlas(QString inputDTIAtlas)
+//{
+//    m_inputDTIAtlas = inputDTIAtlas;
+//}
+//void Registration::setRegistrationType(QString registrationType)
+//{
+//    m_registrationType = registrationType;
+//}
 
-void Registration::setSimilarityMetric(QString similarityMetric)
-{
-    m_similarityMetric = similarityMetric;
-}
+//void Registration::setSimilarityMetric(QString similarityMetric)
+//{
+//    m_similarityMetric = similarityMetric;
+//}
 
-void Registration::setGaussianSigma(QString gaussianSigma)
-{
-    m_gaussianSigma = gaussianSigma;
-}
+//void Registration::setGaussianSigma(QString gaussianSigma)
+//{
+//    m_gaussianSigma = gaussianSigma;
+//}
 
 void Registration::setDisplacementFieldPath(QString path)
 {
@@ -38,12 +38,18 @@ void Registration::initializeScript()
 
     m_script += "import re\n";
 
-    defineExecutable("DTIReg");
-    defineParameter("refDTIatlas_dir");
-    defineParameter("inputDTIatlas_dir");
-    defineParameter("registrationType");
-    defineParameter("similarityMetric");
-    defineParameter("gaussianSigma");
+    //    defineExecutable("DTIReg");
+    //    defineParameter("refDTIatlas_dir");
+    //    defineParameter("inputDTIatlas_dir");
+    //    defineParameter("registrationType");
+    //    defineParameter("similarityMetric");
+    //    defineParameter("gaussianSigma");
+    m_script += "DTIReg = '" + m_soft_m->getsoft_DTIReg_lineEdit() + "'\n";
+    m_script += "refDTIatlas_dir = '" + m_para_m->getpara_refDTIatlas_lineEdit() + "'\n";
+    m_script += "inputDTIatlas_dir = '" + m_para_m->getpara_inputDTIatlas_lineEdit() + "'\n";
+    m_script += "registrationType = '" + m_para_m->getpara_registration_type_comboBox() + "'\n";
+    m_script += "similarityMetric = '" + m_para_m->getpara_similarity_metric_comboBox() + "'\n";
+    m_script += "gaussianSigma = '" + QString::number(m_para_m->getpara_gaussian_sigma_spinBox()) + "'\n";
     m_script += "displacementFieldPath = '" + m_displacementFieldPath + "'\n";
 
     m_script += "logger = logging.getLogger('AutoTract')\n\n";
@@ -71,21 +77,14 @@ void Registration::implementRun()
 
     m_script += "\tlogger.info('=== Registration ===')\n";
 
-    m_script += "\trefDTIAtlas = '" + m_refDTIAtlas + "'\n";
-    m_script += "\tinputDTIAtlas = '" + m_inputDTIAtlas + "'\n";
-    m_script += "\tregistrationType = '" + m_registrationType + "'\n";
-    m_script += "\tsimilarityMetric = '" + m_similarityMetric + "'\n";
-    m_script += "\tgaussianSigma = '" + m_gaussianSigma + "'\n\n";
-
     m_outputs.insert("displacementField", m_displacementFieldPath);
     checkFinalOutputs();
 
     m_script += "\tlogger.info('')\n";
 
-    //execute(); seg fault for now (missing args?)
     executeRegistration();
     // Cleaning for keven data
-    QFileInfo fi(m_refDTIAtlas);
+    QFileInfo fi(m_para_m->getpara_refDTIatlas_lineEdit());
     QString base = fi.baseName();
     m_unnecessaryFiles << m_module_dir->filePath(base + "_ANTSAffine.txt");
     m_unnecessaryFiles << m_module_dir->filePath(base + "_InverseWarp.nii.gz");

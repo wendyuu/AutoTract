@@ -21,11 +21,11 @@ class Registration : public Script
    // Constructor
    Registration(QString module);
    // Set
-   void setRefDTIAtlas(QString refDTIAtlas);
-   void setInputDTIAtlas(QString inputDTIAtlas);
-   void setRegistrationType(QString registrationType);
-   void setSimilarityMetric(QString similarityMetric);
-   void setGaussianSigma(QString gaussianSigma);
+//   void setRefDTIAtlas(QString refDTIAtlas);
+//   void setInputDTIAtlas(QString inputDTIAtlas);
+//   void setRegistrationType(QString registrationType);
+//   void setSimilarityMetric(QString similarityMetric);
+//   void setGaussianSigma(QString gaussianSigma);
    void setDisplacementFieldPath(QString path); //output
 
    // Implementing Script
@@ -40,11 +40,11 @@ class Registration : public Script
    private:
 
    // Parameters
-   QString              m_refDTIAtlas;
-   QString              m_inputDTIAtlas;
-   QString              m_registrationType;
-   QString              m_similarityMetric;
-   QString              m_gaussianSigma;
+//   QString              m_refDTIAtlas;
+//   QString              m_inputDTIAtlas;
+//   QString              m_registrationType;
+//   QString              m_similarityMetric;
+//   QString              m_gaussianSigma;
    QString              m_displacementFieldPath;
 };
 

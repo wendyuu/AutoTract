@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -531,6 +531,12 @@
                  </item>
                  <item>
                   <widget class="QDoubleSpinBox" name="para_transformation_step_spinBox">
+                   <property name="maximum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.010000000000000</double>
+                   </property>
                    <property name="value">
                     <double>0.250000000000000</double>
                    </property>
@@ -666,7 +672,11 @@ MI=Mutual Information, MSQ=Mean Square Difference</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="para_gaussian_sigma_spinBox"/>
+                  <widget class="QDoubleSpinBox" name="para_gaussian_sigma_spinBox">
+                   <property name="value">
+                    <double>3.000000000000000</double>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </widget>
@@ -785,7 +795,7 @@ MI=Mutual Information, MSQ=Mean Square Difference</string>
                  <item>
                   <widget class="QDoubleSpinBox" name="para_seedspacing_spinBox">
                    <property name="minimum">
-                    <double>-1.000000000000000</double>
+                    <double>0.000000000000000</double>
                    </property>
                    <property name="maximum">
                     <double>10.000000000000000</double>
@@ -969,7 +979,7 @@ MI=Mutual Information, MSQ=Mean Square Difference</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="para_stoppingcurvature_spinBox">
+                  <widget class="QDoubleSpinBox" name="para_integrationsteplength_spinBox">
                    <property name="maximum">
                     <double>10.000000000000000</double>
                    </property>
@@ -982,7 +992,7 @@ MI=Mutual Information, MSQ=Mean Square Difference</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="para_integrationsteplength_spinBox">
+                  <widget class="QDoubleSpinBox" name="para_stoppingcurvature_spinBox">
                    <property name="maximum">
                     <double>10.000000000000000</double>
                    </property>
@@ -1121,17 +1131,17 @@ on the same fiber (mm)</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="tractOverlapRatio_label">
                 <property name="text">
                  <string>Tract Overlap Ratio</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
+              <item row="2" column="1">
                <widget class="QDoubleSpinBox" name="para_tractOverlapRatio_spinBox"/>
               </item>
-              <item row="1" column="2">
+              <item row="2" column="2">
                <widget class="QLabel" name="tractOverlapRatio_label_2">
                 <property name="font">
                  <font>
@@ -1144,17 +1154,30 @@ on the same fiber (mm)</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="1" column="1">
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="5" column="0">
                <widget class="QLabel" name="tractMaxDistThreshold_label">
                 <property name="text">
                  <string>Tract Max Distance Threshold</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="5" column="1">
                <widget class="QDoubleSpinBox" name="para_tractMaxDistThreshold_spinBox"/>
               </item>
-              <item row="2" column="2">
+              <item row="5" column="2">
                <widget class="QLabel" name="traxtMaxDistThreshold_descr_label">
                 <property name="font">
                  <font>
@@ -1167,8 +1190,34 @@ a reference fiber bundle allowed</string>
                 </property>
                </widget>
               </item>
+              <item row="4" column="1">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -1203,6 +1252,9 @@ a reference fiber bundle allowed</string>
             <widget class="QRadioButton" name="para_all_radioButton">
              <property name="text">
               <string>All</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -1358,7 +1410,7 @@ a reference fiber bundle allowed</string>
               <string>Run Pipeline</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="resources.qrc">
                <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
              </property>
              <property name="iconSize">
@@ -1375,7 +1427,7 @@ a reference fiber bundle allowed</string>
               <string>Stop Pipeline</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="resources.qrc">
                <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
              </property>
              <property name="iconSize">
@@ -1399,7 +1451,7 @@ a reference fiber bundle allowed</string>
               <string>Display Results</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="resources.qrc">
                <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
              </property>
              <property name="iconSize">
@@ -1469,7 +1521,7 @@ a reference fiber bundle allowed</string>
   </widget>
   <action name="actionLoad_Parameter_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/load.png</normaloff>:/icons/icons/load.png</iconset>
    </property>
    <property name="text">
@@ -1478,7 +1530,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionSave_Parameter_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/save-3.png</normaloff>:/icons/icons/save-3.png</iconset>
    </property>
    <property name="text">
@@ -1487,7 +1539,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionLoad_Software_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/load-softwares.png</normaloff>:/icons/icons/load-softwares.png</iconset>
    </property>
    <property name="text">
@@ -1496,7 +1548,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionSave_Software_Configuration">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/save-softwares.png</normaloff>:/icons/icons/save-softwares.png</iconset>
    </property>
    <property name="text">
@@ -1510,7 +1562,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="runPipeline_action">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
    </property>
    <property name="text">
@@ -1519,7 +1571,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="stopPipeline_action">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
    </property>
    <property name="text">
@@ -1528,7 +1580,7 @@ a reference fiber bundle allowed</string>
   </action>
   <action name="actionDisplay_Results">
    <property name="icon">
-    <iconset>
+    <iconset resource="resources.qrc">
      <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
    </property>
    <property name="text">
@@ -1536,6 +1588,8 @@ a reference fiber bundle allowed</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

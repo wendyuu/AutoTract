@@ -31,7 +31,7 @@ int main( int argc , char** argv )
     }
 
 
-    QMap <QString , QString> lookup_executables_map;
+    /*QMap <QString , QString> lookup_executables_map;
     QMap <QString , QString> lookup_parameters_map;
     lookup_executables_map["DTIReg"] = soft_m.getsoft_DTIReg_lineEdit();
     lookup_executables_map["fiberprocess"] = soft_m.getsoft_fiberprocess_lineEdit();
@@ -55,6 +55,7 @@ int main( int argc , char** argv )
     lookup_parameters_map["computingSystem"] = para_m.getpara_computingSystem_comboBox();
     lookup_parameters_map["nbCores"] = QString::number(para_m.getpara_nbCores_spinBox());
     lookup_parameters_map["nbTractsProcessed"] = QString::number(para_m.getpara_nbTractsProcessed_spinBox());
+    lookup_parameters_map["dilationRadius"] = QString::number(para_m.getpara_dilation_radius_spinBox());*/
 
     if(noGUI == false)
     {
@@ -66,10 +67,25 @@ int main( int argc , char** argv )
         window.SetSoftLoad(&soft_l);
         window.SetSoftModel(&soft_m);
         window.SetSoftSave(&soft_s);
-        window.SetLookupExecutableMap(lookup_executables_map);
-        window.SetLookupParameterMap(lookup_parameters_map);
-        window.SyncModelStructureToUi();
+        /*window.SetLookupExecutableMap(lookup_executables_map);
+        window.SetLookupParameterMap(lookup_parameters_map);*/
+        //window.SyncModelStructureToUi();
         window.show() ;
+        if(parameters.empty() && executables.empty())
+        {
+            window.initSoftware();
+        }
+        if(parameters.empty() && !executables.empty())
+        {
+            window.SyncModelStructureToUi("soft");
+
+        }
+        if(!parameters.empty() && executables.empty())
+        {
+            window.initSoftware();
+            window.SyncModelStructureToUi("para");
+        }
+        window.SyncModelStructureToUi();
         return app.exec() ;
     }
     else
@@ -78,12 +94,11 @@ int main( int argc , char** argv )
         pipeline = new Pipeline();
         pipeline->setPipelineParameters(&para_m);
         pipeline->setPipelineSoftwares(&soft_m);
-        pipeline->SetExecutablesMap( lookup_executables_map );
-        pipeline->SetParametersMap( lookup_parameters_map );
+        /*pipeline->SetExecutablesMap( lookup_executables_map );
+        pipeline->SetParametersMap( lookup_parameters_map );*/
         pipeline->writePipeline();
         pipeline->runPipeline();
         delete( pipeline );
         return 0;
     }
-
 }

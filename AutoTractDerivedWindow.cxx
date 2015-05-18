@@ -1,5 +1,4 @@
 #include "AutoTractDerivedWindow.h"
-#include <iostream>
 
 /* Management of software tab: https://github.com/marie-cherel2013/NeosegPipeline*/
 
@@ -10,7 +9,7 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect( this->actionSave_Software_Configuration, SIGNAL( triggered() ), SLOT( SaveSoftConfigFile() ) );
     connect( this->actionLoad_Software_Configuration, SIGNAL( triggered() ), SLOT( LoadSoftConfigFile() ) );
 
-    /*1st tab*/
+    /*1st tab: Inputs*/
     // Select Parameters Signal Mapper
     QSignalMapper* selectParameters_signalMapper = new QSignalMapper(this);
     connect(selectParameters_signalMapper, SIGNAL(mapped(QString)), this, SLOT(selectParameters(QString)));
@@ -35,12 +34,18 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect(output_dir_pushButton, SIGNAL(clicked()), this, SLOT(selectOutputDirectory()));
     connect(para_output_dir_lineEdit, SIGNAL(editingFinished()), this, SLOT(enterOutputDirectory()));
 
-    /*2nd tab*/
+    /*2nd tab: reference tracts*/
+
+    connect(tracts_dir_pushButton, SIGNAL(clicked()), this, SLOT(selectTractsPopulationDirectory()));
+    connect(para_tracts_dir_lineEdit, SIGNAL(editingFinished()), this, SLOT(enterTractPopulationDirectory()));
+    connect(para_ref_tracts_listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(selectTracts(QListWidgetItem*)));
+    connect(check_all_tracts_pushButton, SIGNAL(clicked()), this, SLOT(checkAllTracts()));
+    connect(uncheck_all_tracts_pushButton, SIGNAL(clicked()), this, SLOT(uncheckAllTracts()));
+
+    /*3rd tab: software*/
     // Select Executable Signal Mapper
     QSignalMapper* selectExecutable_signalMapper = new QSignalMapper(this);
     connect(selectExecutable_signalMapper, SIGNAL(mapped(QString)), this, SLOT(selectExecutable(QString)));
-    connect(check_all_tracts_pushButton, SIGNAL(clicked()), this, SLOT(checkAllTracts()));
-    connect(uncheck_all_tracts_pushButton, SIGNAL(clicked()), this, SLOT(uncheckAllTracts()));
 
     // Enter Executable Signal Mapper
     QSignalMapper* enterExecutable_signalMapper = new QSignalMapper(this);
@@ -68,22 +73,71 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     }
 
     /*4th tab: Registration*/
-    connect(para_registration_type_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeRegistrationType(int)));
+    connect(para_registration_type_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_transformation_step_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_iterations_lineEdit, SIGNAL(editingFinished()), this, SLOT(SyncUiToModelStructure()));
+    connect(para_similarity_metric_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_gaussian_sigma_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
 
-    /*4th tab*/
-    connect(tracts_dir_pushButton, SIGNAL(clicked()), this, SLOT(selectTractsPopulationDirectory()));
-    connect(para_tracts_dir_lineEdit, SIGNAL(editingFinished()), this, SLOT(enterAtlasPopulationDirectory()));
-    connect(para_ref_tracts_listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(selectAtlas(QListWidgetItem*)));
+    /*5th tab: Tractography*/
+    connect(para_dilation_radius_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_seedspacing_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_linearmeasure_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_minpathlength_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_maxpathlength_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_stoppingvalue_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_integrationsteplength_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_stoppingcurvature_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+
+    /*6th tab: Tract Processing Parameters*/
+    connect(para_thresholdWMmask_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_tractOverlapRatio_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_tractMaxDistThreshold_spinBox,SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
 
     /*7th tab: Execution*/
     connect(runPipeline_pushButton, SIGNAL(clicked()), this, SLOT(runPipeline()));
     connect(stopPipeline_pushButton, SIGNAL(clicked()), this, SLOT(stopPipeline()));
+    connect(para_all_radioButton, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
+    connect(para_singletract_radioButton, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
+    connect(para_cleanup_checkBox, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
+    connect(para_overwrite_checkBox, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
 }
-
-void AutoTractDerivedWindow::changeRegistrationType(int index)
+void AutoTractDerivedWindow::initSoftware()
 {
+    std::string soft = "dtiprocess";
+    m_soft_m->setsoft_dtiprocess_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
 
+    soft = "DTI-Reg";
+    m_soft_m->setsoft_DTIReg_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "FiberPostProcess";
+    m_soft_m->setsoft_FiberPostProcess_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "fiberprocess";
+    m_soft_m->setsoft_fiberprocess_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "ImageMath";
+    m_soft_m->setsoft_ImageMath_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "ResampleDTIVolume";
+    m_soft_m->setsoft_ResampleDTIVolume_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "MaurerDistanceTransform";
+    m_soft_m->setsoft_MDT_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "polydatatransform";
+    m_soft_m->setsoft_polydatatransform_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "python";
+    m_soft_m->setsoft_python_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "TractographyLabelMapSeeding";
+    m_soft_m->setsoft_TractographyLabelMapSeeding_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "unu";
+    m_soft_m->setsoft_unu_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
 }
+
 
 void AutoTractDerivedWindow::checkAllTracts()
 {
@@ -116,11 +170,10 @@ void AutoTractDerivedWindow::runPipeline()
     m_pipeline = new Pipeline();
     m_pipeline->setPipelineParameters(m_para_m);
     m_pipeline->setPipelineSoftwares(m_soft_m);
-    m_pipeline->SetExecutablesMap( m_lookup_executables_map );
-    m_pipeline->SetParametersMap( m_lookup_parameters_map );
+//    m_pipeline->SetExecutablesMap( m_lookup_executables_map );
+//    m_pipeline->SetParametersMap( m_lookup_parameters_map );
     initializePipelineLogging();
     m_pipeline->writePipeline();
-
 
     m_thread = new MainScriptThread();
     m_thread->setPipeline(m_pipeline);
@@ -267,22 +320,22 @@ void AutoTractDerivedWindow::initializeExecutablesMap()
     m_executables_map.insert("dtiprocess", dtiprocess);
 }
 
-void AutoTractDerivedWindow::SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map)
-{
-    QMap<QString, QString>::iterator i;
-    for (i = lookup_executables_map.begin(); i != lookup_executables_map.end(); ++i)
-    {
-        m_lookup_executables_map[i.key()] =  i.value() ;
-    }
-}
-void AutoTractDerivedWindow::SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map)
-{
-    QMap<QString, QString>::iterator i;
-    for (i = lookup_parameters_map.begin(); i != lookup_parameters_map.end(); ++i)
-    {
-        m_lookup_parameters_map[i.key()] =  i.value() ;
-    }
-}
+//void AutoTractDerivedWindow::SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map)
+//{
+//    QMap<QString, QString>::iterator i;
+//    for (i = lookup_executables_map.begin(); i != lookup_executables_map.end(); ++i)
+//    {
+//        m_lookup_executables_map[i.key()] =  i.value() ;
+//    }
+//}
+//void AutoTractDerivedWindow::SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map)
+//{
+//    QMap<QString, QString>::iterator i;
+//    for (i = lookup_parameters_map.begin(); i != lookup_parameters_map.end(); ++i)
+//    {
+//        m_lookup_parameters_map[i.key()] =  i.value() ;
+//    }
+//}
 
 void AutoTractDerivedWindow::selectExecutable(QString executable_name)
 {
@@ -300,6 +353,7 @@ void AutoTractDerivedWindow::selectExecutable(QString executable_name)
     {
         (executable.enter_lineEdit)->setText(executable_path) ;
     }
+    SyncUiToModelStructure();
 }
 
 void AutoTractDerivedWindow::enterExecutable(QString executable_name)
@@ -307,12 +361,14 @@ void AutoTractDerivedWindow::enterExecutable(QString executable_name)
     Executable executable = m_executables_map[executable_name];
     QString executable_path = (executable.enter_lineEdit)->text();
     (executable.enter_lineEdit)->setText(executable_path) ;
+    SyncUiToModelStructure();
 }
 
 void AutoTractDerivedWindow::resetExecutable(QString executable_name)
 {
     Executable executable = m_executables_map[executable_name];
-    (executable.enter_lineEdit)->setText(m_lookup_executables_map[executable_name]);
+    (executable.enter_lineEdit)->setText("");
+    SyncUiToModelStructure();
 }
 
 void AutoTractDerivedWindow::initializeParametersMap()
@@ -328,9 +384,6 @@ void AutoTractDerivedWindow::initializeParametersMap()
 
     Parameters refDTIatlas_dir = {refDTIatlas_pushButton, para_refDTIatlas_lineEdit};
     m_parameters_map.insert("refDTIatlas_dir", refDTIatlas_dir);
-
-    Parameters tracts_dir = {tracts_dir_pushButton, para_tracts_dir_lineEdit};
-    m_parameters_map.insert("tracts_dir", tracts_dir);
 }
 
 void AutoTractDerivedWindow::selectParameters(QString parameters_name)
@@ -349,6 +402,7 @@ void AutoTractDerivedWindow::selectParameters(QString parameters_name)
     {
         (parameters.enter_lineEdit)->setText(parameters_path) ;
     }
+    SyncUiToModelStructure();
 }
 
 void AutoTractDerivedWindow::enterParameters(QString parameters_name)
@@ -356,18 +410,20 @@ void AutoTractDerivedWindow::enterParameters(QString parameters_name)
     Parameters parameters = m_parameters_map[parameters_name];
     QString parameters_path = (parameters.enter_lineEdit)->text();
     (parameters.enter_lineEdit)->setText(parameters_path) ;
+    SyncUiToModelStructure();
 }
 
 void AutoTractDerivedWindow::selectTractsPopulationDirectory()
 {
     QString tractsPopulationDirectory = QFileDialog::getExistingDirectory (this, tr("Open Directory"), para_tracts_dir_lineEdit->text(), QFileDialog::ShowDirsOnly);
     para_tracts_dir_lineEdit->setText(tractsPopulationDirectory);
-    m_atlasPopulationDirectory = tractsPopulationDirectory;
-    UpdateAtlasPopulationDirectoryDisplay() ;
+    m_tractPopulationDirectory = tractsPopulationDirectory;
+    UpdateTractPopulationDirectoryDisplay() ;
+    SyncUiToModelStructure();
 }
 
 //***** Select/Unselect Atlas *****//
-void AutoTractDerivedWindow::selectAtlas(QListWidgetItem* item)
+void AutoTractDerivedWindow::selectTracts(QListWidgetItem* item)
 {
     if(item->checkState())
     {
@@ -377,16 +433,17 @@ void AutoTractDerivedWindow::selectAtlas(QListWidgetItem* item)
     {
         m_selectedTracts.removeAt(m_selectedTracts.indexOf(item->text()));
     }
+    SyncUiToModelStructure();
 }
 
-void AutoTractDerivedWindow::UpdateAtlasPopulationDirectoryDisplay()
+void AutoTractDerivedWindow::UpdateTractPopulationDirectoryDisplay()
 {
-    checkAtlases() ;
-    displayAtlases() ;
-    checkSelectedAtlases() ;
+    checkTracts() ;
+    displayTracts() ;
+    checkSelectedTracts() ;
 }
 //***** Display Atlases *****//
-void AutoTractDerivedWindow::displayAtlases()
+void AutoTractDerivedWindow::displayTracts()
 {
     para_ref_tracts_listWidget->clear();
     QStringList::const_iterator it;
@@ -399,17 +456,18 @@ void AutoTractDerivedWindow::displayAtlases()
     }
 }
 
-void AutoTractDerivedWindow::enterAtlasPopulationDirectory()
+void AutoTractDerivedWindow::enterTractPopulationDirectory()
 {
-    QString atlasPopulationDirectory = para_tracts_dir_lineEdit->text();
-    if(!atlasPopulationDirectory.isEmpty())
+    QString tractPopulationDirectory = para_tracts_dir_lineEdit->text();
+    if(!tractPopulationDirectory.isEmpty())
     {
-        m_atlasPopulationDirectory =  para_tracts_dir_lineEdit->text() ;
+        m_tractPopulationDirectory =  para_tracts_dir_lineEdit->text() ;
     }
-    UpdateAtlasPopulationDirectoryDisplay() ;
+    UpdateTractPopulationDirectoryDisplay() ;
+    SyncUiToModelStructure();
 }
 
-void AutoTractDerivedWindow::checkSelectedAtlases()
+void AutoTractDerivedWindow::checkSelectedTracts()
 {
     QStringList::const_iterator it;
     for (it = m_selectedTracts.constBegin(); it != m_selectedTracts.constEnd(); ++it)
@@ -425,13 +483,13 @@ void AutoTractDerivedWindow::checkSelectedAtlases()
 }
 
 //***** Checking Atlases *****//
-void AutoTractDerivedWindow::checkAtlases()
+void AutoTractDerivedWindow::checkTracts()
 {
-    QDir* m_atlasPopulation_dir = new QDir(para_tracts_dir_lineEdit ->text());
-    QStringList atlasPopulation_list = m_atlasPopulation_dir->entryList( QDir::Files | QDir::NoSymLinks);
+    QDir* m_tractPopulation_dir = new QDir(para_tracts_dir_lineEdit ->text());
+    QStringList tractPopulation_list = m_tractPopulation_dir->entryList( QDir::Files | QDir::NoSymLinks);
 
     QStringList::const_iterator it;
-    for (it = atlasPopulation_list.constBegin(); it != atlasPopulation_list.constEnd(); ++it)
+    for (it = tractPopulation_list.constBegin(); it != tractPopulation_list.constEnd(); ++it)
     {
         if((*it).endsWith(".vtk") || (*it).endsWith(".vtp"))
         {
@@ -443,8 +501,8 @@ void AutoTractDerivedWindow::checkAtlases()
 void AutoTractDerivedWindow::selectOutputDirectory()
 {
     QString outputDirectory = QFileDialog::getExistingDirectory (this, tr("Open Directory"), para_output_dir_lineEdit->text(), QFileDialog::ShowDirsOnly);
-    para_output_dir_lineEdit->setText(outputDirectory);
     m_para_m->setpara_output_dir_lineEdit( outputDirectory );
+    SyncUiToModelStructure();
 }
 
 void AutoTractDerivedWindow::enterOutputDirectory()
@@ -452,6 +510,6 @@ void AutoTractDerivedWindow::enterOutputDirectory()
     QString outputDirectory = para_output_dir_lineEdit->text();
     if(!outputDirectory.isEmpty())
     {
-        m_para_m->setpara_output_dir_lineEdit( para_output_dir_lineEdit->text() ) ;
+        SyncUiToModelStructure();
     }
 }

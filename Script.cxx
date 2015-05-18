@@ -15,23 +15,23 @@ void Script::setModuleDirectory(QString module_path)
    m_module_path = module_path;
    m_module_dir = new QDir(module_path);
 }
-void Script::SetExecutablesMap( QMap<QString, QString> executables_map)
-{
-    QMap<QString, QString>::iterator i;
-    for (i = executables_map.begin(); i != executables_map.end(); ++i)
-    {
-        m_executables_map[i.key()] =  i.value() ;
-    }
-}
+//void Script::SetExecutablesMap( QMap<QString, QString> executables_map)
+//{
+//    QMap<QString, QString>::iterator i;
+//    for (i = executables_map.begin(); i != executables_map.end(); ++i)
+//    {
+//        m_executables_map[i.key()] =  i.value() ;
+//    }
+//}
 
-void Script::SetParametersMap( QMap<QString, QString> parameters_map)
-{
-    QMap<QString, QString>::iterator i;
-    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
-    {
-        m_parameters_map[i.key()] =  i.value() ;
-    }
-}
+//void Script::SetParametersMap( QMap<QString, QString> parameters_map)
+//{
+//    QMap<QString, QString>::iterator i;
+//    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
+//    {
+//        m_parameters_map[i.key()] =  i.value() ;
+//    }
+//}
 
 void Script::setScriptParameters(para_Model_AutoTract* para_m)
 {
@@ -88,14 +88,14 @@ void Script::importGeneralModules()
    m_script += "import subprocess\n\n";
 }
 
-void Script::defineExecutable(QString executable)
-{
-    m_script += executable + " = '" + m_executables_map[executable] + "'\n";
-}
-void Script::defineParameter(QString parameter)
-{
-    m_script += parameter + " = '" + m_parameters_map[parameter] + "'\n";
-}
+//void Script::defineExecutable(QString executable)
+//{
+//    m_script += executable + " = '" + m_executables_map[executable] + "'\n";
+//}
+//void Script::defineParameter(QString parameter)
+//{
+//    m_script += parameter + " = '" + m_parameters_map[parameter] + "'\n";
+//}
 void Script::implementStop()
 {
    m_script += "def stop(signal, frame):\n";

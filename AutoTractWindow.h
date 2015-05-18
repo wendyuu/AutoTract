@@ -15,8 +15,7 @@ class AutoTractWindow :public QMainWindow, public Ui::MainWindow
     Q_OBJECT
 public:
     AutoTractWindow( QWidget * parent = 0, Qt::WFlags f = 0);
-    void SyncUiToModelStructure();
-    void SyncModelStructureToUi();
+
     void SetParaModel( para_Model_AutoTract* para_m );
     void SetParaSave( para_Save_AutoTract* para_s );
     void SetParaLoad( para_Load_AutoTract* para_l );
@@ -29,15 +28,21 @@ public slots:
     void Load_Parameter_Configuration( std::string filename );
     void Save_Software_Configuration( std::string filename );
     void Load_Software_Configuration( std::string filename );
+    void SyncUiToModelStructure();
+    void SyncModelStructureToUi();
+    void SyncUiToModelStructure(QString prefix);
+    void SyncModelStructureToUi(QString prefix);
 
-
-protected:
+public:
     para_Model_AutoTract* m_para_m;
     para_Save_AutoTract* m_para_s;
     para_Load_AutoTract* m_para_l;
     soft_Model_AutoTract* m_soft_m;
     soft_Save_AutoTract* m_soft_s;
     soft_Load_AutoTract* m_soft_l;
+
+private:
+    bool m_sync;
 };
 
 #endif
