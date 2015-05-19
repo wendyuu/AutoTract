@@ -27,10 +27,17 @@ void SingleTractProcess::initializeScript()
     //    defineParameter("dilationRadius");
 
     m_script += "polydatatransform = '" + m_soft_m->getsoft_polydatatransform_lineEdit() + "'\n";
+    m_script += "TractographyLabelMapSeeding = '" + m_soft_m->getsoft_TractographyLabelMapSeeding_lineEdit() + "'\n";
     m_script += "fiberprocess = '" + m_soft_m->getsoft_fiberprocess_lineEdit() + "'\n";
     m_script += "ImageMath = '" + m_soft_m->getsoft_ImageMath_lineEdit() + "'\n";
     m_script += "inputDTIatlas_dir = '" + m_para_m->getpara_inputDTIatlas_lineEdit() + "'\n";
     m_script += "dilationRadius = '" + QString::number(m_para_m->getpara_dilation_radius_spinBox()) + "'\n";
+    m_script += "seedspacing = '" + QString::number(m_para_m->getpara_seedspacing_spinBox()) + "'\n";
+    m_script += "clthreshold = '" + QString::number(m_para_m->getpara_linearmeasure_spinBox()) + "'\n";
+    m_script += "minimumlength = '" + QString::number(m_para_m->getpara_minpathlength_spinBox()) + "'\n";
+    m_script += "maximumlength = '" + QString::number(m_para_m->getpara_maxpathlength_spinBox()) + "'\n";
+    m_script += "stoppingcurvature = '" + QString::number(m_para_m->getpara_stoppingcurvature_spinBox()) + "'\n";
+    m_script += "integrationsteplength = '" + QString::number(m_para_m->getpara_integrationsteplength_spinBox()) + "'\n";
 
     m_script += "logger = None\n";
 
@@ -82,7 +89,7 @@ void SingleTractProcess::implementSingleTractProcess()
     m_script += "\n\tref_tract_mapped = outputDir + '/' + name + '_t.vtk'";
     m_script += "\n";
     m_script += "\tref_tract_dilated = outputDir + '/' + name + '_t_dil.vtk'";
-    m_script +="\n\n";
+    m_script += "\n\n";
 
     m_argumentsList << "polydatatransform" << "'--fiber_file'" << "tract" << "'-o'" << "ref_tract_mapped" << "'-D'" << "displacementField" << "'--inverty'" << "'--invertx'";
     execute();
@@ -90,43 +97,27 @@ void SingleTractProcess::implementSingleTractProcess()
     m_log = "Dilation and voxelization of the mapped reference tracts";
 
     m_script += "\tlabelmap = outputDir + '/' + name + '.nrrd'";
-    m_script +="\n\n";
+    m_script += "\n\n";
     m_argumentsList << "fiberprocess" << "'--voxelize'" << "labelmap" << "'--fiber_file'" << "ref_tract_mapped" << "'-T'" << "inputDTIatlas_dir";
     execute();
 
-    m_script +="\n\n";
+    m_script += "\n\n";
     m_script += "\tdilatedImage = outputDir + '/' + name + '_dil.nrrd'";
-    m_script +="\n";
+    m_script += "\n";
     m_argumentsList << "ImageMath" << "labelmap" << "'-dilate'" << "str(dilationRadius) + \',1\'" << "'-outfile'" << "dilatedImage";
     execute();
 
     m_log = "Tractography by labelmap seeding";
 
-    m_script +="\n\n";
+    m_script += "\n\n";
 
 
-    m_script +="fiber = outputDir + name + '.vtp";
+    m_script += "\ttractedFiber = outputDir + '/' + name + '.vtp'";
+    m_script += "\n";
+    m_argumentsList << "TractographyLabelMapSeeding" << "inputDTIatlas_dir" << "tractedFiber" << "'-a'" << "dilatedImage" << "'-s'" << "seedspacing" << "'--clthreshold'" << "clthreshold" << "'--minimumlength'" << "minimumlength" << "'--maximumlength'" << "maximumlength" << "'--stoppingcurvature'" << "stoppingcurvature" << "'--integrationsteplength'" << "integrationsteplength";
+    execute();
 
-    /*m_log = "Tractography by labelmap seeding";
-    m_script += "fiber = outputDir + name + '.vtp'";
-    m_script += "\n\n";*/
-    //m_argumentsList << "TractographyLabelMapSeeding
-
-    /*print "Step: TractographyLabelMapSeeding ... "
-            for file in os.listdir(outputdir + "dilated_images"):
-                if(file.endswith("_dil.nrrd")):
-                    print file
-                    make_sure_path_exists(outputdir + "fibers_processed")
-                    fiber = outputdir + "fibers_processed/" + file[:-9] + ".vtp"
-                    subprocess.check_call([TractographyLabelMapSeeding, DTIsource, fiber, "-a", outputdir + "dilated_images/" + file,
-                                     "-s", seedspacing,
-                                     "--clthreshold", clthreshold,
-                                     "--minimumlength", minimumlength,
-                                     "--stoppingvalue", stoppingvalue,
-                                     "--stoppingcurvature", stoppingcurvature,
-                                     "--integrationsteplength", integrationsteplength])
-            print "Step: Tractography using label map seeding DONE"*/
-
+    m_script += "\n\n";
 }
 
 void SingleTractProcess::writeSingleTractProcess()

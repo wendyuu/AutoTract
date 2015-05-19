@@ -322,7 +322,6 @@ void AutoTractWindow::Save_Parameter_Configuration( std::string filename )
 void AutoTractWindow::Load_Parameter_Configuration( std::string filename )
 {
     m_para_l->load( *m_para_m, filename );
-    std::cout<<m_para_m->getpara_dilation_radius_spinBox()<<std::endl;
     SyncModelStructureToUi();
 }
 
