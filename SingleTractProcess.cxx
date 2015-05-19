@@ -100,6 +100,13 @@ void SingleTractProcess::implementSingleTractProcess()
     m_argumentsList << "ImageMath" << "labelmap" << "'-dilate'" << "str(dilationRadius) + \',1\'" << "'-outfile'" << "dilatedImage";
     execute();
 
+    m_log = "Tractography by labelmap seeding";
+
+    m_script +="\n\n";
+
+
+    m_script +="fiber = outputDir + name + '.vtp";
+
     /*m_log = "Tractography by labelmap seeding";
     m_script += "fiber = outputDir + name + '.vtp'";
     m_script += "\n\n";*/

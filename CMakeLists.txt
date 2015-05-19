@@ -54,7 +54,6 @@ TractPopulationProcess.cxx
 SingleTractProcess.cxx
 )
 
-QT4_ADD_RESOURCES(RESOURCES resources.qrc)
 QT4_WRAP_CPP(QtProject_HEADERS_MOC AutoTractWindow.h AutoTractDerivedWindow.h MainScriptThread.h)
 QT4_WRAP_UI(UI_FILES AutoTract.ui)
 
@@ -77,7 +76,7 @@ QtToCppXML( SOURCES srcfiles NAME AutoTract UIXML_FILE AutoTract.ui PREFIXES sof
 SEMMacroBuildCLI(
   NAME AutoTract
   EXECUTABLE_ONLY
-  ADDITIONAL_SRCS ${srcfiles} ${RESOURCES} 
+  ADDITIONAL_SRCS ${srcfiles}
   TARGET_LIBRARIES ${QT_LIBRARIES} ${ITK_LIBRARIES}
   LINK_DIRECTORIES ${QT_LIBRARY_DIRS} ${ITK_LIBRARY_DIRS}
   INCLUDE_DIRECTORIES ${QT_INCLUDE_DIR} ${ITK_INCLUDE_DIR}
