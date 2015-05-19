@@ -15,10 +15,16 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="margin">
+     <number>18</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>6</number>
+    </property>
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -1500,25 +1506,6 @@ a reference fiber bundle allowed</string>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="separator"/>
-   <addaction name="actionLoad_Parameter_Configuration"/>
-   <addaction name="actionSave_Parameter_Configuration"/>
-   <addaction name="separator"/>
-   <addaction name="actionLoad_Software_Configuration"/>
-   <addaction name="actionSave_Software_Configuration"/>
-   <addaction name="separator"/>
-   <addaction name="actionDisplay_Results"/>
-  </widget>
   <action name="actionLoad_Parameter_Configuration">
    <property name="icon">
     <iconset resource="resources.qrc">
