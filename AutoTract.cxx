@@ -74,6 +74,7 @@ int main( int argc , char** argv )
         if(parameters.empty() && executables.empty())
         {
             window.initSoftware();
+            window.SyncModelStructureToUi("soft");
         }
         if(parameters.empty() && !executables.empty())
         {
@@ -83,9 +84,13 @@ int main( int argc , char** argv )
         if(!parameters.empty() && executables.empty())
         {
             window.initSoftware();
-            window.SyncModelStructureToUi("para");
+            window.SyncModelStructureToUi();
         }
-        window.SyncModelStructureToUi();
+        if(!parameters.empty() && !executables.empty())
+        {
+            window.SyncModelStructureToUi();
+        }
+        window.SyncUiToModelStructure();
         return app.exec() ;
     }
     else

@@ -61,7 +61,10 @@ void AutoTractWindow::SyncUiToModelStructure()
     m_para_m->setpara_stoppingcurvature_spinBox( para_stoppingcurvature_spinBox->value() );
     m_para_m->setpara_integrationsteplength_spinBox( para_integrationsteplength_spinBox->value() );
 
-
+    /*6th tab*/
+    m_para_m->setpara_thresholdWMmask_spinBox( para_thresholdWMmask_spinBox->value() );
+    m_para_m->setpara_tractOverlapRatio_spinBox( para_tractOverlapRatio_spinBox->value() );
+    m_para_m->setpara_tractMaxDistThreshold_spinBox( para_tractMaxDistThreshold_spinBox->value() );
 
     /*7th tab: Execution*/
     m_para_m->setpara_all_radioButton( para_all_radioButton->isChecked() );
@@ -123,7 +126,10 @@ void AutoTractWindow::SyncUiToModelStructure( QString prefix )
         m_para_m->setpara_stoppingcurvature_spinBox( para_stoppingcurvature_spinBox->value() );
         m_para_m->setpara_integrationsteplength_spinBox( para_integrationsteplength_spinBox->value() );
 
-
+        /*6th tab*/
+        m_para_m->setpara_thresholdWMmask_spinBox( para_thresholdWMmask_spinBox->value() );
+        m_para_m->setpara_tractOverlapRatio_spinBox( para_tractOverlapRatio_spinBox->value() );
+        m_para_m->setpara_tractMaxDistThreshold_spinBox( para_tractMaxDistThreshold_spinBox->value() );
 
         /*7th tab: Execution*/
         m_para_m->setpara_all_radioButton( para_all_radioButton->isChecked() );
@@ -212,7 +218,10 @@ void AutoTractWindow::SyncModelStructureToUi()
     para_stoppingcurvature_spinBox->setValue( m_para_m->getpara_stoppingcurvature_spinBox() );
     para_integrationsteplength_spinBox->setValue( m_para_m->getpara_integrationsteplength_spinBox() );
 
-
+    /*6th tab*/
+    para_thresholdWMmask_spinBox->setValue(m_para_m->getpara_thresholdWMmask_spinBox() );
+    para_tractOverlapRatio_spinBox->setValue(m_para_m->getpara_tractOverlapRatio_spinBox() );
+    para_tractMaxDistThreshold_spinBox->setValue(m_para_m->getpara_tractMaxDistThreshold_spinBox() );
 
     /*7th tab: Execution*/
     para_all_radioButton->setChecked( m_para_m->getpara_all_radioButton() );
@@ -270,6 +279,11 @@ void AutoTractWindow::SyncModelStructureToUi( QString prefix )
         para_stoppingvalue_spinBox->setValue( m_para_m->getpara_stoppingvalue_spinBox() );
         para_stoppingcurvature_spinBox->setValue( m_para_m->getpara_stoppingcurvature_spinBox() );
         para_integrationsteplength_spinBox->setValue( m_para_m->getpara_integrationsteplength_spinBox() );
+
+        /*6th tab*/
+        para_thresholdWMmask_spinBox->setValue(m_para_m->getpara_thresholdWMmask_spinBox() );
+        para_tractOverlapRatio_spinBox->setValue(m_para_m->getpara_tractOverlapRatio_spinBox() );
+        para_tractMaxDistThreshold_spinBox->setValue(m_para_m->getpara_tractMaxDistThreshold_spinBox() );
 
         /*7th tab: Execution*/
         para_all_radioButton->setChecked( m_para_m->getpara_all_radioButton() );
