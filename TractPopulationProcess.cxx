@@ -13,8 +13,6 @@ void TractPopulationProcess::initializeScript()
     m_script += "import array\n";
     m_script += "from collections import namedtuple\n\n";
 
-    //define
-    //    defineParameter("tracts_dir");
     m_script += "tracts_dir = '" + m_para_m->getpara_tracts_dir_lineEdit() + "'\n";
     m_script += "displacementFieldPath = '" + m_displacementFieldPath + "'\n";
     m_script += "logger = logging.getLogger('AutoTract')\n\n";

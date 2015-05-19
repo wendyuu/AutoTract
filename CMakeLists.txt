@@ -52,6 +52,7 @@ Script.cxx
 Registration.cxx
 TractPopulationProcess.cxx
 SingleTractProcess.cxx
+MaskCreation.cxx
 )
 
 QT4_WRAP_CPP(QtProject_HEADERS_MOC AutoTractWindow.h AutoTractDerivedWindow.h MainScriptThread.h)

@@ -25,6 +25,7 @@
 #include "Registration.h"
 #include "TractPopulationProcess.h"
 #include "SingleTractProcess.h"
+#include "MaskCreation.h"
 
 class Pipeline
 {
@@ -37,8 +38,6 @@ public:
     ~Pipeline();
 
     // Parameters
-    /*void SetExecutablesMap( QMap<QString, QString> executables_map);
-    void SetParametersMap( QMap<QString, QString> parameters_map);*/
     void setPipelineParameters(para_Model_AutoTract *para_m);
     void setPipelineSoftwares(soft_Model_AutoTract *soft_m);
     void setPlainTextEdit(QPlainTextEdit* plainTextEdit);
@@ -63,6 +62,7 @@ private:
     void defineSignalHandler();
     void writeMainScript();
     void writeRegistration();
+    void writeMaskCreation();
     void writeSingleTractProcess();
     void writeProcess();
     void executeMainScript();
@@ -72,6 +72,7 @@ private:
     void cleanUp();
 
     Registration* m_registration;
+    MaskCreation* m_maskCreation;
     TractPopulationProcess* m_process;
     SingleTractProcess* m_singleTractProcess;
 
@@ -80,9 +81,6 @@ private:
 
     para_Model_AutoTract* m_para_m;
     soft_Model_AutoTract* m_soft_m;
-
-    /*QMap<QString, QString> m_executables_map;
-    QMap<QString, QString> m_parameters_map;*/
 
     QString m_processing_name;
     QString m_processing_path;

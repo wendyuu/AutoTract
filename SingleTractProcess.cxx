@@ -20,16 +20,11 @@ void SingleTractProcess::initializeScript()
     m_script += "import re\n";
     m_script += "import time\n";
 
-    //    defineExecutable("polydatatransform");
-    //    defineExecutable("fiberprocess");
-    //    defineExecutable("ImageMath");
-    //    defineParameter("inputDTIatlas_dir");
-    //    defineParameter("dilationRadius");
-
     m_script += "polydatatransform = '" + m_soft_m->getsoft_polydatatransform_lineEdit() + "'\n";
     m_script += "TractographyLabelMapSeeding = '" + m_soft_m->getsoft_TractographyLabelMapSeeding_lineEdit() + "'\n";
     m_script += "fiberprocess = '" + m_soft_m->getsoft_fiberprocess_lineEdit() + "'\n";
     m_script += "ImageMath = '" + m_soft_m->getsoft_ImageMath_lineEdit() + "'\n";
+    m_script += "dtiprocess = '" + m_soft_m->getsoft_dtiprocess_lineEdit() + "'\n";
     m_script += "inputDTIatlas_dir = '" + m_para_m->getpara_inputDTIatlas_lineEdit() + "'\n";
     m_script += "dilationRadius = '" + QString::number(m_para_m->getpara_dilation_radius_spinBox()) + "'\n";
     m_script += "seedspacing = '" + QString::number(m_para_m->getpara_seedspacing_spinBox()) + "'\n";
@@ -108,7 +103,6 @@ void SingleTractProcess::implementSingleTractProcess()
     execute();
 
     m_log = "Tractography by labelmap seeding";
-
     m_script += "\n\n";
 
 
@@ -116,8 +110,6 @@ void SingleTractProcess::implementSingleTractProcess()
     m_script += "\n";
     m_argumentsList << "TractographyLabelMapSeeding" << "inputDTIatlas_dir" << "tractedFiber" << "'-a'" << "dilatedImage" << "'-s'" << "seedspacing" << "'--clthreshold'" << "clthreshold" << "'--minimumlength'" << "minimumlength" << "'--maximumlength'" << "maximumlength" << "'--stoppingcurvature'" << "stoppingcurvature" << "'--integrationsteplength'" << "integrationsteplength";
     execute();
-
-    m_script += "\n\n";
 }
 
 void SingleTractProcess::writeSingleTractProcess()

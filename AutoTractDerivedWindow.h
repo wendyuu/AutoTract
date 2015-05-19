@@ -20,8 +20,6 @@ public:
     void checkSelectedTracts();
     void checkTracts();
     void initSoftware();
-    /*void setSoftwareXMLPath(std::string executables);
-    void setParameterXMLPath(std::string parameters);*/
 public slots:
     void UpdateTractPopulationDirectoryDisplay();
     void selectTracts(QListWidgetItem* item);
@@ -31,8 +29,6 @@ public slots:
     void enterOutputDirectory();
     void initializePipelineLogging();
     void printPipelineLog();
-//    void SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map);
-//    void SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map);
     void checkAllTracts();
     void uncheckAllTracts();
 private slots:
@@ -62,9 +58,7 @@ private:
     };
 
     QMap<QString, Executable> m_executables_map;
-    //QMap<QString, QString> m_lookup_executables_map;
     QMap<QString, Parameters> m_parameters_map;
-    //QMap<QString, QString> m_lookup_parameters_map;
     QTextStream* m_log_textStream;
     MainScriptThread* m_thread;
     void initializeExecutablesMap();

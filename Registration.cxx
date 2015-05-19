@@ -3,28 +3,6 @@
 Registration::Registration(QString module) : Script(module)
 {
 }
-//void Registration::setRefDTIAtlas(QString refDTIAtlas)
-//{
-//    m_refDTIAtlas = refDTIAtlas;
-//}
-//void Registration::setInputDTIAtlas(QString inputDTIAtlas)
-//{
-//    m_inputDTIAtlas = inputDTIAtlas;
-//}
-//void Registration::setRegistrationType(QString registrationType)
-//{
-//    m_registrationType = registrationType;
-//}
-
-//void Registration::setSimilarityMetric(QString similarityMetric)
-//{
-//    m_similarityMetric = similarityMetric;
-//}
-
-//void Registration::setGaussianSigma(QString gaussianSigma)
-//{
-//    m_gaussianSigma = gaussianSigma;
-//}
 
 void Registration::setDisplacementFieldPath(QString path)
 {
@@ -38,12 +16,6 @@ void Registration::initializeScript()
 
     m_script += "import re\n";
 
-    //    defineExecutable("DTIReg");
-    //    defineParameter("refDTIatlas_dir");
-    //    defineParameter("inputDTIatlas_dir");
-    //    defineParameter("registrationType");
-    //    defineParameter("similarityMetric");
-    //    defineParameter("gaussianSigma");
     m_script += "DTIReg = '" + m_soft_m->getsoft_DTIReg_lineEdit() + "'\n";
     m_script += "refDTIatlas_dir = '" + m_para_m->getpara_refDTIatlas_lineEdit() + "'\n";
     m_script += "inputDTIatlas_dir = '" + m_para_m->getpara_inputDTIatlas_lineEdit() + "'\n";
@@ -60,13 +32,10 @@ void Registration::initializeScript()
 void Registration::executeRegistration()
 {
     m_log = "Registration";
-    m_outputs.insert("displacementField", m_displacementFieldPath);
     m_argumentsList << "DTIReg" << "'--movingVolume'" << "refDTIatlas_dir" << "'--fixedVolume'" << "inputDTIatlas_dir" << "'--method useScalar-ANTS'" << "'--ANTSRegistrationType'"<< "registrationType" << "'--ANTSSimilarityMetric'" << "similarityMetric"  << "'--ANTSSimilarityParameter'" << "'4'" << "'--ANTSGaussianSigma'" << "gaussianSigma" << "'--outputDisplacementField'" << "displacementFieldPath";
     execute();
     m_unnecessaryFiles << m_displacementFieldPath;
 }
-
-
 
 void Registration::implementRun()
 {

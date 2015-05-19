@@ -1,5 +1,5 @@
-#ifndef REGISTRATION_H
-#define REGISTRATION_H
+#ifndef MASKCREATION_H
+#define MASKCREATION_H
 
 // General Librairies
 #include <iostream>
@@ -14,27 +14,26 @@
 #include "para_Model_AutoTract.h"
 #include "soft_Model_AutoTract.h"
 
-class Registration : public Script
+class MaskCreation : public Script
 {
    public:
 
    // Constructor
-   Registration(QString module);
+   MaskCreation(QString module);
    // Set
-   void setDisplacementFieldPath(QString path); //output
+   void setOutputDirectory(QString dir);
 
    // Implementing Script
    void initializeScript();
-   void executeRegistration();
+   void executeMaskCreation();
    void implementRun();
 
    // Updating & Getting Output
    void update();
-   QString getDisplacementField();
 
    private:
-   QString              m_displacementFieldPath;
+   QString m_outputDir;
 };
 
 
-#endif // REGISTRATION_H
+#endif // MASKCREATION_H

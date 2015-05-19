@@ -11,24 +11,6 @@ Pipeline::~Pipeline()
 
 }
 
-//void Pipeline::SetExecutablesMap( QMap<QString, QString> executables_map)
-//{
-//    QMap<QString, QString>::iterator i;
-//    for (i = executables_map.begin(); i != executables_map.end(); ++i)
-//    {
-//        m_executables_map[i.key()] =  i.value() ;
-//    }
-//}
-
-//void Pipeline::SetParametersMap( QMap<QString, QString> parameters_map)
-//{
-//    QMap<QString, QString>::iterator i;
-//    for (i = parameters_map.begin(); i != parameters_map.end(); ++i)
-//    {
-//        m_parameters_map[i.key()] =  i.value() ;
-//    }
-//}
-
 void Pipeline::setPipelineParameters(para_Model_AutoTract* para_m)
 {
     m_para_m = para_m;
@@ -165,33 +147,41 @@ void Pipeline::writeRegistration()
     m_registration->setOverwriting(m_para_m->getpara_overwrite_checkBox());
     m_registration->setModuleDirectory(directory_path);
     m_registration->setProcessingDirectory(m_processing_path);
-//    m_registration->setRefDTIAtlas(m_para_m->getpara_refDTIatlas_lineEdit());
-//    m_registration->setInputDTIAtlas(m_para_m->getpara_inputDTIatlas_lineEdit());
-//    m_registration->setRegistrationType(m_para_m->getpara_registration_type_comboBox());
-//    m_registration->setSimilarityMetric(m_para_m->getpara_similarity_metric_comboBox());
-//    m_registration->setGaussianSigma(QString::number(m_para_m->getpara_gaussian_sigma_spinBox()));
-//    m_registration->SetExecutablesMap(m_executables_map);
-//    m_registration->SetParametersMap(m_parameters_map);
     m_registration->setDisplacementFieldPath(m_displacementFieldPath);
     m_registration->setScriptParameters(m_para_m);
     m_registration->setScriptSoftwares(m_soft_m);
 
-    /*m_registration->setOverwriting(m_parameters->getOverwriting());
-      m_registration->setStoppingIfError(m_parameters->getStoppingIfError());*/
+    /*m_registration->setStoppingIfError(m_parameters->getStoppingIfError());*/
     m_registration->update();
     m_importingModules += "import " + module_name + "\n";
     m_runningModules += module_name + ".run()\n";
-
-    /*1st step: Registration*/
-    /*m_script += "\nlogger.info(' \"Step: Co-registering atlases & creation of displacement field ...\"'\n)";
-    m_script += "\ns = subprocess.Popen([DTIReg, \"--movingVolume\", refDTIatlas_dir, \"--fixedVolume\", inputDTIatlas_dir, \"--method useScalar-ANTS\",\"--ANTSRegistrationType\", \"GreedyDiffeo\", \"--ANTSSimilarityMetric\",\"CC\",\"--ANTSSimilarityParameter\", \"4\", \"--outputDisplacementField\", displacementField], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)";
-
-    m_script += "\nlogger.info(' \"Step: Co-registration DONE\"'\n)";*/
 }
+
+void Pipeline::writeMaskCreation()
+{
+    QString directory_name = "2.MaskCreation";
+    QString directory_path = createModuleDirectory(directory_name);
+
+    QString module_name = "MaskCreation";
+    m_maskCreation = new::MaskCreation(module_name);
+    m_maskCreation->setScriptParameters(m_para_m);
+    m_maskCreation->setScriptSoftwares(m_soft_m);
+    m_maskCreation->setOutputDirectory(directory_name);
+    m_maskCreation->setOverwriting(m_para_m->getpara_overwrite_checkBox());
+    m_maskCreation->setModuleDirectory(directory_path);
+    m_maskCreation->setProcessingDirectory(m_processing_path);
+
+
+    /*m_maskCreation->setStoppingIfError(m_parameters->getStoppingIfError());*/
+    m_maskCreation->update();
+    m_importingModules += "import " + module_name + "\n";
+    m_runningModules += module_name + ".run()\n";
+}
+
 
 void Pipeline::writeProcess()
 {
-    QString directory_name = "2.PostProcess";
+    QString directory_name = "3.PostProcess";
     QString directory_path = createModuleDirectory(directory_name);
 
     QString module_name = "PostProcess";
@@ -201,8 +191,6 @@ void Pipeline::writeProcess()
     m_process->setProcessingDirectory(m_processing_path);
     m_process->setScriptParameters(m_para_m);
     m_process->setScriptSoftwares(m_soft_m);
-//    m_process->SetExecutablesMap(m_executables_map);
-//    m_process->SetParametersMap(m_parameters_map);
     m_process->SetDisplacementFieldPath(m_displacementFieldPath);
     m_process->update();
     m_importingModules += "import " + module_name + "\n";
@@ -218,8 +206,6 @@ void Pipeline::writeSingleTractProcess()
     m_singleTractProcess->setLog(m_log_path);
     m_singleTractProcess->setScriptParameters(m_para_m);
     m_singleTractProcess->setScriptSoftwares(m_soft_m);
-//    m_singleTractProcess->SetExecutablesMap(m_executables_map);
-//    m_singleTractProcess->SetParametersMap(m_parameters_map);
     /*m_singleTractProcess->setOverwriting(m_parameters->getOverwriting());
     m_singleTractProcess->setStoppingIfError(m_parameters->getStoppingIfError());*/
     m_singleTractProcess->update();
@@ -242,6 +228,7 @@ void Pipeline::writePipeline()
     m_log_path = output_dir->filePath(base + ".log");
     m_displacementFieldPath = m_para_m->getpara_output_dir_lineEdit() + "/" + "1.Registration" + "/displacementField.nrrd";
     writeRegistration();
+    writeMaskCreation();
     writeProcess();
     writeSingleTractProcess();
     writeMainScript();

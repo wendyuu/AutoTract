@@ -320,23 +320,6 @@ void AutoTractDerivedWindow::initializeExecutablesMap()
     m_executables_map.insert("dtiprocess", dtiprocess);
 }
 
-//void AutoTractDerivedWindow::SetLookupExecutableMap(QMap<QString, QString> lookup_executables_map)
-//{
-//    QMap<QString, QString>::iterator i;
-//    for (i = lookup_executables_map.begin(); i != lookup_executables_map.end(); ++i)
-//    {
-//        m_lookup_executables_map[i.key()] =  i.value() ;
-//    }
-//}
-//void AutoTractDerivedWindow::SetLookupParameterMap(QMap<QString, QString> lookup_parameters_map)
-//{
-//    QMap<QString, QString>::iterator i;
-//    for (i = lookup_parameters_map.begin(); i != lookup_parameters_map.end(); ++i)
-//    {
-//        m_lookup_parameters_map[i.key()] =  i.value() ;
-//    }
-//}
-
 void AutoTractDerivedWindow::selectExecutable(QString executable_name)
 {
     Executable executable = m_executables_map[executable_name];
@@ -422,7 +405,7 @@ void AutoTractDerivedWindow::selectTractsPopulationDirectory()
     SyncUiToModelStructure();
 }
 
-//***** Select/Unselect Atlas *****//
+//***** Select/Unselect Tracts *****//
 void AutoTractDerivedWindow::selectTracts(QListWidgetItem* item)
 {
     if(item->checkState())
@@ -442,7 +425,7 @@ void AutoTractDerivedWindow::UpdateTractPopulationDirectoryDisplay()
     displayTracts() ;
     checkSelectedTracts() ;
 }
-//***** Display Atlases *****//
+//***** Display Tracts *****//
 void AutoTractDerivedWindow::displayTracts()
 {
     para_ref_tracts_listWidget->clear();
@@ -482,7 +465,7 @@ void AutoTractDerivedWindow::checkSelectedTracts()
     }
 }
 
-//***** Checking Atlases *****//
+//***** Checking Tracts *****//
 void AutoTractDerivedWindow::checkTracts()
 {
     QDir* m_tractPopulation_dir = new QDir(para_tracts_dir_lineEdit ->text());
