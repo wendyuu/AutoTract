@@ -38,6 +38,8 @@ void MaskCreation::executeMaskCreation()
     m_script += "\n";
     m_script += "\tMDmask = outputDir + '/MDmask.nrrd'";
     m_script += "\n";
+    m_script += "\tbrainSkull = outputDir + '/brainSkull.nrrd'";
+    m_script += "\n";
     m_argumentsList << "dtiprocess" << "'--dti_image'" << "inputDTIatlas_dir" <<"'-f'" << "FAimage";
     execute();
     m_log = "Creation of WM mask - Step 2";
@@ -64,6 +66,12 @@ void MaskCreation::executeMaskCreation()
     execute();
     m_log = "Creation of CSF mask - Step 3";
     m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "MDmask" << "'-erode'" << "'2,1'";
+    execute();
+    m_log = "Creation of CSF mask - Step 4";
+    m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "brainSkull" << "'-erode'" << "'4,1'";
+    execute();
+    m_log = "Creation of CSF mask - Step 5";
+    m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "MDmask" << "'-sub'" << "brainSkull";
     execute();
     m_script += "\n\n";
 }
