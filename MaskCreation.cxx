@@ -12,6 +12,8 @@ void MaskCreation::initializeScript()
     m_script += "import re\n";
     m_script += "ImageMath = '" + m_soft_m->getsoft_ImageMath_lineEdit() + "'\n";
     m_script += "dtiprocess ='" + m_soft_m->getsoft_dtiprocess_lineEdit() + "'\n";
+    m_script += "unu ='" + m_soft_m->getsoft_unu_lineEdit() + "'\n";
+    m_script += "ResampleDTIVolume ='" + m_soft_m->getsoft_ResampleDTIVolume_lineEdit() + "'\n";
     m_script += "refDTIatlas_dir = '" + m_para_m->getpara_refDTIatlas_lineEdit() + "'\n";
     m_script += "inputDTIatlas_dir = '" + m_para_m->getpara_inputDTIatlas_lineEdit() + "'\n";
     m_script += "outputDir = '" + m_outputDir + "'\n";
@@ -39,6 +41,8 @@ void MaskCreation::executeMaskCreation()
     m_script += "\tMDmask = outputDir + '/MDmask.nrrd'";
     m_script += "\n";
     m_script += "\tbrainSkull = outputDir + '/brainSkull.nrrd'";
+    m_script += "\n";
+    m_script += "\tupsampledImage = outputDir + '/upsampledImage.nrrd'";
     m_script += "\n";
     m_argumentsList << "dtiprocess" << "'--dti_image'" << "inputDTIatlas_dir" <<"'-f'" << "FAimage";
     execute();
@@ -74,6 +78,14 @@ void MaskCreation::executeMaskCreation()
     m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "MDmask" << "'-sub'" << "brainSkull";
     execute();
     m_script += "\n\n";
+    m_log = "Upsampling of the reference image - Step 1 ";
+    m_argumentsList << "unu" << "'resample'" << "'-i'" << "FAimage" << "'-o'" << "upsampledImage" << "'-s'" << "'x2'" << "'x2'" << "'x2'";
+    execute();
+    m_log = "Upsampling of the reference image - Step 2";
+    m_argumentsList << "ResampleDTIVolume" << "inputDTIatlas_dir" << "upsampledImage" << "'-R'" << "upsampledImage";
+    execute();
+    m_script +="\n\n";
+
 }
 
 void MaskCreation::implementRun()
@@ -87,6 +99,7 @@ void MaskCreation::implementRun()
 
     m_outputs.insert("WMmask", m_outputDir + "/WMmask.nrrd");
     m_outputs.insert("MDmask", m_outputDir + "/MDmask.nrrd");
+    m_outputs.insert("upsampledImage", m_outputDir + "/upsampledImage.nrrd");
     checkFinalOutputs();
 
     m_script += "\tlogger.info('')\n";

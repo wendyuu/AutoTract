@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>744</width>
+    <width>746</width>
     <height>763</height>
    </rect>
   </property>
@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -1204,11 +1204,14 @@ on the same fiber (mm)</string>
                 <property name="decimals">
                  <number>3</number>
                 </property>
+                <property name="maximum">
+                 <double>1.000000000000000</double>
+                </property>
                 <property name="singleStep">
-                 <double>0.010000000000000</double>
+                 <double>0.001000000000000</double>
                 </property>
                 <property name="value">
-                 <double>0.100000000000000</double>
+                 <double>0.001000000000000</double>
                 </property>
                </widget>
               </item>
@@ -1221,7 +1224,8 @@ on the same fiber (mm)</string>
                 </property>
                 <property name="text">
                  <string>% of the fibers that are
- outside of the WM boundaries allowed</string>
+ outside of the WM boundaries allowed 
+(value between 0 and 1)</string>
                 </property>
                </widget>
               </item>
@@ -1235,13 +1239,16 @@ on the same fiber (mm)</string>
               <item row="2" column="1">
                <widget class="QDoubleSpinBox" name="para_tractOverlapRatio_spinBox">
                 <property name="decimals">
-                 <number>0</number>
+                 <number>3</number>
                 </property>
                 <property name="maximum">
-                 <double>100.000000000000000</double>
+                 <double>1.000000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.001000000000000</double>
                 </property>
                 <property name="value">
-                 <double>60.000000000000000</double>
+                 <double>0.600000000000000</double>
                 </property>
                </widget>
               </item>
@@ -1254,7 +1261,8 @@ on the same fiber (mm)</string>
                 </property>
                 <property name="text">
                  <string>% of the fibers that should overlap
- with the reference fibers</string>
+ with the reference fibers 
+(value between 0 and 1)</string>
                 </property>
                </widget>
               </item>
@@ -1632,7 +1640,7 @@ a reference fiber bundle allowed</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>744</width>
+     <width>746</width>
      <height>25</height>
     </rect>
    </property>

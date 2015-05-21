@@ -25,6 +25,7 @@ void SingleTractProcess::initializeScript()
     m_script += "fiberprocess = '" + m_soft_m->getsoft_fiberprocess_lineEdit() + "'\n";
     m_script += "ImageMath = '" + m_soft_m->getsoft_ImageMath_lineEdit() + "'\n";
     m_script += "dtiprocess = '" + m_soft_m->getsoft_dtiprocess_lineEdit() + "'\n";
+    m_script += "FiberPostProcess ='" + m_soft_m->getsoft_FiberPostProcess_lineEdit() + "'\n";
     m_script += "inputDTIatlas_dir = '" + m_para_m->getpara_inputDTIatlas_lineEdit() + "'\n";
     m_script += "dilationRadius = '" + QString::number(m_para_m->getpara_dilation_radius_spinBox()) + "'\n";
     m_script += "seedspacing = '" + QString::number(m_para_m->getpara_seedspacing_spinBox()) + "'\n";
@@ -33,6 +34,8 @@ void SingleTractProcess::initializeScript()
     m_script += "maximumlength = '" + QString::number(m_para_m->getpara_maxpathlength_spinBox()) + "'\n";
     m_script += "stoppingcurvature = '" + QString::number(m_para_m->getpara_stoppingcurvature_spinBox()) + "'\n";
     m_script += "integrationsteplength = '" + QString::number(m_para_m->getpara_integrationsteplength_spinBox()) + "'\n";
+    m_script += "output_dir ='" + m_para_m->getpara_output_dir_lineEdit() + "'\n";
+    m_script += "thresholdWMmask ='" + QString::number(m_para_m->getpara_thresholdWMmask_spinBox()) + "'\n";
 
     m_script += "logger = None\n";
 
@@ -58,7 +61,7 @@ void SingleTractProcess::initializeLogging()
 
 void SingleTractProcess::implementSingleTractProcess()
 {
-    m_script += "def main(name, tract, outputDir, displacementField, log):\n\n";
+    m_script += "def main(name, tract, current_dir, displacementField, log):\n\n";
 
     m_script += "\tsignal.signal(signal.SIGINT, stop)\n";
     m_script += "\tsignal.signal(signal.SIGTERM, stop)\n\n";
@@ -81,23 +84,24 @@ void SingleTractProcess::implementSingleTractProcess()
     //m_inputs.insert("tract", tract);
     //m_inputs.insert("displacementField", displacementField);
 
-    m_script += "\n\tref_tract_mapped = outputDir + '/' + name + '_t.vtk'";
+    m_script += "\n\tref_tract_mapped = current_dir + '/' + name + '_t.vtk'";
     m_script += "\n";
-    m_script += "\tref_tract_dilated = outputDir + '/' + name + '_t_dil.vtk'";
+    m_script += "\tref_tract_dilated = current_dir + '/' + name + '_t_dil.vtk'";
     m_script += "\n\n";
 
     m_argumentsList << "polydatatransform" << "'--fiber_file'" << "tract" << "'-o'" << "ref_tract_mapped" << "'-D'" << "displacementField" << "'--inverty'" << "'--invertx'";
     execute();
 
-    m_log = "Dilation and voxelization of the mapped reference tracts";
+    m_log = "Dilation and voxelization of the mapped reference tracts - Step 1";
 
-    m_script += "\tlabelmap = outputDir + '/' + name + '.nrrd'";
+    m_script += "\tlabelmap = current_dir + '/' + name + '.nrrd'";
     m_script += "\n\n";
     m_argumentsList << "fiberprocess" << "'--voxelize'" << "labelmap" << "'--fiber_file'" << "ref_tract_mapped" << "'-T'" << "inputDTIatlas_dir";
     execute();
 
+    m_log = "Dilation and voxelization of the mapped reference tracts - Step 2";
     m_script += "\n\n";
-    m_script += "\tdilatedImage = outputDir + '/' + name + '_dil.nrrd'";
+    m_script += "\tdilatedImage = current_dir + '/' + name + '_dil.nrrd'";
     m_script += "\n";
     m_argumentsList << "ImageMath" << "labelmap" << "'-dilate'" << "str(dilationRadius) + \',1\'" << "'-outfile'" << "dilatedImage";
     execute();
@@ -106,10 +110,40 @@ void SingleTractProcess::implementSingleTractProcess()
     m_script += "\n\n";
 
 
-    m_script += "\ttractedFiber = outputDir + '/' + name + '.vtp'";
+    m_script += "\ttractedFiber = current_dir + '/' + name + '.vtp'";
     m_script += "\n";
     m_argumentsList << "TractographyLabelMapSeeding" << "inputDTIatlas_dir" << "tractedFiber" << "'-a'" << "dilatedImage" << "'-s'" << "seedspacing" << "'--clthreshold'" << "clthreshold" << "'--minimumlength'" << "minimumlength" << "'--maximumlength'" << "maximumlength" << "'--stoppingcurvature'" << "stoppingcurvature" << "'--integrationsteplength'" << "integrationsteplength";
     execute();
+
+    m_log = "Cropping reference tracts";
+    m_script += "\n";
+    m_script += "\trefFiberCropped = current_dir + '/' + name + '_ref_cleanEnds.vtp'";
+    m_script += "\n";
+    m_argumentsList << "FiberPostProcess" << "'-i'" << "ref_tract_mapped" << "'-o'" << "refFiberCropped" << "'--crop'" << "'-m'" << "output_dir + '/2.MaskCreation/WMmask.nrrd'" << "'--thresholdMode'" << "'above'";
+    execute();
+
+    m_log = "Cropping using WM mask";
+    m_script += "\n";
+    m_script += "\tfiberCropped = current_dir + '/' + name + '_cleanEnds.vtp'";
+    m_script += "\n";
+    m_argumentsList << "FiberPostProcess" << "'-i'" << "tractedFiber" << "'-o'" << "fiberCropped" << "'--crop'" << "'-m'" << "output_dir + '/2.MaskCreation/WMmask.nrrd'" << "'--thresholdMode'" << "'above'";
+    execute();
+
+    m_log = "Masking with CSF mask";
+    m_script += "\n";
+    m_script += "\tfiberMaskedCSF = current_dir + '/' + name + '_maskCSF.vtp'";
+    m_script += "\n";
+    m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberCropped" << "'-o'" << "fiberMaskedCSF" << "'--mask'" << "'--clean'" << "'-m'" << "output_dir + '/2.MaskCreation/MDmask.nrrd'" << "'--thresholdMode'" << "'above'" << "'-t'" << "thresholdWMmask";
+    execute();
+
+    m_log = "Masking with dilated reference image";
+    m_script += "\n";
+    m_script += "\tfiberMaskedTract = current_dir + '/' + name + '_maskTract.vtp'";
+    m_script += "\n";
+    m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberMaskedCSF" << "'-o'" << "fiberMaskedTract" << "'--mask'" << "'--clean'" << "'-m'" << "dilatedImage" << "'--thresholdMode'" << "'below'" << "'-t'" << "'0.6'";
+    execute();
+
+
 }
 
 void SingleTractProcess::writeSingleTractProcess()
