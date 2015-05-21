@@ -349,9 +349,53 @@ void AutoTractDerivedWindow::enterExecutable(QString executable_name)
 
 void AutoTractDerivedWindow::resetExecutable(QString executable_name)
 {
-    Executable executable = m_executables_map[executable_name];
-    (executable.enter_lineEdit)->setText("");
-    SyncUiToModelStructure();
+    if(executable_name == "dtiprocess")
+    {
+        m_soft_m->setsoft_dtiprocess_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "DTIReg")
+    {
+        std::string soft = "DTI-Reg";
+        m_soft_m->setsoft_DTIReg_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+    }
+    if(executable_name == "FiberPostProcess")
+    {
+        m_soft_m->setsoft_FiberPostProcess_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "fiberprocess")
+    {
+        m_soft_m->setsoft_fiberprocess_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "ImageMath")
+    {
+        m_soft_m->setsoft_ImageMath_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "ResampleDTIVolume")
+    {
+        m_soft_m->setsoft_ResampleDTIVolume_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "MDT")
+    {
+        std::string soft = "MaurerDistanceTransform";
+        m_soft_m->setsoft_MDT_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+    }
+    if(executable_name == "polydatatransform")
+    {
+        m_soft_m->setsoft_polydatatransform_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "python")
+    {
+        m_soft_m->setsoft_python_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "TractographyLabelMapSeeding")
+    {
+        m_soft_m->setsoft_TractographyLabelMapSeeding_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "unu")
+    {
+        m_soft_m->setsoft_unu_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    SyncModelStructureToUi("soft");
 }
 
 void AutoTractDerivedWindow::initializeParametersMap()

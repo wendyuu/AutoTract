@@ -143,7 +143,12 @@ void SingleTractProcess::implementSingleTractProcess()
     m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberMaskedCSF" << "'-o'" << "fiberMaskedTract" << "'--mask'" << "'--clean'" << "'-m'" << "dilatedImage" << "'--thresholdMode'" << "'below'" << "'-t'" << "'0.6'";
     execute();
 
-
+    m_log = "Matching length with reference tract";
+    m_script += "\n";
+    m_script += "\tfiberLengthMatch = current_dir + '/' + name + '_lengthMatch.vtp'";
+    m_script += "\n";
+    m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberMaskedTract" << "'-o'" << "fiberLengthMatch" << "'--mask'" << "'-m'" << "refFiberCropped" << "'--clean'";
+    execute();
 }
 
 void SingleTractProcess::writeSingleTractProcess()
