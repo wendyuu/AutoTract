@@ -103,8 +103,7 @@ void Pipeline::writeMainScript()
     m_script += m_importingModules;
     defineSignalHandler();
     initializeLogging();
-
-    m_script += "os.environ['ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS'] = '1' \n";
+    m_script += "os.environ['ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS'] = '" + QString::number(m_para_m->getpara_nbCores_spinBox()) +  "' \n";
 
     m_script += "logger.info(sys.executable)\n";
 

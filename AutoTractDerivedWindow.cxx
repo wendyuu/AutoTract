@@ -4,6 +4,8 @@
 
 AutoTractDerivedWindow::AutoTractDerivedWindow()
 {
+    m_thread = new MainScriptThread();
+
     connect( this->actionSave_Parameter_Configuration, SIGNAL( triggered() ), SLOT( SaveParaConfigFile() ) );
     connect( this->actionLoad_Parameter_Configuration, SIGNAL( triggered() ), SLOT( LoadParaConfigFile() ) );
     connect( this->actionSave_Software_Configuration, SIGNAL( triggered() ), SLOT( SaveSoftConfigFile() ) );
@@ -101,7 +103,34 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect(para_singletract_radioButton, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
     connect(para_cleanup_checkBox, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
     connect(para_overwrite_checkBox, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
+    connect(para_nbCores_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_nbTractsProcessed_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
 }
+
+void AutoTractDerivedWindow::closeEvent(QCloseEvent *event)
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question( this, "AutoTract",
+                                                                tr("Do you want to kill the processes running?\n"),
+                                                                QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes, QMessageBox::Yes);
+    if(resBtn  == QMessageBox::Cancel)
+    {
+        event->ignore();
+    }
+    else if (resBtn == QMessageBox::Yes)
+    {
+        if(m_thread->isRunning())
+        {
+            m_thread->terminate();
+        }
+
+        event->accept();
+    }
+    else
+    {
+        event->accept();
+    }
+}
+
 void AutoTractDerivedWindow::initSoftware()
 {
     std::string soft = "dtiprocess";
@@ -166,16 +195,16 @@ void AutoTractDerivedWindow::uncheckAllTracts()
 
 void AutoTractDerivedWindow::runPipeline()
 {
+    runPipeline_pushButton->setEnabled(false);
+    stopPipeline_pushButton->setEnabled(true);
     SyncUiToModelStructure();
+
     m_pipeline = new Pipeline();
     m_pipeline->setPipelineParameters(m_para_m);
     m_pipeline->setPipelineSoftwares(m_soft_m);
-//    m_pipeline->SetExecutablesMap( m_lookup_executables_map );
-//    m_pipeline->SetParametersMap( m_lookup_parameters_map );
     initializePipelineLogging();
     m_pipeline->writePipeline();
 
-    m_thread = new MainScriptThread();
     m_thread->setPipeline(m_pipeline);
     m_thread->start();
 }
@@ -189,8 +218,6 @@ void AutoTractDerivedWindow::stopPipeline()
 
     stopPipeline_pushButton->setEnabled(false);
     stopPipeline_action->setEnabled(false);
-
-    //runPipeline_progressBar->hide();
 }
 
 void AutoTractDerivedWindow::initializePipelineLogging()

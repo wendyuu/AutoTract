@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -1492,13 +1492,20 @@ a reference fiber bundle allowed</string>
            </property>
            <item>
             <widget class="QLabel" name="nbTractsProcessed_label">
+             <property name="toolTip">
+              <string>Number of processes started in parallel. Make sure that your computer has enough memory.</string>
+             </property>
              <property name="text">
               <string>Nb of tracts processed in parallel:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="para_nbTractsProcessed_spinBox"/>
+            <widget class="QSpinBox" name="para_nbTractsProcessed_spinBox">
+             <property name="toolTip">
+              <string>Number of processes started in parallel. Make sure that your computer has enough memory.</string>
+             </property>
+            </widget>
            </item>
            <item>
             <spacer name="horizontalSpacer_3">
@@ -1515,13 +1522,20 @@ a reference fiber bundle allowed</string>
            </item>
            <item>
             <widget class="QLabel" name="nbCores_label">
+             <property name="toolTip">
+              <string>Setting of ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS to force ITK filters to use this number of threads.</string>
+             </property>
              <property name="text">
               <string>Nb of Cores/tract:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="para_nbCores_spinBox"/>
+            <widget class="QSpinBox" name="para_nbCores_spinBox">
+             <property name="toolTip">
+              <string>Setting of ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS to force ITK filters to use this number of threads.</string>
+             </property>
+            </widget>
            </item>
            <item>
             <spacer name="horizontalSpacer_4">
@@ -1665,37 +1679,21 @@ a reference fiber bundle allowed</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoad_Parameter_Configuration">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/load.png</normaloff>:/icons/icons/load.png</iconset>
-   </property>
    <property name="text">
     <string>Load Parameter Configuration</string>
    </property>
   </action>
   <action name="actionSave_Parameter_Configuration">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/save-3.png</normaloff>:/icons/icons/save-3.png</iconset>
-   </property>
    <property name="text">
     <string>Save Parameter Configuration</string>
    </property>
   </action>
   <action name="actionLoad_Software_Configuration">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/load-softwares.png</normaloff>:/icons/icons/load-softwares.png</iconset>
-   </property>
    <property name="text">
     <string>Load Software Configuration</string>
    </property>
   </action>
   <action name="actionSave_Software_Configuration">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/save-softwares.png</normaloff>:/icons/icons/save-softwares.png</iconset>
-   </property>
    <property name="text">
     <string>Save Software Configuration</string>
    </property>
@@ -1706,28 +1704,16 @@ a reference fiber bundle allowed</string>
    </property>
   </action>
   <action name="runPipeline_action">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/run-button.png</normaloff>:/icons/icons/run-button.png</iconset>
-   </property>
    <property name="text">
     <string>Run Pipeline</string>
    </property>
   </action>
   <action name="stopPipeline_action">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/stop-button.png</normaloff>:/icons/icons/stop-button.png</iconset>
-   </property>
    <property name="text">
     <string>Stop Pipeline</string>
    </property>
   </action>
   <action name="actionDisplay_Results">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
-   </property>
    <property name="text">
     <string>Display Results</string>
    </property>

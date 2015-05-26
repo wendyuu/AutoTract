@@ -56,7 +56,7 @@ private:
         QPushButton* select_button;
         QLineEdit* enter_lineEdit;
     };
-
+    void closeEvent(QCloseEvent *event);
     QMap<QString, Executable> m_executables_map;
     QMap<QString, Parameters> m_parameters_map;
     QTextStream* m_log_textStream;
