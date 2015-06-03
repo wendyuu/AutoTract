@@ -32,77 +32,82 @@ void MaskCreation::executeMaskCreation()
 {
     m_log = "Creation of WM mask - Step 1";
     m_script += "\n\n";
-    m_script += "\tFAimage = outputDir + '/FAimage.nrrd'";
+    m_script += "FAimage = outputDir + '/FAimage.nrrd'";
     m_script += "\n";
-    m_script += "\tMDimage = outputDir + '/MDimage.nrrd'";
+    m_script += "MDimage = outputDir + '/MDimage.nrrd'";
     m_script += "\n";
-    m_script += "\tWMmask = outputDir + '/WMmask.nrrd'";
+    m_script += "WMmask = outputDir + '/WMmask.nrrd'";
     m_script += "\n";
-    m_script += "\tMDmask = outputDir + '/MDmask.nrrd'";
+    m_script += "MDmask = outputDir + '/MDmask.nrrd'";
     m_script += "\n";
-    m_script += "\tbrainSkull = outputDir + '/brainSkull.nrrd'";
+    m_script += "brainSkull = outputDir + '/brainSkull.nrrd'";
     m_script += "\n";
-    m_script += "\tupsampledImage = outputDir + '/upsampledImage.nrrd'";
+    m_script += "upsampledImage = outputDir + '/upsampledImage.nrrd'";
     m_script += "\n";
     m_argumentsList << "dtiprocess" << "'--dti_image'" << "inputDTIatlas_dir" <<"'-f'" << "FAimage";
-    execute();
+    execute("");
     m_log = "Creation of WM mask - Step 2";
     m_argumentsList << "ImageMath" << "FAimage" << "'-outfile'" << "WMmask" << "'-dilate'" << "'10,10'";
-    execute();
+    execute("");
     m_log = "Creation of WM mask - Step 3";
     m_argumentsList << "ImageMath" << "WMmask" << "'-otsu'" << "'-outfile'" << "WMmask";
-    execute();
+    execute("");
     m_script += "\n\n";
 
     m_log = "Creation of CSF mask - Step 1";
     m_argumentsList << "dtiprocess" << "'--dti_image'" << "inputDTIatlas_dir" <<"'-m'" << "MDimage";
-    execute();
+    execute("");
     m_log = "Creation of CSF mask - Step 2";
-    m_script += "\tnbThresholds = '3'";
+    m_script += "nbThresholds = '3'";
     m_script += "\n";
-    m_script += "\tnbHistogramBins = '128'";
+    m_script += "nbHistogramBins = '128'";
     m_script += "\n";
-    m_script += "\tlabelOffset = '0'";
+    m_script += "labelOffset = '0'";
     m_script += "\n";
-    m_script += "\totsuPara = nbThresholds + ',' + labelOffset + ',' + nbHistogramBins";
+    m_script += "otsuPara = nbThresholds + ',' + labelOffset + ',' + nbHistogramBins";
     m_script += "\n";
     m_argumentsList << "ImageMath" << "MDimage" << "'-outfile'" << "MDmask" << "'-otsuMultipleThresholds'" << "'-otsuPara'" << "otsuPara";
-    execute();
+    execute("");
     m_log = "Creation of CSF mask - Step 3";
     m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "MDmask" << "'-erode'" << "'2,1'";
-    execute();
+    execute("");
     m_log = "Creation of CSF mask - Step 4";
     m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "brainSkull" << "'-erode'" << "'4,1'";
-    execute();
+    execute("");
     m_log = "Creation of CSF mask - Step 5";
     m_argumentsList << "ImageMath" << "MDmask" << "'-outfile'" << "MDmask" << "'-sub'" << "brainSkull";
-    execute();
+    execute("");
     m_script += "\n\n";
     m_log = "Upsampling of the reference image - Step 1 ";
     m_argumentsList << "unu" << "'resample'" << "'-i'" << "FAimage" << "'-o'" << "upsampledImage" << "'-s'" << "'x2'" << "'x2'" << "'x2'";
-    execute();
+    execute("");
     m_log = "Upsampling of the reference image - Step 2";
     m_argumentsList << "ResampleDTIVolume" << "inputDTIatlas_dir" << "upsampledImage" << "'-R'" << "upsampledImage";
-    execute();
+    execute("");
     m_script +="\n\n";
 
 }
 
 void MaskCreation::implementRun()
 {
-    m_script += "def run():\n\n";
+    //m_script += "def run():\n\n";
 
-    m_script += "\tsignal.signal(signal.SIGINT, stop)\n";
-    m_script += "\tsignal.signal(signal.SIGTERM, stop)\n\n";
+    m_script += "signal.signal(signal.SIGINT, stop)\n";
+    m_script += "signal.signal(signal.SIGTERM, stop)\n\n";
 
-    m_script += "\tlogger.info('=== MaskCreation ===')\n";
+    m_script += "logger.info('=== MaskCreation ===')\n";
+
+
+    m_script += "'WMmask = " + m_outputDir + "/WMmask.nrrd'\n";
+    m_script += "'MDmask = " + m_outputDir + "/MDmask.nrrd'\n";
+    m_script += "'upsampledImage = " + m_outputDir + "/upsampledImage.nrrd'\n";
 
     m_outputs.insert("WMmask", m_outputDir + "/WMmask.nrrd");
     m_outputs.insert("MDmask", m_outputDir + "/MDmask.nrrd");
     m_outputs.insert("upsampledImage", m_outputDir + "/upsampledImage.nrrd");
-    checkFinalOutputs();
+    checkFinalOutputs("");
 
-    m_script += "\tlogger.info('')\n";
+    m_script += "logger.info('')\n";
 
     executeMaskCreation();
     // Cleaning for keven data

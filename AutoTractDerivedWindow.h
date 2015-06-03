@@ -28,7 +28,11 @@ public slots:
     void selectOutputDirectory();
     void enterOutputDirectory();
     void initializePipelineLogging();
+    void initializeProcessLogging();
     void printPipelineLog();
+    void printProcessLog(QString log_path);
+    void selectLog();
+    void changeExecutionPlainTextEdit();
     void checkAllTracts();
     void uncheckAllTracts();
 private slots:
@@ -67,6 +71,12 @@ private:
     QStringList m_selectedTracts;
     QString m_tractPopulationDirectory;
     QString m_script;
+    struct Logging
+    {
+       QTextStream* textStream;
+       QPlainTextEdit* plainTextEdit;
+    };
+    QMap<QString, Logging> m_processLoggings;
 };
 
 #endif

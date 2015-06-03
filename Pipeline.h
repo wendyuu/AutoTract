@@ -100,9 +100,6 @@ private:
 
     // PlainTextEdit
     QPlainTextEdit* m_plainTextEdit;
-
-    // Timer
-    QTime m_timer;
 };
 
 #endif

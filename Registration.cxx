@@ -33,23 +33,24 @@ void Registration::executeRegistration()
 {
     m_log = "Registration";
     m_argumentsList << "DTIReg" << "'--movingVolume'" << "refDTIatlas_dir" << "'--fixedVolume'" << "inputDTIatlas_dir" << "'--method useScalar-ANTS'" << "'--ANTSRegistrationType'"<< "registrationType" << "'--ANTSSimilarityMetric'" << "similarityMetric"  << "'--ANTSSimilarityParameter'" << "'4'" << "'--ANTSGaussianSigma'" << "gaussianSigma" << "'--outputDisplacementField'" << "displacementFieldPath";
-    execute();
+
+    execute("");
     m_unnecessaryFiles << m_displacementFieldPath;
 }
 
 void Registration::implementRun()
 {
-    m_script += "def run():\n\n";
+    //m_script += "def run():\n\n";
 
-    m_script += "\tsignal.signal(signal.SIGINT, stop)\n";
-    m_script += "\tsignal.signal(signal.SIGTERM, stop)\n\n";
+    m_script += "signal.signal(signal.SIGINT, stop)\n";
+    m_script += "signal.signal(signal.SIGTERM, stop)\n\n";
 
-    m_script += "\tlogger.info('=== Registration ===')\n";
+    m_script += "logger.info('=== Registration ===')\n";
 
     m_outputs.insert("displacementField", m_displacementFieldPath);
-    checkFinalOutputs();
+    checkFinalOutputs("");
 
-    m_script += "\tlogger.info('')\n";
+    m_script += "logger.info('')\n";
 
     executeRegistration();
     // Cleaning for keven data

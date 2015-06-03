@@ -110,7 +110,6 @@ void Pipeline::writeMainScript()
     m_script += "start = datetime.datetime.now()\n\n";
 
     m_script += m_runningModules + "\n";
-
     m_script += "end = datetime.datetime.now()\n\n";
 
     m_script += "elapsedTime = (end - start).seconds\n";
@@ -149,11 +148,13 @@ void Pipeline::writeRegistration()
     m_registration->setDisplacementFieldPath(m_displacementFieldPath);
     m_registration->setScriptParameters(m_para_m);
     m_registration->setScriptSoftwares(m_soft_m);
-
+    //std::cout<<m_processing_path.toStdString()<<" " <<directory_path.toStdString()<<std::endl;
     /*m_registration->setStoppingIfError(m_parameters->getStoppingIfError());*/
     m_registration->update();
-    m_importingModules += "import " + module_name + "\n";
-    m_runningModules += module_name + ".run()\n";
+    //m_importingModules += "import " + module_name + "\n";
+    m_runningModules += "args = ['python','" + m_processing_path + "/" +  module_name + ".py']\n";
+    m_runningModules += "registration = subprocess.Popen(args)\n";
+    m_runningModules += "registration.communicate()\n";
 }
 
 void Pipeline::writeMaskCreation()
@@ -173,8 +174,12 @@ void Pipeline::writeMaskCreation()
 
     /*m_maskCreation->setStoppingIfError(m_parameters->getStoppingIfError());*/
     m_maskCreation->update();
-    m_importingModules += "import " + module_name + "\n";
-    m_runningModules += module_name + ".run()\n";
+    //m_importingModules += "import " + module_name + "\n";
+    //m_runningModules += module_name + ".run()\n";
+
+    m_runningModules += "args = ['python','" + m_processing_path + "/" +  module_name + ".py']\n";
+    m_runningModules += "maskcreation = subprocess.Popen(args)\n";
+    m_runningModules += "maskcreation.communicate()\n";
 }
 
 
@@ -192,8 +197,11 @@ void Pipeline::writeProcess()
     m_process->setScriptSoftwares(m_soft_m);
     m_process->SetDisplacementFieldPath(m_displacementFieldPath);
     m_process->update();
-    m_importingModules += "import " + module_name + "\n";
-    m_runningModules += module_name + ".run()\n";
+    //m_importingModules += "import " + module_name + "\n";
+    //m_runningModules += module_name + ".run()\n";
+    m_runningModules += "args = ['python','" + m_processing_path + "/" +  module_name + ".py']\n";
+    m_runningModules += "postprocess = subprocess.Popen(args)\n";
+    m_runningModules += "postprocess.communicate()\n";
 }
 
 void Pipeline::writeSingleTractProcess()
@@ -253,18 +261,11 @@ void Pipeline::runPipeline()
         env.insert("PATH", pythonDirectory_path + ":" + env.value("PATH"));
         env.insert("PYTHONPATH", "");
     }
-
     m_mainScriptProcess = new QProcess;
     m_mainScriptProcess->setProcessEnvironment(env);
     m_mainScriptProcess->start(command);
     m_mainScriptProcess->waitForStarted();
     m_mainScriptProcess->waitForFinished();
-    m_timer.start();
-
-    while (!m_mainScriptProcess->waitForFinished())
-    {
-        sleep(1);
-    }
 
     if(!(m_para_m->getpara_computingSystem_comboBox()).compare("killdevil", Qt::CaseInsensitive))
     {

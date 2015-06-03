@@ -94,21 +94,21 @@ void SingleTractProcess::implementSingleTractProcess()
     m_script += "\n\n";
 
     m_argumentsList << "polydatatransform" << "'--fiber_file'" << "tract" << "'-o'" << "ref_tract_mapped" << "'-D'" << "displacementField" << "'--inverty'" << "'--invertx'";
-    execute();
+    execute("\t");
 
     m_log = "Dilation and voxelization of the mapped reference tracts - Step 1";
 
     m_script += "\tlabelmap = current_dir + '/' + name + '.nrrd'";
     m_script += "\n\n";
     m_argumentsList << "fiberprocess" << "'--voxelize'" << "labelmap" << "'--fiber_file'" << "ref_tract_mapped" << "'-T'" << "inputDTIatlas_dir";
-    execute();
+    execute("\t");
 
     m_log = "Dilation and voxelization of the mapped reference tracts - Step 2";
     m_script += "\n\n";
     m_script += "\tdilatedImage = current_dir + '/' + name + '_dil.nrrd'";
     m_script += "\n";
     m_argumentsList << "ImageMath" << "labelmap" << "'-dilate'" << "str(dilationRadius) + \',1\'" << "'-outfile'" << "dilatedImage";
-    execute();
+    execute("\t");
 
     m_log = "Tractography by labelmap seeding";
     m_script += "\n\n";
@@ -117,63 +117,63 @@ void SingleTractProcess::implementSingleTractProcess()
     m_script += "\ttractedFiber = current_dir + '/' + name + '.vtp'";
     m_script += "\n";
     m_argumentsList << "TractographyLabelMapSeeding" << "inputDTIatlas_dir" << "tractedFiber" << "'-a'" << "dilatedImage" << "'-s'" << "seedspacing" << "'--clthreshold'" << "clthreshold" << "'--minimumlength'" << "minimumlength" << "'--maximumlength'" << "maximumlength" << "'--stoppingcurvature'" << "stoppingcurvature" << "'--integrationsteplength'" << "integrationsteplength" << "'--stoppingvalue'" << "stoppingvalue";
-    execute();
+    execute("\t");
 
     m_log = "Cropping reference tracts";
     m_script += "\n";
     m_script += "\trefFiberCropped = current_dir + '/' + name + '_ref_cleanEnds.vtp'";
     m_script += "\n";
     m_argumentsList << "FiberPostProcess" << "'-i'" << "ref_tract_mapped" << "'-o'" << "refFiberCropped" << "'--crop'" << "'-m'" << "output_dir + '/2.MaskCreation/WMmask.nrrd'" << "'--thresholdMode'" << "'above'";
-    execute();
+    execute("\t");
 
     m_log = "Cropping using WM mask";
     m_script += "\n";
     m_script += "\tfiberCropped = current_dir + '/' + name + '_cleanEnds.vtp'";
     m_script += "\n";
     m_argumentsList << "FiberPostProcess" << "'-i'" << "tractedFiber" << "'-o'" << "fiberCropped" << "'--crop'" << "'-m'" << "output_dir + '/2.MaskCreation/WMmask.nrrd'" << "'--thresholdMode'" << "'above'";
-    execute();
+    execute("\t");
 
     m_log = "Masking with CSF mask";
     m_script += "\n";
     m_script += "\tfiberMaskedCSF = current_dir + '/' + name + '_maskCSF.vtp'";
     m_script += "\n";
     m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberCropped" << "'-o'" << "fiberMaskedCSF" << "'--mask'" << "'--clean'" << "'-m'" << "output_dir + '/2.MaskCreation/MDmask.nrrd'" << "'--thresholdMode'" << "'above'" << "'-t'" << "thresholdWMmask";
-    execute();
+    execute("\t");
 
     m_log = "Masking with dilated reference image";
     m_script += "\n";
     m_script += "\tfiberMaskedTract = current_dir + '/' + name + '_maskTract.vtp'";
     m_script += "\n";
     m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberMaskedCSF" << "'-o'" << "fiberMaskedTract" << "'--mask'" << "'--clean'" << "'-m'" << "dilatedImage" << "'--thresholdMode'" << "'below'" << "'-t'" << "tractOverlapRatio";
-    execute();
+    execute("\t");
 
     m_log = "Matching length with reference tract";
     m_script += "\n";
     m_script += "\tfiberLengthMatch = current_dir + '/' + name + '_lengthMatch.vtp'";
     m_script += "\n";
     m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberMaskedTract" << "'--lengthMatch'" << "refFiberCropped" << "'-o'" << "fiberLengthMatch";
-    execute();
+    execute("\t");
 
     m_log = "Computation of the distance map of the reference tract - Step 1";
     m_script += "\n";
     m_script += "\tvoxelizedImage = current_dir + '/' + name + '_voxelizedImage.nrrd'";
     m_script += "\n";
     m_argumentsList << "fiberprocess" << "'--voxelize'" << "voxelizedImage" << "'--fiber_file'" << "fiberLengthMatch" << "'-T'" << "output_dir + '/2.MaskCreation/upsampledImage.nrrd'";
-    execute();
+    execute("\t");
 
     m_log = "Computation of the distance map of the reference tract - Step 2";
     m_script += "\n";
     m_script += "\tdistanceMap = current_dir + '/' + name + '_distanceMap.nrrd'";
     m_script += "\n";
     m_argumentsList << "MDT" << "voxelizedImage" << "distanceMap";
-    execute();
+    execute("\t");
 
     m_log = "Matching tract with the distance map";
     m_script += "\n";
     m_script += "\toutputTract = current_dir + '/' + name + '_processed.vtp'";
     m_script += "\n";
     m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberLengthMatch" << "'-o'" << "outputTract" << "'-m'" << "distanceMap" << "'--threshold'" << "tractMaxDistThreshold" << "'--mask'" << "'--clean'" << "'--thresholdMode'" << "'above'";
-    execute();
+    execute("\t");
 }
 
 void SingleTractProcess::writeSingleTractProcess()

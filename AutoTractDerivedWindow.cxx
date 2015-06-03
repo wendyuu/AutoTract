@@ -105,6 +105,12 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect(para_overwrite_checkBox, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
     connect(para_nbCores_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
     connect(para_nbTractsProcessed_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
+
+    stopPipeline_pushButton->setEnabled(false);
+
+    para_all_radioButton->setEnabled(false);
+    para_singletract_radioButton->setEnabled(false);
+    para_singletract_comboBox->setEnabled(false);
 }
 
 void AutoTractDerivedWindow::closeEvent(QCloseEvent *event)
@@ -206,6 +212,8 @@ void AutoTractDerivedWindow::runPipeline()
     m_pipeline->writePipeline();
 
     m_thread->setPipeline(m_pipeline);
+
+    initializeProcessLogging();
     m_thread->start();
 }
 
@@ -222,6 +230,9 @@ void AutoTractDerivedWindow::stopPipeline()
 
 void AutoTractDerivedWindow::initializePipelineLogging()
 {
+    para_all_radioButton->setEnabled(true);
+    para_all_radioButton->setChecked(true);
+
     log_textEdit->show();
     log_textEdit->clear();
     log_textEdit->setMaximumBlockCount(500);
@@ -243,6 +254,89 @@ void AutoTractDerivedWindow::initializePipelineLogging()
     connect(log_watcher, SIGNAL(fileChanged(QString)), this, SLOT(printPipelineLog()));
 }
 
+void AutoTractDerivedWindow::initializeProcessLogging()
+{
+    UpdateTractPopulationDirectoryDisplay() ;
+    QDir output_dir(m_para_m->getpara_output_dir_lineEdit());
+    QString process_path = output_dir.filePath("3.PostProcess");
+    QDir process_dir(process_path);
+    Logging logging;
+
+    QStringList::iterator it;
+    for(it = m_selectedTracts.begin(); it != m_selectedTracts.end(); ++it)
+    {
+        // Existing QPlainTextEdit
+        if(m_processLoggings.contains(*it))
+        {
+            delete (m_processLoggings[*it]).plainTextEdit;
+        }
+
+        // QPlainTextEdit
+        QPlainTextEdit* log_plainTextEdit = new::QPlainTextEdit(log_widget);
+
+        QFont font("Courier 10 Pitch", 9);
+        log_plainTextEdit->setFont(font);
+
+        QLayout* execution_layout = log_widget->layout();
+        execution_layout->addWidget(log_plainTextEdit);
+
+        log_plainTextEdit->setMaximumBlockCount(500);
+        log_plainTextEdit->hide();
+
+        QFileInfo fi(*it);
+        QString base = fi.baseName();
+
+        // Tract Directory
+        QString tract_path = process_dir.filePath(base);
+        QDir tract_dir(tract_path);
+
+        // Log File
+        QString log_path = tract_dir.filePath(base + ".log");
+        QFile* log_file = new::QFile(log_path);
+        log_file->open(QIODevice::ReadWrite);
+        QTextStream* log_textStream = new::QTextStream(log_file);
+
+        // QFileSystemWatcher
+        QFileSystemWatcher* log_watcher = new::QFileSystemWatcher(this);
+        log_watcher->addPath(log_path);
+        connect(log_watcher, SIGNAL(fileChanged(QString)), this, SLOT(printProcessLog(QString)));
+
+        logging.textStream = log_textStream;
+        logging.plainTextEdit = log_plainTextEdit;
+
+        m_processLoggings.insert(*it, logging);
+    }
+    // Radio Button
+    para_singletract_radioButton->setEnabled(true);
+
+    // Combo Box
+    para_singletract_comboBox->clear();
+    para_singletract_comboBox->setEnabled(true);
+    para_singletract_comboBox->insertItems(0, m_selectedTracts);
+    connect(para_singletract_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeExecutionPlainTextEdit()));
+}
+
+void AutoTractDerivedWindow::printProcessLog(QString log_path)
+{
+    QString tract_name = (QFileInfo(log_path).absoluteDir()).dirName();
+    Logging logging = m_processLoggings[tract_name];
+    QTextStream* log_textStream = logging.textStream;
+    QPlainTextEdit* log_plainTextEdit = logging.plainTextEdit;
+
+    QScrollBar *scrollBar = log_plainTextEdit->verticalScrollBar();
+
+    if(scrollBar->value() == scrollBar->maximum())
+    {
+        log_textEdit->insertPlainText((log_textStream->readAll()));
+        scrollBar->setValue(scrollBar->maximum());
+    }
+    else
+    {
+        log_textEdit->insertPlainText((log_textStream->readAll()));
+    }
+}
+
+
 void AutoTractDerivedWindow::printPipelineLog()
 {
     QScrollBar *scrollBar = log_textEdit->verticalScrollBar();
@@ -257,6 +351,47 @@ void AutoTractDerivedWindow::printPipelineLog()
     else
     {
         log_textEdit->insertPlainText(line);
+    }
+}
+
+void AutoTractDerivedWindow::selectLog()
+{
+    QString process = para_singletract_comboBox->currentText();
+    Logging logging = m_processLoggings[process];
+
+    if(para_all_radioButton->isChecked())
+    {
+        log_textEdit->show();
+        logging.plainTextEdit->hide();
+    }
+
+    if(para_singletract_radioButton->isChecked())
+    {
+        log_textEdit->hide();
+        logging.plainTextEdit->show();
+    }
+}
+
+void AutoTractDerivedWindow::changeExecutionPlainTextEdit()
+{
+    QString tract_name = para_singletract_comboBox->currentText();
+
+    QMap <QString, Logging>::iterator it;
+    QString name;
+    Logging logging;
+    for(it = m_processLoggings.begin(); it != m_processLoggings.end(); ++it)
+    {
+        name = it.key();
+        logging = it.value();
+
+        if(name == tract_name && para_singletract_radioButton->isChecked())
+        {
+            logging.plainTextEdit->show();
+        }
+        else
+        {
+            logging.plainTextEdit->hide();
+        }
     }
 }
 
@@ -501,12 +636,11 @@ void AutoTractDerivedWindow::displayTracts()
 {
     para_ref_tracts_listWidget->clear();
     QStringList::const_iterator it;
-    int count = 0;
     for (it = m_selectedTracts.constBegin(); it != m_selectedTracts.constEnd(); ++it)
     {
         QListWidgetItem* item = new QListWidgetItem(*it, para_ref_tracts_listWidget);
         item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable);
-        item->setCheckState(Qt::Unchecked);count++;
+        item->setCheckState(Qt::Unchecked);
     }
 }
 

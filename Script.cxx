@@ -186,19 +186,19 @@ void Script::implementExecutePipe()
    m_script += "\treturn stdout\n\n";
 }
 
-void Script::checkFinalOutputs()
+void Script::checkFinalOutputs(QString indentation)
 {
    QMap<QString, QString>::iterator it = m_outputs.begin();
 
    if(!m_overwriting)
    {
-      QString checking = "\tif ";
+      QString checking = indentation + "if ";
 
       if(!m_outputs.isEmpty())
       {
          for(it = m_outputs.begin(); it != m_outputs.end(); ++it )
          {
-            m_script += "\t" + it.key() + " = '" + it.value() + "'\n";
+            m_script += indentation + it.key() + " = '" + it.value() + "'\n";
 
             checking += "checkFileExistence(" + it.key() + ")==True";
 
@@ -210,15 +210,15 @@ void Script::checkFinalOutputs()
 
          m_script += checking + ":\n";
 
-         m_script += "\t\tlogger.info('" + m_log + " -> Skipped')\n";
-         m_script += "\t\tlogger.info('')\n";
-         m_script += "\t\treturn\n\n";
+         m_script += indentation + "\tlogger.info('" + m_log + " -> Skipped')\n";
+         m_script += indentation + "\tlogger.info('')\n";
+         m_script += indentation + "\tsys.exit(0)\n\n";
       }
    }
    m_outputs.clear();
 }
 
-void Script::execute()
+void Script::execute(QString indentation)
 {
    QMap<QString, QString>::iterator it;
 
@@ -229,7 +229,7 @@ void Script::execute()
    }
    else
    {
-      m_indentation = "\t";
+      m_indentation = indentation;
    }
 
    QString checking = m_indentation + "if ";

@@ -44,8 +44,8 @@ class Script
    void implementExecutePipe();
 
    // Execute Command Line
-   void checkFinalOutputs();
-   void execute();
+   void checkFinalOutputs(QString indentation);
+   void execute(QString indentation);
    void executePipe();
 
    // Write XML Files

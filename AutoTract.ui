@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -1623,23 +1623,6 @@ a reference fiber bundle allowed</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="displayResults_pushButton">
-             <property name="text">
-              <string>Display Results</string>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>:/icons/icons/eye.png</normaloff>:/icons/icons/eye.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>30</width>
-               <height>15</height>
-              </size>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
@@ -1719,8 +1702,6 @@ a reference fiber bundle allowed</string>
    </property>
   </action>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
