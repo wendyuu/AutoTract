@@ -105,6 +105,7 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect(para_overwrite_checkBox, SIGNAL(clicked()), this, SLOT(SyncUiToModelStructure()));
     connect(para_nbCores_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
     connect(para_nbTractsProcessed_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_nb_memory_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
 }
 
 void AutoTractDerivedWindow::closeEvent(QCloseEvent *event)

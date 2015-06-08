@@ -189,7 +189,7 @@ void TractPopulationProcess::SubmitTractPostProcessJob(QString tract, int i)
 
     QString tract_name = "tract_" + QString_i;
 
-    QString args = "'bsub', '-q', 'day', '-M', '" + QString::number(4) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
+    QString args = "'bsub', '-q', 'day', '-M', '" + QString::number(10) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
     args += "'python', postProcess_script, name, tract, output_dir, displacementFieldPath, log";
     m_script += "\targs = [" + args + "]\n";
     m_script += "\tbsub_process = subprocess.Popen(args, stdout=subprocess.PIPE)\n";

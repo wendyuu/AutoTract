@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -1428,7 +1428,7 @@ a reference fiber bundle allowed</string>
          <widget class="QWidget" name="widget_28" native="true">
           <layout class="QHBoxLayout" name="horizontalLayout_19">
            <property name="spacing">
-            <number>66</number>
+            <number>6</number>
            </property>
            <property name="topMargin">
             <number>9</number>
@@ -1478,6 +1478,33 @@ a reference fiber bundle allowed</string>
              </property>
             </spacer>
            </item>
+           <item>
+            <widget class="QLabel" name="nb_memory_label">
+             <property name="text">
+              <string>Nb of GB per process:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="para_nb_memory_spinBox">
+             <property name="value">
+              <number>4</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </widget>
         </item>
@@ -1504,6 +1531,9 @@ a reference fiber bundle allowed</string>
             <widget class="QSpinBox" name="para_nbTractsProcessed_spinBox">
              <property name="toolTip">
               <string>Number of processes started in parallel. Make sure that your computer has enough memory.</string>
+             </property>
+             <property name="value">
+              <number>1</number>
              </property>
             </widget>
            </item>
@@ -1534,6 +1564,9 @@ a reference fiber bundle allowed</string>
             <widget class="QSpinBox" name="para_nbCores_spinBox">
              <property name="toolTip">
               <string>Setting of ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS to force ITK filters to use this number of threads.</string>
+             </property>
+             <property name="value">
+              <number>1</number>
              </property>
             </widget>
            </item>
@@ -1719,8 +1752,6 @@ a reference fiber bundle allowed</string>
    </property>
   </action>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -75,6 +75,7 @@ void AutoTractWindow::SyncUiToModelStructure()
     m_para_m->setpara_cleanup_checkBox( para_cleanup_checkBox->isChecked() );
     m_para_m->setpara_overwrite_checkBox( para_overwrite_checkBox->isChecked() );
     m_para_m->setpara_singletract_comboBox( para_singletract_comboBox->currentText() );
+    m_para_m->setpara_nb_memory_spinBox( para_nb_memory_spinBox->value() );
 
 
     //m.setdtiprocess_lineEdit();
@@ -140,6 +141,7 @@ void AutoTractWindow::SyncUiToModelStructure( QString prefix )
         m_para_m->setpara_cleanup_checkBox( para_cleanup_checkBox->isChecked() );
         m_para_m->setpara_overwrite_checkBox( para_overwrite_checkBox->isChecked() );
         m_para_m->setpara_singletract_comboBox( para_singletract_comboBox->currentText() );
+        m_para_m->setpara_nb_memory_spinBox( para_nb_memory_spinBox->value() );
     }
 
     if(prefix == "soft")
