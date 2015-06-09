@@ -32,9 +32,19 @@ void Registration::initializeScript()
 void Registration::executeRegistration()
 {
     m_log = "Registration";
-    m_argumentsList << "DTIReg" << "'--movingVolume'" << "refDTIatlas_dir" << "'--fixedVolume'" << "inputDTIatlas_dir" << "'--method useScalar-ANTS'" << "'--ANTSRegistrationType'"<< "registrationType" << "'--ANTSSimilarityMetric'" << "similarityMetric"  << "'--ANTSSimilarityParameter'" << "'4'" << "'--ANTSGaussianSigma'" << "gaussianSigma" << "'--outputDisplacementField'" << "displacementFieldPath";
-    execute();
-    m_unnecessaryFiles << m_displacementFieldPath;
+    if( m_para_m->getpara_computingSystem_comboBox() == "local")
+    {
+
+        m_argumentsList << "DTIReg" << "'--movingVolume'" << "refDTIatlas_dir" << "'--fixedVolume'" << "inputDTIatlas_dir" << "'--method useScalar-ANTS'" << "'--ANTSRegistrationType'"<< "registrationType" << "'--ANTSSimilarityMetric'" << "similarityMetric"  << "'--ANTSSimilarityParameter'" << "'4'" << "'--ANTSGaussianSigma'" << "gaussianSigma" << "'--outputDisplacementField'" << "displacementFieldPath";
+        execute();
+        m_unnecessaryFiles << m_displacementFieldPath;
+    }
+    else
+    {
+        QString args = "'bsub', '-q', 'day', '-M', '" + QString::number(10) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
+        args += "'DTIReg', '--movingVolume', refDTIatlas_dir, '--fixedVolume', inputDTIatlas_dir, '--method useScalar-ANTS', '--ANTSRegistrationType', registrationType, '--ANTSSimilarityMetric', '4', '--ANTSGaussianSigma', gaussianSigma, '--outputDisplacementField', displacementFieldPath";
+        m_script += "\targs = [" + args + "]\n";
+    }
 }
 
 void Registration::implementRun()
