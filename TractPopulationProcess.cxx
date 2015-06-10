@@ -83,7 +83,7 @@ void TractPopulationProcess::implementProcessTractPopulation()
 
         m_script += "def checkRunningTract():\n";
         m_script += "\tfor tract in runningTract :\n";
-        m_script += "\t\tbjobs_tract = subprocess.Popen(['bjobs', tract.job], stdout=subprocess.PIPE)\n";
+        m_script += "\t\tbjobs_process = subprocess.Popen(['bjobs', tract.job], stdout=subprocess.PIPE)\n";
         m_script += "\t\tbjobs_output = bjobs_process.stdout.read()\n";
         m_script += "\t\tif 'DONE' in bjobs_output or 'EXIT' in bjobs_output :\n";
         m_script += "\t\t\trunningTract.remove(tract)\n\n";
