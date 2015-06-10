@@ -40,7 +40,7 @@ void Registration::executeRegistration()
     else
     {
         QString args = "'bsub', '-q', 'day', '-K', '-M', '" + QString::number(8) + "', '-n', '" + QString::number(m_para_m->getpara_nb_threads_spinBox()) + "', '-R', 'span[hosts=1]', ";
-        args += "DTIReg, '--movingVolume', refDTIatlas_dir, '--fixedVolume', inputDTIatlas_dir, '--method useScalar-ANTS', '--ANTSRegistrationType', registrationType, '--ANTSSimilarityMetric', similarityMetric, '--ANTSSimilarityParameter', '4', '--ANTSGaussianSigma', gaussianSigma, '--outputDisplacementField'";
+        args += "DTIReg, '--movingVolume', refDTIatlas_dir, '--fixedVolume', inputDTIatlas_dir, '--method useScalar-ANTS', '--ANTSRegistrationType', registrationType, '--ANTSSimilarityMetric', similarityMetric, '--ANTSSimilarityParameter', '4', '--ANTSGaussianSigma', gaussianSigma, '--outputDisplacementField', displacementFieldPath";
         m_script += "\targs = [" + args + "]\n";
         m_script += "\tbsub_process = subprocess.Popen(args, stdout=subprocess.PIPE)\n";
         m_script += "\tbsub_output = bsub_process.stdout.read()\n";
