@@ -189,7 +189,7 @@ void TractPopulationProcess::SubmitTractPostProcessJob(QString tract, int i)
 
     QString tract_name = "tract_" + QString_i;
 
-    QString args = "'bsub', '-q', 'day', '-M', '" + QString::number(10) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
+    QString args = "'bsub', '-q', 'hour', '-M', '" + QString::number(10) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
     args += "'python', postProcess_script, name, tract, output_dir, displacementFieldPath, log";
     m_script += "\targs = [" + args + "]\n";
     m_script += "\tbsub_process = subprocess.Popen(args, stdout=subprocess.PIPE)\n";
@@ -197,8 +197,8 @@ void TractPopulationProcess::SubmitTractPostProcessJob(QString tract, int i)
     m_script += "\tlogger.info(bsub_output)\n";
     m_script += "\tjobID = re.search('(<{1})([0-9]{1,})(>{1})', bsub_output).group(2)\n";
     m_script += "\tlogger.info(jobID)\n";
-    m_script += "\t" + tract_name + " = registration('" + tract + "', jobID)\n";
-    m_script += "\trunningRegistrations.append(" + tract_name + ")\n\n";
+    m_script += "\t" + tract_name + " = postprocess('" + tract + "', jobID)\n";
+    m_script += "\trunningTract.append(" + tract_name + ")\n\n";
 
 }
 
