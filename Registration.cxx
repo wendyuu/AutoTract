@@ -34,17 +34,21 @@ void Registration::executeRegistration()
     m_log = "Registration";
     if( m_para_m->getpara_computingSystem_comboBox() == "local")
     {
-
         m_argumentsList << "DTIReg" << "'--movingVolume'" << "refDTIatlas_dir" << "'--fixedVolume'" << "inputDTIatlas_dir" << "'--method useScalar-ANTS'" << "'--ANTSRegistrationType'"<< "registrationType" << "'--ANTSSimilarityMetric'" << "similarityMetric"  << "'--ANTSSimilarityParameter'" << "'4'" << "'--ANTSGaussianSigma'" << "gaussianSigma" << "'--outputDisplacementField'" << "displacementFieldPath";
         execute();
-        m_unnecessaryFiles << m_displacementFieldPath;
     }
     else
     {
-        QString args = "'bsub', '-q', 'day', '-M', '" + QString::number(10) + "', '-n', '" + QString::number(m_para_m->getpara_nbCores_spinBox()) + "', '-R', 'span[hosts=1]', ";
-        args += "'DTIReg', '--movingVolume', refDTIatlas_dir, '--fixedVolume', inputDTIatlas_dir, '--method useScalar-ANTS', '--ANTSRegistrationType', registrationType, '--ANTSSimilarityMetric', '4', '--ANTSGaussianSigma', gaussianSigma, '--outputDisplacementField', displacementFieldPath";
+        QString args = "'bsub', '-q', 'day', '-K', -M', '" + QString::number(8) + "', '-n', '" + QString::number(m_para_m->getpara_nb_threads_spinBox()) + "', '-R', 'span[hosts=1]', ";
+        args += "'D', postProcess_script, name, tract, output_dir, displacementFieldPath, log";
         m_script += "\targs = [" + args + "]\n";
+        m_script += "\tbsub_process = subprocess.Popen(args, stdout=subprocess.PIPE)\n";
+        m_script += "\tbsub_output = bsub_process.stdout.read()\n";
+        m_script += "\tlogger.info(bsub_output)\n";
+        m_script += "\tjobID = re.search('(<{1})([0-9]{1,})(>{1})', bsub_output).group(2)\n";
+        m_script += "\tlogger.info(jobID)\n";
     }
+    m_unnecessaryFiles << m_displacementFieldPath;
 }
 
 void Registration::implementRun()
@@ -60,6 +64,7 @@ void Registration::implementRun()
     checkFinalOutputs();
 
     m_script += "\tlogger.info('')\n";
+    m_script += "\tos.environ['ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS'] = '" + QString::number(m_para_m->getpara_nb_threads_spinBox()) + "' \n";
 
     executeRegistration();
     // Cleaning for keven data

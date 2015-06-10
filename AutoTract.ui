@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -719,17 +719,45 @@ MI=Mutual Information, MSQ=Mean Square Difference</string>
                </widget>
               </item>
               <item>
-               <spacer name="verticalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
+               <widget class="QWidget" name="widget_24" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0">
+                 <property name="spacing">
+                  <number>300</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_25" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_31">
+                    <item>
+                     <widget class="QLabel" name="nb_threads_label">
+                      <property name="text">
+                       <string>Number of threads</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="nb_threads_descr_label">
+                      <property name="font">
+                       <font>
+                        <italic>true</italic>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Number of threads that ANTS will use</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="para_nb_threads_spinBox">
+                   <property name="value">
+                    <number>8</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
               </item>
              </layout>
             </widget>

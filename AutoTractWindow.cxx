@@ -50,6 +50,7 @@ void AutoTractWindow::SyncUiToModelStructure()
     m_para_m->setpara_iterations_lineEdit( para_iterations_lineEdit->text() );
     m_para_m->setpara_similarity_metric_comboBox( para_similarity_metric_comboBox->currentText() );
     m_para_m->setpara_gaussian_sigma_spinBox( para_gaussian_sigma_spinBox->value() );
+    m_para_m->setpara_nb_threads_spinBox( para_nb_threads_spinBox->value() );
 
     /*5th tab*/
     m_para_m->setpara_dilation_radius_spinBox( para_dilation_radius_spinBox->value() );
@@ -116,6 +117,7 @@ void AutoTractWindow::SyncUiToModelStructure( QString prefix )
         m_para_m->setpara_iterations_lineEdit( para_iterations_lineEdit->text() );
         m_para_m->setpara_similarity_metric_comboBox( para_similarity_metric_comboBox->currentText() );
         m_para_m->setpara_gaussian_sigma_spinBox( para_gaussian_sigma_spinBox->value() );
+        m_para_m->setpara_nb_threads_spinBox( para_nb_threads_spinBox->value() );
 
         /*5th tab*/
         m_para_m->setpara_dilation_radius_spinBox( para_dilation_radius_spinBox->value() );
@@ -206,6 +208,7 @@ void AutoTractWindow::SyncModelStructureToUi()
     para_transformation_step_spinBox->setValue( m_para_m->getpara_transformation_step_spinBox() );
     para_iterations_lineEdit->setText( m_para_m->getpara_iterations_lineEdit() );
     para_similarity_metric_comboBox->setCurrentIndex(para_similarity_metric_comboBox->findText(m_para_m->getpara_similarity_metric_comboBox() ) );
+    para_nb_threads_spinBox->setValue( m_para_m->getpara_nb_threads_spinBox());
     para_gaussian_sigma_spinBox->setValue( m_para_m->getpara_gaussian_sigma_spinBox() );
 
     /*5th tab*/
@@ -271,6 +274,7 @@ void AutoTractWindow::SyncModelStructureToUi( QString prefix )
         para_iterations_lineEdit->setText( m_para_m->getpara_iterations_lineEdit() );
         para_similarity_metric_comboBox->setCurrentIndex(para_similarity_metric_comboBox->findText(m_para_m->getpara_similarity_metric_comboBox() ) );
         para_gaussian_sigma_spinBox->setValue( m_para_m->getpara_gaussian_sigma_spinBox() );
+        para_nb_threads_spinBox->setValue( m_para_m->getpara_nb_threads_spinBox());
 
         /*5th tab*/
         para_dilation_radius_spinBox->setValue( m_para_m->getpara_dilation_radius_spinBox() );

@@ -80,6 +80,7 @@ AutoTractDerivedWindow::AutoTractDerivedWindow()
     connect(para_iterations_lineEdit, SIGNAL(editingFinished()), this, SLOT(SyncUiToModelStructure()));
     connect(para_similarity_metric_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(SyncUiToModelStructure()));
     connect(para_gaussian_sigma_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
+    connect(para_nb_threads_spinBox, SIGNAL(valueChanged(int)), this, SLOT(SyncUiToModelStructure()));
 
     /*5th tab: Tractography*/
     connect(para_dilation_radius_spinBox, SIGNAL(valueChanged(double)), this, SLOT(SyncUiToModelStructure()));
