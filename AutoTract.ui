@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="inputs_tab">
        <attribute name="title">
@@ -262,188 +262,205 @@
               <string>Executables</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_5">
-              <item row="2" column="2">
-               <widget class="QPushButton" name="reset_ResampleDTI_Volume_pushButton">
-                <property name="text">
-                 <string>Reset</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QPushButton" name="DTIReg_pushButton">
-                <property name="text">
-                 <string>DTIReg</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="soft_DTIReg_lineEdit"/>
-              </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="reset_DTIReg_pushButton">
+              <item row="3" column="3">
+               <widget class="QPushButton" name="reset_ResampleDTIlogEuclidean_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QPushButton" name="fiberprocess_pushButton">
+               <widget class="QPushButton" name="DTIReg_pushButton">
                 <property name="text">
-                 <string>fiberprocess</string>
+                 <string>DTIReg</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="soft_fiberprocess_lineEdit"/>
-              </item>
               <item row="1" column="2">
-               <widget class="QPushButton" name="reset_fiberprocess_pushButton">
+               <widget class="QLineEdit" name="soft_DTIReg_lineEdit"/>
+              </item>
+              <item row="1" column="3">
+               <widget class="QPushButton" name="reset_DTIReg_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
               <item row="2" column="0">
-               <widget class="QPushButton" name="ResampleDTIVolume_pushButton">
+               <widget class="QPushButton" name="fiberprocess_pushButton">
                 <property name="text">
-                 <string>ResampleDTIVolume</string>
+                 <string>fiberprocess</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="soft_ResampleDTIVolume_lineEdit"/>
+              <item row="2" column="2">
+               <widget class="QLineEdit" name="soft_fiberprocess_lineEdit"/>
               </item>
-              <item row="3" column="1">
-               <widget class="QLineEdit" name="soft_ImageMath_lineEdit"/>
+              <item row="2" column="3">
+               <widget class="QPushButton" name="reset_fiberprocess_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
               </item>
               <item row="3" column="0">
+               <widget class="QPushButton" name="ResampleDTIlogEuclidean_pushButton">
+                <property name="text">
+                 <string>ResampleDTIlogEuclidean</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLineEdit" name="soft_ResampleDTIlogEuclidean_lineEdit"/>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLineEdit" name="soft_ImageMath_lineEdit"/>
+              </item>
+              <item row="4" column="0">
                <widget class="QPushButton" name="ImageMath_pushButton">
                 <property name="text">
                  <string>ImageMath</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="2">
+              <item row="4" column="3">
                <widget class="QPushButton" name="reset_ImageMath_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
+              <item row="5" column="0">
                <widget class="QPushButton" name="TractographyLabelMapSeeding_pushButton">
                 <property name="text">
                  <string>TractographyLabelMapSeeding</string>
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
+              <item row="5" column="2">
                <widget class="QLineEdit" name="soft_TractographyLabelMapSeeding_lineEdit"/>
               </item>
-              <item row="4" column="2">
+              <item row="5" column="3">
                <widget class="QPushButton" name="reset_TractographyLabelMapSeeding_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
+              <item row="6" column="0">
                <widget class="QPushButton" name="FiberPostProcess_pushButton">
                 <property name="text">
                  <string>FiberPostProcess</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
+              <item row="6" column="2">
                <widget class="QLineEdit" name="soft_FiberPostProcess_lineEdit"/>
               </item>
-              <item row="5" column="2">
+              <item row="6" column="3">
                <widget class="QPushButton" name="reset_FiberPostProcess_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
+              <item row="7" column="0">
                <widget class="QPushButton" name="polydatattransform_pushButton">
                 <property name="text">
                  <string>polydatatransform</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="7" column="2">
                <widget class="QLineEdit" name="soft_polydatatransform_lineEdit"/>
               </item>
-              <item row="6" column="2">
+              <item row="7" column="3">
                <widget class="QPushButton" name="reset_polydatatransform_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="0">
+              <item row="8" column="0">
                <widget class="QPushButton" name="unu_pushButton">
                 <property name="text">
                  <string>unu</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
+              <item row="8" column="2">
                <widget class="QLineEdit" name="soft_unu_lineEdit"/>
               </item>
-              <item row="7" column="2">
+              <item row="8" column="3">
                <widget class="QPushButton" name="reset_unu_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="8" column="0">
+              <item row="9" column="0">
                <widget class="QPushButton" name="MDT_pushButton">
                 <property name="text">
                  <string>MDT</string>
                 </property>
                </widget>
               </item>
-              <item row="8" column="1">
+              <item row="9" column="2">
                <widget class="QLineEdit" name="soft_MDT_lineEdit"/>
               </item>
-              <item row="8" column="2">
+              <item row="9" column="3">
                <widget class="QPushButton" name="reset_MDT_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="9" column="0">
+              <item row="10" column="0">
                <widget class="QPushButton" name="python_pushButton">
                 <property name="text">
                  <string>python</string>
                 </property>
                </widget>
               </item>
-              <item row="9" column="1">
+              <item row="10" column="2">
                <widget class="QLineEdit" name="soft_python_lineEdit"/>
               </item>
-              <item row="10" column="1">
+              <item row="11" column="2">
                <widget class="QLineEdit" name="soft_dtiprocess_lineEdit"/>
               </item>
-              <item row="9" column="2">
+              <item row="10" column="3">
                <widget class="QPushButton" name="reset_python_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
+              <item row="11" column="0">
                <widget class="QPushButton" name="dtiprocess_pushButton">
                 <property name="text">
                  <string>dtiprocess</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="2">
+              <item row="11" column="3">
                <widget class="QPushButton" name="reset_dtiprocess_pushButton">
+                <property name="text">
+                 <string>Reset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="slicer_pushButton">
+                <property name="text">
+                 <string>Slicer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLineEdit" name="soft_slicer_lineEdit"/>
+              </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="reset_slicer_pushButton">
                 <property name="text">
                  <string>Reset</string>
                 </property>

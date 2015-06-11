@@ -37,12 +37,13 @@ void AutoTractWindow::SyncUiToModelStructure()
     m_soft_m->setsoft_FiberPostProcess_lineEdit( soft_FiberPostProcess_lineEdit->text() );
     m_soft_m->setsoft_fiberprocess_lineEdit( soft_fiberprocess_lineEdit->text() );
     m_soft_m->setsoft_ImageMath_lineEdit( soft_ImageMath_lineEdit->text() );
-    m_soft_m->setsoft_ResampleDTIVolume_lineEdit( soft_ResampleDTIVolume_lineEdit->text() );
+    m_soft_m->setsoft_ResampleDTIlogEuclidean_lineEdit( soft_ResampleDTIlogEuclidean_lineEdit->text() );
     m_soft_m->setsoft_MDT_lineEdit( soft_MDT_lineEdit->text() );
     m_soft_m->setsoft_polydatatransform_lineEdit( soft_polydatatransform_lineEdit->text() );
     m_soft_m->setsoft_python_lineEdit( soft_python_lineEdit->text() );
     m_soft_m->setsoft_TractographyLabelMapSeeding_lineEdit( soft_TractographyLabelMapSeeding_lineEdit->text() );
     m_soft_m->setsoft_unu_lineEdit( soft_unu_lineEdit->text() );
+    m_soft_m->setsoft_slicer_lineEdit( soft_slicer_lineEdit->text() );
 
     /*4th tab: registration*/
     m_para_m->setpara_registration_type_comboBox( para_registration_type_comboBox->currentText() );
@@ -154,12 +155,13 @@ void AutoTractWindow::SyncUiToModelStructure( QString prefix )
         m_soft_m->setsoft_FiberPostProcess_lineEdit( soft_FiberPostProcess_lineEdit->text() );
         m_soft_m->setsoft_fiberprocess_lineEdit( soft_fiberprocess_lineEdit->text() );
         m_soft_m->setsoft_ImageMath_lineEdit( soft_ImageMath_lineEdit->text() );
-        m_soft_m->setsoft_ResampleDTIVolume_lineEdit( soft_ResampleDTIVolume_lineEdit->text() );
+        m_soft_m->setsoft_ResampleDTIlogEuclidean_lineEdit( soft_ResampleDTIlogEuclidean_lineEdit->text() );
         m_soft_m->setsoft_MDT_lineEdit( soft_MDT_lineEdit->text() );
         m_soft_m->setsoft_polydatatransform_lineEdit( soft_polydatatransform_lineEdit->text() );
         m_soft_m->setsoft_python_lineEdit( soft_python_lineEdit->text() );
         m_soft_m->setsoft_TractographyLabelMapSeeding_lineEdit( soft_TractographyLabelMapSeeding_lineEdit->text() );
         m_soft_m->setsoft_unu_lineEdit( soft_unu_lineEdit->text() );
+        m_soft_m->setsoft_slicer_lineEdit( soft_slicer_lineEdit->text() );
 
     }
     m_sync = 0 ;
@@ -196,12 +198,13 @@ void AutoTractWindow::SyncModelStructureToUi()
     soft_FiberPostProcess_lineEdit->setText( m_soft_m->getsoft_FiberPostProcess_lineEdit() );
     soft_fiberprocess_lineEdit->setText( m_soft_m->getsoft_fiberprocess_lineEdit() );
     soft_ImageMath_lineEdit->setText( m_soft_m->getsoft_ImageMath_lineEdit() );
-    soft_ResampleDTIVolume_lineEdit->setText( m_soft_m->getsoft_ResampleDTIVolume_lineEdit() );
+    soft_ResampleDTIlogEuclidean_lineEdit->setText( m_soft_m->getsoft_ResampleDTIlogEuclidean_lineEdit() );
     soft_MDT_lineEdit->setText( m_soft_m->getsoft_MDT_lineEdit() );
     soft_polydatatransform_lineEdit->setText( m_soft_m->getsoft_polydatatransform_lineEdit() );
     soft_python_lineEdit->setText( m_soft_m->getsoft_python_lineEdit() );
     soft_TractographyLabelMapSeeding_lineEdit->setText( m_soft_m->getsoft_TractographyLabelMapSeeding_lineEdit() );
     soft_unu_lineEdit->setText( m_soft_m->getsoft_unu_lineEdit() );
+    soft_slicer_lineEdit->setText( m_soft_m->getsoft_slicer_lineEdit() );
 
     /*4th tab: registration*/
     para_registration_type_comboBox->setCurrentIndex(para_registration_type_comboBox->findText(m_para_m->getpara_registration_type_comboBox()));
@@ -309,12 +312,13 @@ void AutoTractWindow::SyncModelStructureToUi( QString prefix )
         soft_FiberPostProcess_lineEdit->setText( m_soft_m->getsoft_FiberPostProcess_lineEdit() );
         soft_fiberprocess_lineEdit->setText( m_soft_m->getsoft_fiberprocess_lineEdit() );
         soft_ImageMath_lineEdit->setText( m_soft_m->getsoft_ImageMath_lineEdit() );
-        soft_ResampleDTIVolume_lineEdit->setText( m_soft_m->getsoft_ResampleDTIVolume_lineEdit() );
+        soft_ResampleDTIlogEuclidean_lineEdit->setText( m_soft_m->getsoft_ResampleDTIlogEuclidean_lineEdit() );
         soft_MDT_lineEdit->setText( m_soft_m->getsoft_MDT_lineEdit() );
         soft_polydatatransform_lineEdit->setText( m_soft_m->getsoft_polydatatransform_lineEdit() );
         soft_python_lineEdit->setText( m_soft_m->getsoft_python_lineEdit() );
         soft_TractographyLabelMapSeeding_lineEdit->setText( m_soft_m->getsoft_TractographyLabelMapSeeding_lineEdit() );
         soft_unu_lineEdit->setText( m_soft_m->getsoft_unu_lineEdit() );
+        soft_slicer_lineEdit->setText( m_soft_m->getsoft_slicer_lineEdit() );
     }
     m_sync = 0 ;
 }

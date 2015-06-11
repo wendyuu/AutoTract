@@ -150,8 +150,8 @@ void AutoTractDerivedWindow::initSoftware()
     soft = "ImageMath";
     m_soft_m->setsoft_ImageMath_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
 
-    soft = "ResampleDTIVolume";
-    m_soft_m->setsoft_ResampleDTIVolume_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+    soft = "ResampleDTIlogEuclidean";
+    m_soft_m->setsoft_ResampleDTIlogEuclidean_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
 
     soft = "MaurerDistanceTransform";
     m_soft_m->setsoft_MDT_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
@@ -166,6 +166,9 @@ void AutoTractDerivedWindow::initSoftware()
     m_soft_m->setsoft_TractographyLabelMapSeeding_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
 
     soft = "unu";
+    m_soft_m->setsoft_unu_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
+
+    soft = "Slicer";
     m_soft_m->setsoft_unu_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( soft.c_str() ) ) ) ;
 }
 
@@ -321,8 +324,8 @@ void AutoTractDerivedWindow::initializeExecutablesMap()
     Executable fiberprocess = {fiberprocess_pushButton, soft_fiberprocess_lineEdit, reset_fiberprocess_pushButton};
     m_executables_map.insert("fiberprocess", fiberprocess);
 
-    Executable ResampleDTIVolume = {ResampleDTIVolume_pushButton, soft_ResampleDTIVolume_lineEdit, reset_ResampleDTI_Volume_pushButton};
-    m_executables_map.insert("ResampleDTIVolume", ResampleDTIVolume);
+    Executable ResampleDTIlogEuclidean = {ResampleDTIlogEuclidean_pushButton, soft_ResampleDTIlogEuclidean_lineEdit, reset_ResampleDTIlogEuclidean_pushButton};
+    m_executables_map.insert("ResampleDTIlogEuclidean", ResampleDTIlogEuclidean);
 
     Executable ImageMath = {ImageMath_pushButton, soft_ImageMath_lineEdit, reset_ImageMath_pushButton};
     m_executables_map.insert("ImageMath", ImageMath);
@@ -347,6 +350,9 @@ void AutoTractDerivedWindow::initializeExecutablesMap()
 
     Executable dtiprocess = {dtiprocess_pushButton, soft_dtiprocess_lineEdit, reset_dtiprocess_pushButton};
     m_executables_map.insert("dtiprocess", dtiprocess);
+
+    Executable Slicer = {slicer_pushButton, soft_slicer_lineEdit, reset_slicer_pushButton};
+    m_executables_map.insert("Slicer", Slicer);
 }
 
 void AutoTractDerivedWindow::selectExecutable(QString executable_name)
@@ -399,9 +405,9 @@ void AutoTractDerivedWindow::resetExecutable(QString executable_name)
     {
         m_soft_m->setsoft_ImageMath_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
     }
-    if(executable_name == "ResampleDTIVolume")
+    if(executable_name == "ResampleDTIlogEuclidean")
     {
-        m_soft_m->setsoft_ResampleDTIVolume_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+        m_soft_m->setsoft_ResampleDTIlogEuclidean_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
     }
     if(executable_name == "MDT")
     {
@@ -423,6 +429,10 @@ void AutoTractDerivedWindow::resetExecutable(QString executable_name)
     if(executable_name == "unu")
     {
         m_soft_m->setsoft_unu_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
+    }
+    if(executable_name == "Slicer")
+    {
+        m_soft_m->setsoft_slicer_lineEdit(QString::fromStdString( itksys::SystemTools::FindProgram( executable_name.toStdString().c_str() ) ) ) ;
     }
     SyncModelStructureToUi("soft");
 }
