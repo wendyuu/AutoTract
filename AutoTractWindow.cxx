@@ -240,6 +240,7 @@ void AutoTractWindow::SyncModelStructureToUi()
     para_cleanup_checkBox->setChecked( m_para_m->getpara_cleanup_checkBox() );
     para_overwrite_checkBox->setChecked( m_para_m->getpara_overwrite_checkBox() );
     para_singletract_comboBox->setCurrentIndex( para_singletract_comboBox->findText(m_para_m->getpara_singletract_comboBox() ) ) ;
+    para_nb_memory_spinBox->setValue( m_para_m->getpara_nb_memory_spinBox() );
 
     m_sync = 0 ;
 }
@@ -303,6 +304,7 @@ void AutoTractWindow::SyncModelStructureToUi( QString prefix )
         para_cleanup_checkBox->setChecked( m_para_m->getpara_cleanup_checkBox() );
         para_overwrite_checkBox->setChecked( m_para_m->getpara_overwrite_checkBox() );
         para_singletract_comboBox->setCurrentIndex( para_singletract_comboBox->findText(m_para_m->getpara_singletract_comboBox() ) ) ;
+        para_nb_memory_spinBox->setValue( m_para_m->getpara_nb_memory_spinBox() );
     }
     if(prefix == "soft")
     {
