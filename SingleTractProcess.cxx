@@ -176,12 +176,12 @@ void SingleTractProcess::implementSingleTractProcess()
     m_argumentsList << "FiberPostProcess" << "'-i'" << "fiberLengthMatch" << "'-o'" << "outputTract" << "'-m'" << "distanceMap" << "'--threshold'" << "tractMaxDistThreshold" << "'--mask'" << "'--clean'" << "'--thresholdMode'" << "'above'";
     execute();
 
-//    m_log = "Creation of a tmp txt file";
-//    m_script += "\n";
-//    m_script += "\ttmp = current_dir + '/' + name + '_tmp.txt'";
-//    m_script += "\n";
-//    m_argumentsList << "'touch'" << "'tmp'";
-//    execute();
+    m_log = "Creation of a tmp txt file";
+    m_script += "\n";
+    m_script += "\ttmp = current_dir + '/' + name + '_tmp.txt'";
+    m_script += "\n";
+    m_argumentsList << "'touch'" << "'tmp'";
+    execute();
 
 }
 

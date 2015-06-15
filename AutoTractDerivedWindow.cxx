@@ -212,6 +212,8 @@ void AutoTractDerivedWindow::runPipeline()
 
     m_thread->setPipeline(m_pipeline);
     m_thread->start();
+    //runPipeline_pushButton->setEnabled(true);
+    //stopPipeline_pushButton->setEnabled(false);
 }
 
 void AutoTractDerivedWindow::stopPipeline()
